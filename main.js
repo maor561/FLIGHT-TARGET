@@ -10,7 +10,7 @@ let flightLayers = [];
 
 // Initialize Dashboard
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("✈️ FLIGHT TARGET DASHBOARD v1.0.0 ACTIVE");
+    console.log("✈️ FLIGHT TARGET DASHBOARD v1.1.0 ACTIVE");
     normalizeDates();
     initMap();
     populateAirlineFilter();

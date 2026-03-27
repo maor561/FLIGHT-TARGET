@@ -6,7 +6,7 @@
 const lastUpdated = {
     timestamp: "2026-03-27T22:30:08.000Z",
     source: "Last Vercel Deployment",
-    version: "1.0.0"
+    version: "1.1.0"
 };
 
 const destinations = {
