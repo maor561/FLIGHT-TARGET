@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FLIGHT TARGET – דאשבורד משלחות וטיסות מיוחדות</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <link rel="icon" type="image/png" href="logo.png?v=17">
+    <link rel="apple-touch-icon" href="logo.png?v=17">
+    <link rel="stylesheet" href="style.css?v=17">
+</head>
+<body>
+    <button id="mobile-menu-toggle" class="mobile-only" aria-label="Toggle Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    <div id="app">
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="logo.png" alt="Flight Target" class="brand-logo">
+            </div>
+            <nav class="nav-menu">
+                <button class="nav-item active" data-category="all">
+                    <span class="icon">🏠</span>
+                    <span class="label">הכל</span>
+                </button>
+
+                <!-- Sport Category -->
+                <div class="category-item open" id="cat-sports">
+                    <div class="category-header">
+                        <span class="label">⚡ ספורט</span>
+                        <span class="chevron">⌄</span>
+                    </div>
+                    <div class="category-content">
+                        <button class="nav-item" data-category="football">
+                            <span class="icon">⚽</span>
+                            <span class="label">כדורגל</span>
+                        </button>
+                        <button class="nav-item" data-category="basketball">
+                            <span class="icon">🏀</span>
+                            <span class="label">כדורסל</span>
+                        </button>
+                        <button class="nav-item" data-category="sports-other">
+                            <span class="icon">🏅</span>
+                            <span class="label">ענפים נוספים</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Community Category -->
+                <div class="category-item" id="cat-jewish">
+                    <div class="category-header">
+                        <span class="label">✡️ קהילה ויהדות</span>
+                        <span class="chevron">⌄</span>
+                    </div>
+                    <div class="category-content">
+                        <button class="nav-item" data-category="jewish">
+                            <span class="icon">✡️</span>
+                            <span class="label">כל המשלחות</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Business Category -->
+                <div class="category-item" id="cat-business">
+                    <div class="category-header">
+                        <span class="label">💼 עסקים וטכנולוגיה</span>
+                        <span class="chevron">⌄</span>
+                    </div>
+                    <div class="category-content">
+                        <button class="nav-item" data-category="business">
+                            <span class="icon">🚀</span>
+                            <span class="label">כנסים ותערוכות</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Diplomacy Category -->
+                <div class="category-item" id="cat-diplomacy">
+                    <div class="category-header">
+                        <span class="label">🏛️ דיפלומטיה וממשל</span>
+                        <span class="chevron">⌄</span>
+                    </div>
+                    <div class="category-content">
+                        <button class="nav-item" data-category="diplomatic">
+                            <span class="icon">🏛️</span>
+                            <span class="label">טיסות VIP</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Culture Category -->
+                <div class="category-item" id="cat-culture">
+                    <div class="category-header">
+                        <span class="label">🎨 תרבות ואומנות</span>
+                        <span class="chevron">⌄</span>
+                    </div>
+                    <div class="category-content">
+                        <button class="nav-item" data-category="culture">
+                            <span class="icon">🎬</span>
+                            <span class="label">אירועי תרבות</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Data Info -->
+                <div class="sidebar-footer">
+                    <div class="data-source-info">
+                        <div class="data-source-label">עדכון מידע אחרון</div>
+                        <div class="data-source-time" id="data-last-updated">טוען...</div>
+                        <div class="data-source-badge">Claude Scheduled Task v17</div>
+                    </div>
+                </div>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <header class="top-bar">
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="חיפוש לפי יעד, אירוע או חברת תעופה...">
+                    <span class="search-icon">🔍</span>
+                </div>
+
+                <div class="metar-display card">
+                    <div class="metar-title">LLBG METAR - מזג אוויר בזמן אמת</div>
+                    <div class="metar-content">
+                        <div class="metar-parsed" id="metar-parsed">
+                            <span class="metar-chip" id="metar-temp">🌡️ –</span>
+                            <span class="metar-chip" id="metar-wind">💨 –</span>
+                            <span class="metar-chip" id="metar-vis">👁️ –</span>
+                            <span class="metar-chip" id="metar-condition">☁️ –</span>
+                            <span class="metar-chip" id="metar-qnh">🔵 –</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Last updated removed - not relevant -->
+
+                <div class="top-actions">
+                    <button id="theme-toggle" class="icon-btn" title="החלף מצב תצוגה">🌓</button>
+                    <button id="refresh-btn" class="icon-btn" title="רענון נתונים">🔄</button>
+                </div>
+
+                <div class="user-stats">
+                    <div class="stat">
+                        <span class="stat-value" id="total-flights">0</span>
+                        <span class="stat-label">טיסות</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value" id="upcoming-events">0</span>
+                        <span class="stat-label">קטגוריות</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="dashboard-grid">
+                <div class="flight-list-container">
+                    <div class="section-header">
+                        <h2 class="list-title">טיסות מיוחדות</h2>
+                        <div class="filters">
+                            <select id="airline-filter" class="filter-select">
+                                <option value="all">כל חברות התעופה</option>
+                            </select>
+                            <span class="filter-tag active">הכל</span>
+                            <span class="filter-tag">היום</span>
+                            <span class="filter-tag">השבוע</span>
+                        </div>
+                    </div>
+                    <div class="flight-list" id="flight-list"></div>
+                </div>
+
+                <div class="map-container card">
+                    <div id="map-scanline" class="scanline"></div>
+                    <div id="map"></div>
+                </div>
+            </div>
+
+            <!-- News Ticker -->
+            <div class="news-ticker-container">
+                <div class="news-ticker" id="news-ticker"></div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Flight Detail Modal -->
+    <div id="flight-modal" class="modal">
+        <div class="modal-content card">
+            <span class="close-modal">&times;</span>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Scanning Overlay -->
+    <div id="scanning-overlay" class="scanning-overlay" style="display:none;">
+        <div class="scanning-text">
+            <div class="scan-spinner"></div>
+            <span>סורק לוח הטיסות של נתב״ג...</span>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="data.js?v=18"></script>
+    <script src="main.js?v=18"></script>
+</body>
+</html>

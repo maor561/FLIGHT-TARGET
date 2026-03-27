@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node -c main.js)",
+      "Bash(curl -s https://flight-target.vercel.app/)",
+      "Bash(curl -s -I https://flight-target.vercel.app/)",
+      "Bash(curl -s https://flight-target.vercel.app/main.js)",
+      "Bash(curl -s https://raw.githubusercontent.com/maor561/FLIGHT-TARGET/master/main.js)",
+      "Bash(curl -s \"https://raw.githubusercontent.com/maor561/FLIGHT-TARGET/master/style.css\")",
+      "Bash(curl -s \"https://flight-target.vercel.app/style.css\")",
+      "Bash(curl -s \"https://raw.githubusercontent.com/maor561/FLIGHT-TARGET/master/index.html\")",
+      "WebSearch",
+      "Bash(sed 's/\"\"\"\"//g')",
+      "Bash(node -e \"const data = require\\(''./data.js''\\); console.log\\(''Latest 10 dates:''\\); data.flights.slice\\(-10\\).forEach\\(f => console.log\\(f.date + '' - '' + f.title\\)\\)\")",
+      "Bash(node -c data.js)",
+      "Bash(node --check data.js)",
+      "mcp__scheduled-tasks__list_scheduled_tasks",
+      "Bash(node -c \"C:\\\\cluade\\\\FLIGHT TARGET\\\\data.js\")"
+    ]
+  }
+}
