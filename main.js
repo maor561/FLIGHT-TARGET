@@ -58,12 +58,31 @@ function initMobileMenu() {
 // ============================================================
 function displayDataLastUpdated() {
     const el = document.getElementById('data-last-updated');
-    if (!el || typeof lastUpdated === 'undefined') return;
-    const d = new Date(lastUpdated.timestamp);
-    el.textContent = d.toLocaleString('he-IL', {
-        day: '2-digit', month: '2-digit', year: 'numeric',
-        hour: '2-digit', minute: '2-digit'
-    });
+    if (!el) return;
+
+    // Fetch latest commit timestamp from GitHub API
+    fetch('https://api.github.com/repos/maor561/FLIGHT-TARGET/commits?per_page=1')
+        .then(r => r.json())
+        .then(data => {
+            if (data && data[0]) {
+                const d = new Date(data[0].commit.author.date);
+                el.textContent = d.toLocaleString('he-IL', {
+                    day: '2-digit', month: '2-digit', year: 'numeric',
+                    hour: '2-digit', minute: '2-digit'
+                });
+            }
+        })
+        .catch(err => {
+            // Fallback to data.js timestamp if API fails
+            if (typeof lastUpdated !== 'undefined') {
+                const d = new Date(lastUpdated.timestamp);
+                el.textContent = d.toLocaleString('he-IL', {
+                    day: '2-digit', month: '2-digit', year: 'numeric',
+                    hour: '2-digit', minute: '2-digit'
+                });
+            }
+            console.warn('GitHub API error:', err);
+        });
 }
 
 function displayLastUpdatedTime() {
@@ -302,6 +321,7 @@ function renderFlights(category = 'all', searchTerm = '') {
 
     updateStats(filtered.length);
     updateAnalytics();
+    updateCategoryCounts();
 }
 
 // ============================================================
@@ -595,6 +615,63 @@ async function updateNewsTicker() {
 function updateStats(count) {
     document.getElementById('total-flights').textContent = count !== undefined ? count : flights.length;
     document.getElementById('upcoming-events').textContent = new Set(flights.map(f => f.category)).size;
+}
+
+// ============================================================
+// UPDATE CATEGORY COUNTS
+// ============================================================
+function updateCategoryCounts() {
+    const today = new Date(); today.setHours(0, 0, 0, 0);
+
+    // Count by category (only future flights)
+    const counts = {
+        'football': 0,
+        'basketball': 0,
+        'sports-other': 0,
+        'jewish': 0,
+        'diplomatic': 0,
+        'business': 0,
+        'culture': 0
+    };
+
+    flights.forEach(f => {
+        const fd = new Date(f.date); fd.setHours(0, 0, 0, 0);
+        if (fd >= today && counts.hasOwnProperty(f.category)) {
+            counts[f.category]++;
+        }
+    });
+
+    // Update category headers with counts
+    const categoryMap = {
+        'cat-sports': ['football', 'basketball', 'sports-other'],
+        'cat-jewish': ['jewish'],
+        'cat-business': ['business'],
+        'cat-diplomacy': ['diplomatic'],
+        'cat-culture': ['culture']
+    };
+
+    Object.entries(categoryMap).forEach(([elemId, cats]) => {
+        const elem = document.getElementById(elemId);
+        if (!elem) return;
+        const header = elem.querySelector('.category-header');
+        if (!header) return;
+
+        const label = header.querySelector('.label');
+        if (!label) return;
+
+        const total = cats.reduce((sum, cat) => sum + counts[cat], 0);
+
+        // Remove existing count if present
+        const countSpan = header.querySelector('.category-count');
+        if (countSpan) countSpan.remove();
+
+        // Add new count span
+        const newCountSpan = document.createElement('span');
+        newCountSpan.className = 'category-count';
+        newCountSpan.textContent = `(${total})`;
+        label.appendChild(document.createTextNode(' '));
+        header.insertBefore(newCountSpan, header.querySelector('.chevron'));
+    });
 }
 
 function updateAnalytics() {
