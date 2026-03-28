@@ -4,8 +4,8 @@
 // ============================================================
 
 const lastUpdated = {
-    timestamp: "2026-03-27T22:30:08.000Z",
-    source: "Last Vercel Deployment",
+    timestamp: "2026-03-28T08:00:00.000Z",
+    source: "Claude Code Scheduled Task",
     version: "1.1.0"
 };
 
@@ -1108,5 +1108,50 @@ const flights = [
         aircraft: "Airbus A320",
         icon: "🎾",
         source: "Israeli Tennis Association"
+    },
+    {
+        id: "AUTO-2026-04-09-001",
+        category: "basketball",
+        title: "מכבי ת\"א – יורוליג חוץ נגד פריז בסקטבול",
+        mission: "Maccabi Rapyd Tel Aviv – EuroLeague Away vs Paris Basketball",
+        background: "משחק חוץ רשמי של מכבי תל אביב ביורוליג נגד פריז בסקטבול (21:45 שעון מקומי). אחד ממשחקי הסיום של עונת הסף לפני שלב הפלי-אין. הקבוצה טסה לפריז עם 12 שחקנים וצוות אימון.",
+        route: "LLBG -> LFPG",
+        dest_icao: "LFPG",
+        date: "2026-04-09",
+        time: "09:30",
+        airline: "El Al",
+        aircraft: "Boeing 737-900",
+        icon: "🏀",
+        source: "EuroLeague Basketball / euroleaguebasketball.net"
+    },
+    {
+        id: "AUTO-2026-09-24-001",
+        category: "football",
+        title: "נבחרת ישראל – ליגת האומות UEFA נגד אוסטריה",
+        mission: "Israel NT – UEFA Nations League 2026/27 Away vs Austria",
+        background: "ישראל נגד אוסטריה בשלב הקבוצות של ליגת האומות UEFA 2026/27 (ליגה B, קבוצה B3). ישראל בקבוצה עם אוסטריה, רפובליקת אירלנד וקוסובו. שלב הקבוצות מתקיים ספטמבר–נובמבר 2026. טיסת הנבחרת עם 25 שחקנים וצוות אימון.",
+        route: "LLBG -> LOWW",
+        dest_icao: "LOWW",
+        date: "2026-09-24",
+        time: "10:00",
+        airline: "Austrian Airlines",
+        aircraft: "Airbus A320",
+        icon: "⚽",
+        source: "UEFA / Israeli Football Association"
+    },
+    {
+        id: "AUTO-2026-09-11-001",
+        category: "sports-other",
+        title: "נבחרת אתלטיקה – World Athletics Ultimate Championship בודפשט",
+        mission: "Israeli Athletes – World Athletics Ultimate Championship Budapest 2026",
+        background: "אתלטים ישראלים מתמודדים ב-World Athletics Ultimate Championship הראשון בהיסטוריה, שיתקיים בבודפשט, הונגריה (11–13 בספטמבר 2026). התחרות כוללת את המצטיינים ביותר בכל ענף מהסיזן – כ-48 הספורטאים הטובים בעולם בכל קטגוריה.",
+        route: "LLBG -> LHBP",
+        dest_icao: "LHBP",
+        date: "2026-09-11",
+        time: "07:30",
+        airline: "Wizz Air",
+        aircraft: "Airbus A321",
+        icon: "🏃",
+        source: "World Athletics / Israeli Athletics Association"
     }
 ];
