@@ -4,7 +4,7 @@
 // ============================================================
 
 const lastUpdated = {
-    timestamp: "2026-03-28T08:00:00.000Z",
+    timestamp: "2026-03-29T08:00:00.000Z",
     source: "Claude Code Scheduled Task",
     version: "1.1.0"
 };
@@ -394,21 +394,6 @@ const flights = [
     // ============================================================
     // JEWISH MISSIONS – משלחות יהודיות
     // ============================================================
-    {
-        id: "J001",
-        category: "jewish",
-        title: "משלחת תגלית – Birthright Israel",
-        mission: "Birthright Israel Group Departure",
-        background: "קבוצת 40 משתתפים שחוזרת לארה״ב לאחר סיור חינוכי בן 10 ימים בישראל. אחת מתוך עשרות משלחות שיוצאות החודש.",
-        route: "LLBG -> KJFK",
-        dest_icao: "KJFK",
-        date: "2026-03-28",
-        time: "23:55",
-        airline: "Delta",
-        aircraft: "Airbus A330-900neo",
-        source: "Birthright Israel",
-        icon: "✡️"
-    },
     {
         id: "J002",
         category: "jewish",
@@ -1005,7 +990,7 @@ const flights = [
         source: "Israeli Public Broadcasting Corporation"
     },
     {
-        id: "AUTO-2026-05-12-001",
+        id: "AUTO-2026-05-12-002",
         category: "culture",
         title: "משלחת תרבות – פסטיבל קאן לקולנוע",
         mission: "Israeli Film Delegation – Cannes Film Festival 2026",
@@ -1153,5 +1138,35 @@ const flights = [
         aircraft: "Airbus A321",
         icon: "🏃",
         source: "World Athletics / Israeli Athletics Association"
+    },
+    {
+        id: "AUTO-2026-10-04-001",
+        category: "football",
+        title: "נבחרת ישראל – ליגת האומות נגד אירלנד (חוץ)",
+        mission: "Israel NT – UEFA Nations League Away vs Republic of Ireland",
+        background: "ישראל נגד אירלנד במשחק חוץ בליגת האומות UEFA 2026/27 (ליגה B, קבוצה B3). המשחק מתקיים ב-Aviva Stadium דבלין. ישראל בקבוצה עם אוסטריה, אירלנד וקוסובו. הנבחרת טסה עם 25 שחקנים וצוות אימון.",
+        route: "LLBG -> EIDW",
+        dest_icao: "EIDW",
+        date: "2026-10-04",
+        time: "10:00",
+        airline: "El Al",
+        aircraft: "Boeing 737-900",
+        icon: "⚽",
+        source: "UEFA / Israeli Football Association"
+    },
+    {
+        id: "AUTO-2026-11-14-001",
+        category: "football",
+        title: "נבחרת ישראל – ליגת האומות נגד קוסובו (חוץ)",
+        mission: "Israel NT – UEFA Nations League Away vs Kosovo",
+        background: "ישראל נגד קוסובו במשחק חוץ בליגת האומות UEFA 2026/27 (ליגה B, קבוצה B3). משחק מחזור 5 שיתקיים בפרישטינה, קוסובו ב-14 בנובמבר 2026. הנבחרת טסה עם 25 שחקנים וצוות אימון.",
+        route: "LLBG -> BKPR",
+        dest_icao: "BKPR",
+        date: "2026-11-14",
+        time: "09:30",
+        airline: "Wizz Air",
+        aircraft: "Airbus A321",
+        icon: "⚽",
+        source: "UEFA / Israeli Football Association"
     }
 ];
