@@ -58,7 +58,18 @@ const destinations = {
 
     // Israel
     "LLBG": { name: "Tel Aviv / נתב\"ג", coords: [32.0055, 34.8854], facts: ["מרכז הסטארטאפ של ישראל – 'אומת הסטארטאפ'", "קרויה 'העיר ללא הפסקה' – חיי לילה ותרבות שוקקים", "עיר הבינלאומית הרשמית של ישראל", "מרכז 4X לשיחות, ועידות ודיפלומטיה יהודית-עולמית", "נמל תעופה Ben Gurion – שער ישראל לעולם"]},
-    "LLHA": { name: "Haifa", coords: [32.8094, 35.0436], facts: ["עיר הנמל הגדולה של ישראל", "ביתם של כ-300 חברות היי-טק", "הר הכרמל ומרכז מחקר מוביל – הטכניון", "מרכז דתות: בהאי, נצרות, יהדות ואסלאם", "קהילת הדרוזים בנה שם קשרים בינלאומיים"] }
+    "LLHA": { name: "Haifa", coords: [32.8094, 35.0436], facts: ["עיר הנמל הגדולה של ישראל", "ביתם של כ-300 חברות היי-טק", "הר הכרמל ומרכז מחקר מוביל – הטכניון", "מרכז דתות: בהאי, נצרות, יהדות ואסלאם", "קהילת הדרוזים בנה שם קשרים בינלאומיים"] },
+
+    // Additional destinations
+    "LEBB": { name: "Bilbao", coords: [43.3011, -2.9106], facts: ["שדה התעופה של בילבאו, עיר הנמל הגדולה במחוז הבאסקי", "ביתו של מוזיאון גוגנהיים בילבאו – יצירת מופת ארכיטקטונית", "האתלטיק בילבאו – קבוצת כדורגל שמשתמשת רק בשחקנים בסקים", "עיר תרבות ומטבח מפורסמת בפינטאס הבאסקיות", "מרכז תעשייתי ופיננסי של מחוז הבאסק"] },
+    "UGTB": { name: "Tbilisi", coords: [41.6692, 44.9547], facts: ["בירת גאורגיה – עיר עתיקת יומין עם 1,500 שנות היסטוריה", "מרכז ג'ודו בינלאומי – Grand Slam נערך כאן", "ממוקמת בצומת בין אירופה לאסיה", "גאורגיה ידועה ביין, מטבח ואדריכלות ייחודית", "מסורת ספורט לחימה עתיקה וחזקה"] },
+    "UTDD": { name: "Dushanbe", coords: [38.5433, 68.8250], facts: ["בירת טג'יקיסטן – מרכז מרכז אסיה", "מארחת תחרויות ג'ודו בינלאומיות – IJF Grand Slam", "עיר עם ארמון לאומי ושווקים מסורתיים", "ממוקמת בעמק נהר ורזוב", "בסיס לספורט לחימה במרכז אסיה"] },
+    "UUDD": { name: "Moscow", coords: [55.4088, 37.9063], facts: ["נמל תעופה דומודדובו, אחד מנמלי התעופה הגדולים ברוסיה", "בירת רוסיה עם 12 מיליון תושבים", "מרכז ספורט בינלאומי ואירגוני ספורט", "מרכז תרבות, אמנות ותיירות עולמית", "מטרו מוסקבה – הרביעי הגדול בעולם"] },
+    "BKPR": { name: "Pristina", coords: [42.5728, 21.0358], facts: ["בירת קוסובו – מדינה שהכריזה עצמאות ב-2008", "אצטדיון פאדיל ורבה – האצטדיון הלאומי", "עיר צעירה עם ריבוי תרבויות ודתות", "נבחרת הכדורגל של קוסובו בקבוצה עם ישראל", "קוסובו הוכרה על ידי ישראל ב-2020"] },
+    "LIPE": { name: "Bologna", coords: [44.5354, 11.2887], facts: ["'הדשנה' – עיר מפורסמת במטבח האיטלקי ובבולונז", "אוניברסיטת בולוניה – הוותיקה בעולם (1088)", "מרכז ספורט – ביתה של Virtus Bologna בכדורסל", "תערוכת ספרים הבינלאומית מתקיימת בה", "מרכז תחבורה ולוגיסטיקה מרכזי באיטליה הצפונית"] },
+    "EIDW": { name: "Dublin", coords: [53.4213, -6.2700], facts: ["בירת אירלנד – עיר ויקינגית עתיקה", "אצטדיון אביבה – ביתה של נבחרת כדורגל אירלנד", "מרכז פיננסי ועסקי – מטה Facebook, Google, Apple באירופה", "ידועה בפיולות, מוזיקה ותרבות Pub", "קהילה יהודית קטנה אך פעילה"] },
+    "UBBB": { name: "Baku", coords: [40.4675, 50.0467], facts: ["בירת אזרבייג'ן – 'העיר של אש'", "מארחת אליפות העולם בג'ודו 2026", "מרכז נפט וגז – 'ונציה של הקווקז'", "מארחת יורוויזיון 2012 ו-Formula 1 Azerbaijan GP", "עיר ישנה (Icheri Sheher) – מורשת עולמית של UNESCO"] },
+    "HECA": { name: "Cairo", coords: [30.1219, 31.4056], facts: ["בירת מצרים ועיר הגדולה ביותר בעולם הערבי", "הפירמידות וספינקס בסביבתה – מורשת עולמית", "מרכז דיפלומטי מרכזי לתהליכי שלום מזרח תיכוני", "קהיר – מרכז תרבות, קולנוע ומוזיקה ערבית", "נהר הנילוס עובר דרכה – מקור החיים לאגן הנילוס"] }
 };
 
 const flights = [
@@ -78,8 +89,7 @@ const flights = [
         airline: "El Al",
         aircraft: "Boeing 737-800",
         icon: "⚽",
-        source: "Israeli Football Association",
-        isNew: true
+        source: "Israeli Football Association"
     },
     {
         id: "F002",
@@ -218,8 +228,7 @@ const flights = [
         airline: "KLM",
         aircraft: "Boeing 737-800",
         icon: "🏀",
-        source: "Israel Basketball Association",
-        isNew: true
+        source: "Israel Basketball Association"
     },
 
     // ============================================================
@@ -1025,11 +1034,11 @@ const flights = [
         title: "נבחרת ג'ודו – World Judo Championships Baku",
         mission: "Israel Judo Team – World Judo Championships Azerbaijan",
         background: "נבחרת ישראל בג'ודו בדרך לאליפות העולם בבאקו, אזרבייג'ן (4–11 באוקטובר). המשלחת כוללת 30 ספורטאים, מאמנים, רופא קבוצה ופיזיותרפיסטים. ישראל שוגרת מדליסטים אולימפיים וזוכי תחרויות גדולות בינלאומיות.",
-        route: "LLBG -> UUDD",
-        dest_icao: "UUDD",
+        route: "LLBG -> UBBB",
+        dest_icao: "UBBB",
         date: "2026-10-02",
         time: "16:00",
-        airline: "טורקיש אירלינס",
+        airline: "Turkish Airlines",
         aircraft: "Airbus A330-200",
         icon: "🥋",
         source: "Israeli Judo Association"
@@ -1168,5 +1177,101 @@ const flights = [
         aircraft: "Airbus A321",
         icon: "⚽",
         source: "UEFA / Israeli Football Association"
+    },
+    {
+        id: "AUTO-2026-04-15-002",
+        category: "basketball",
+        title: "מכבי ת\"א – יורוליג חוץ נגד ורטוס בולוניה",
+        mission: "Maccabi Rapyd Tel Aviv – EuroLeague Away vs Virtus Bologna",
+        background: "משחק חוץ של מכבי תל אביב ביורוליג נגד ורטוס בולוניה (16 באפריל, 20:05 שעון מקומי) – אחד ממשחקי הסיום של עונת הסף. הקבוצה טסה לבולוניה עם 12 שחקנים וצוות אימון.",
+        route: "LLBG -> LIPE",
+        dest_icao: "LIPE",
+        date: "2026-04-15",
+        time: "10:30",
+        airline: "El Al",
+        aircraft: "Boeing 737-800",
+        icon: "🏀",
+        source: "EuroLeague Basketball / euroleaguebasketball.net",
+        isNew: true
+    },
+    {
+        id: "AUTO-2026-05-14-002",
+        category: "basketball",
+        title: "מכבי ת\"א – פיינל פור יורוליג אתונה 2026",
+        mission: "Maccabi Rapyd Tel Aviv – EuroLeague Final Four Athens 2026",
+        background: "מכבי תל אביב בדרך ל-Final Four של יורוליג 2026 ב-Telekom Center Athens. המשלחת כוללת 12 שחקנים, צוות אימון ומאות אוהדים בטיסות מיוחדות מישראל.",
+        route: "LLBG -> LGAV",
+        dest_icao: "LGAV",
+        date: "2026-05-14",
+        time: "09:00",
+        airline: "El Al",
+        aircraft: "Boeing 737-900",
+        icon: "🏀",
+        source: "EuroLeague Basketball / euroleaguebasketball.net",
+        isNew: true
+    },
+    {
+        id: "AUTO-2026-04-22-002",
+        category: "basketball",
+        title: "הפועל ירושלים – EuroCup פלייאוף חוץ",
+        mission: "Hapoel Jerusalem Basketball – EuroCup Playoff Away Game",
+        background: "הפועל ירושלים בדרך לשלב הפלייאוף של ה-EuroCup. משחק חוץ קריטי עם הסגל המלא. הקבוצה טסה עם 14 שחקנים, צוות אימון ומאות אוהדים.",
+        route: "LLBG -> LOWW",
+        dest_icao: "LOWW",
+        date: "2026-04-22",
+        time: "11:00",
+        airline: "Austrian Airlines",
+        aircraft: "Airbus A320",
+        icon: "🏀",
+        source: "EuroCup Basketball",
+        isNew: true
+    },
+    {
+        id: "AUTO-2026-06-01-001",
+        category: "culture",
+        title: "פילהרמונית ישראל – סיבוב צפון אמריקה 2026",
+        mission: "Israel Philharmonic Orchestra – North America Tour 2026",
+        background: "התזמורת הפילהרמונית הישראלית יוצאת לסיבוב הופעות בצפון אמריקה. הופעות ב-Carnegie Hall ניו יורק ו-Kennedy Center וושינגטון. 80 נגנים, מנצח ראשי וצוות תמיכה.",
+        route: "LLBG -> KJFK",
+        dest_icao: "KJFK",
+        date: "2026-06-01",
+        time: "00:30",
+        airline: "El Al",
+        aircraft: "Boeing 787-9 Dreamliner",
+        icon: "🎻",
+        source: "Israel Philharmonic Orchestra",
+        isNew: true
+    },
+    {
+        id: "AUTO-2026-04-14-002",
+        category: "diplomatic",
+        title: "שיחות שלום – ביקור שר החוץ בקהיר",
+        mission: "Israeli FM – Cairo Peace Process Talks",
+        background: "שר החוץ הישראלי יוצא לקהיר לפגישות עם עמיתיו המצרים ואמריקאים במסגרת תהליך השלום והיציבות האזורית. משלחת בכירה של 15 איש כולל יועצים ומומחים.",
+        route: "LLBG -> HECA",
+        dest_icao: "HECA",
+        date: "2026-04-14",
+        time: "08:00",
+        airline: "El Al",
+        aircraft: "Boeing 737-800",
+        icon: "🕊️",
+        source: "Israeli Ministry of Foreign Affairs",
+        isNew: true
+    },
+    {
+        id: "AUTO-2026-07-05-002",
+        category: "jewish",
+        title: "כנס CUFI – ועידת וושינגטון 2026",
+        mission: "Christians United for Israel – Washington Summit 2026",
+        background: "כנס ה-CUFI (נוצרים המאוחדים למען ישראל) השנתי בוושינגטון, 5–7 ביולי 2026. ישראל שולחת משלחת רשמית של נציגי ממשלה וארגוני יהודי לכנס הגדול של תומכי ישראל הנוצרים בארה״ב עם 5,000+ משתתפים.",
+        route: "LLBG -> KIAD",
+        dest_icao: "KIAD",
+        date: "2026-07-05",
+        time: "11:30",
+        airline: "El Al",
+        aircraft: "Boeing 787-9 Dreamliner",
+        icon: "✝️",
+        source: "CUFI / cufi.org",
+        isNew: true
     }
 ];
