@@ -4,7 +4,7 @@
 // ============================================================
 
 const lastUpdated = {
-    timestamp: "2026-03-30T08:00:00.000Z",
+    timestamp: "2026-03-31T08:00:00.000Z",
     source: "Claude Code Scheduled Task",
     version: "1.1.0"
 };
@@ -135,6 +135,70 @@ const flights = [
         aircraft: "Boeing 787-9 Dreamliner",
         icon: "💼",
         source: "Israel Tech Week (israeltechweek.com) / BusinessWire",
+        isNew: true
+    },
+    {
+        id: "F001",
+        category: "football",
+        title: "נבחרת ישראל בכדורגל | ליגת האומות – אוסטריה",
+        mission: "Israel National Football Team - UEFA Nations League Away vs Austria",
+        background: "נבחרת ישראל בכדורגל יוצאת למשחק הפתיחה של ליגת האומות 2026/27 נגד אוסטריה בווינה, ב-24 בספטמבר 2026, בשעה 20:45 שעון מרכז אירופה. ישראל נמצאת בקבוצה B3 יחד עם אוסטריה, אירלנד וקוסובו. זהו הסבב הראשון מתוך שישה משחקים בשלב הבית. אוסטריה מדורגת גבוה יותר מישראל ב-FIFA, אך הנבחרת הישראלית מקווה להפתיע.",
+        route: "LLBG -> LOWW",
+        dest_icao: "LOWW",
+        date: "2026-09-24",
+        time: "08:00",
+        airline: "אל על",
+        aircraft: "Boeing 737-900",
+        icon: "⚽",
+        source: "UEFA.com / RTÉ.ie / SportsHistori.com",
+        isNew: true
+    },
+    {
+        id: "F002",
+        category: "football",
+        title: "נבחרת ישראל בכדורגל | ליגת האומות – אירלנד",
+        mission: "Israel National Football Team - UEFA Nations League Away vs Republic of Ireland",
+        background: "נבחרת ישראל בכדורגל משחקת בדבלין נגד אירלנד, ב-4 באוקטובר 2026. המשחק הוא חלק מליגת האומות 2026/27, קבוצה B3. אירלנד ואיגוד הכדורגל שלה הכריזו כי ימלאו את חובת המשחק לאחר דיונים פנימיים. אצטדיון אביבה בדבלין הוא הבית של נבחרת אירלנד עם קיבולת של 51,000 צופים.",
+        route: "LLBG -> EIDW",
+        dest_icao: "EIDW",
+        date: "2026-10-04",
+        time: "07:00",
+        airline: "אל על",
+        aircraft: "Boeing 737-900",
+        icon: "⚽",
+        source: "UEFA.com / IrishTimes.com / Algemeiner.com",
+        isNew: true
+    },
+    {
+        id: "F003",
+        category: "football",
+        title: "נבחרת ישראל בכדורגל | ליגת האומות – קוסובו",
+        mission: "Israel National Football Team - UEFA Nations League Away vs Kosovo",
+        background: "נבחרת ישראל בכדורגל נוסעת לפרישטינה, קוסובו, למשחק ליגת האומות 2026/27 ב-14 בנובמבר 2026. ישראל הכירה בעצמאות קוסובו ב-2020, ושתי הנבחרות כבר נפגשו בעבר בשלב האיכות למונדיאל. אצטדיון פאדיל ורבה הוא הבית של נבחרת קוסובו. ניצחון יכול להיות מכריע לעלות לליג A.",
+        route: "LLBG -> BKPR",
+        dest_icao: "BKPR",
+        date: "2026-11-14",
+        time: "09:00",
+        airline: "אל על / וויז אייר",
+        aircraft: "Airbus A320",
+        icon: "⚽",
+        source: "UEFA.com / KOHA.net / SportsHistori.com",
+        isNew: true
+    },
+    {
+        id: "S002",
+        category: "sports-other",
+        title: "נבחרת ג'ודו ישראל | אליפות העולם – באקו",
+        mission: "Israeli Judo Team - IJF World Championships Baku, Azerbaijan",
+        background: "נבחרת ישראל בג'ודו יוצאת לאליפות העולם 2026 בבאקו, אזרבייג'ן, שתתקיים בין 4 ל-11 באוקטובר 2026. זהו האירוע הדגל של הפדרציה הבינלאומית לג'ודו (IJF) ומהווה גם אירוע כישורין לאולימפיאדת לוס אנג'לס 2028. ישראל, שהציגה הופעות מרשימות בגרנד סלאם טביליסי 2026 (בראשות רז הרשקו), שואפת לזכות במדליות בקטגוריות שונות. הארוע ייערך באולם הספורט הלאומי של באקו.",
+        route: "LLBG -> UBBB",
+        dest_icao: "UBBB",
+        date: "2026-10-02",
+        time: "10:00",
+        airline: "אל על / אזרבייג'ן אירליינס",
+        aircraft: "Boeing 737-800",
+        icon: "🏃",
+        source: "IJF.org / InsideTheGames.biz / EJU.net",
         isNew: true
     }
 ];
