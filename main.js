@@ -11,7 +11,6 @@ let flightLayers = [];
 // Initialize Dashboard
 document.addEventListener('DOMContentLoaded', () => {
     console.log("✈️ FLIGHT TARGET DASHBOARD v1.1.0 ACTIVE");
-    normalizeDates();
     initMap();
     populateAirlineFilter();
     renderFlights();
@@ -25,22 +24,6 @@ document.addEventListener('DOMContentLoaded', () => {
     initMetarBar();
 });
 
-// ============================================================
-// NORMALIZE FLIGHT DATES
-// ============================================================
-function normalizeDates() {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const dataDate = new Date('2026-04-05');
-    dataDate.setHours(0, 0, 0, 0);
-    const daysDiff = Math.floor((dataDate - today) / (1000 * 60 * 60 * 24));
-
-    flights.forEach((flight, index) => {
-        const flightDate = new Date(flight.date);
-        flightDate.setDate(flightDate.getDate() - daysDiff);
-        flight.date = flightDate.toISOString().split('T')[0];
-    });
-}
 
 function initMobileMenu() {
     const toggle = document.getElementById('mobile-menu-toggle');
