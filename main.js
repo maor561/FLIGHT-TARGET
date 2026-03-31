@@ -575,16 +575,24 @@ function setupEventListeners() {
 }
 
 // ============================================================
-// NEWS TICKER
+// NEWS TICKER - Only NEW flights
 // ============================================================
 async function updateNewsTicker() {
     const ticker = document.getElementById('news-ticker');
     if (!ticker) return;
 
-    const items = flights.map(f => {
+    // Show only flights marked as NEW
+    const newFlights = flights.filter(f => f.isNew);
+
+    if (newFlights.length === 0) {
+        ticker.innerHTML = '<div class="ticker-item"><span style="color:var(--text-muted);">אין אירועים חדשים כעת</span></div>';
+        return;
+    }
+
+    const items = newFlights.map(f => {
         const destName = destinations[f.dest_icao]?.name || f.dest_icao;
         return `<div class="ticker-item">
-            <span class="live-badge">מבזק</span>
+            <span class="live-badge">🆕 חדש</span>
             <span>${f.icon} <strong style="color:var(--accent-primary)">${f.title}</strong> – ${f.airline} → ${destName} | ${formatDate(f.date)} ${f.time}</span>
         </div>`;
     }).join('<div class="ticker-item"><span style="color:var(--text-muted);padding:0 12px;">◆</span></div>');
