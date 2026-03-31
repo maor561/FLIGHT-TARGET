@@ -73,4 +73,68 @@ const destinations = {
 };
 
 const flights = [
+    {
+        id: "B001",
+        category: "basketball",
+        title: "מכבי ת\"א - ליגת האלופות | בסקוניה",
+        mission: "Maccabi Tel Aviv EuroLeague Away Game vs Baskonia",
+        background: "מכבי תל אביב יוצאים לגמר עונת הליגה הסדירה של יורוליג 2025/26. המשחק מול סאסקי בסקוניה יתקיים ביום שלישי, 7 באפריל 2026, ב-21:30 בארנה פרנדו בואסה שבויטוריה-גסטייז, ספרד. חשוב לציין: המשחק ייערך ללא קהל (בדלתיים סגורות) מטעמי ביטחון. מכבי נמצאת במרוץ על מקום בפלייאין של היורוליג עם מספר סבבים אחרונים בעונה הסדירה.",
+        route: "LLBG -> LEBB",
+        dest_icao: "LEBB",
+        date: "2026-04-07",
+        time: "09:00",
+        airline: "אל על (צ'ארטר ספורטיבי)",
+        aircraft: "Boeing 737-800",
+        icon: "🏀",
+        source: "EuroLeague Basketball / Eurohoops.net",
+        isNew: true
+    },
+    {
+        id: "B002",
+        category: "basketball",
+        title: "מכבי ת\"א - יורוליג | פריז בסקטבול",
+        mission: "Maccabi Tel Aviv EuroLeague Away Game vs Paris Basketball",
+        background: "מכבי תל אביב משחקת אצל פריז בסקטבול באצטדיון Porte de La Chapelle Arena (Adidas Arena) בפריז, ביום חמישי, 9 באפריל 2026, בשעה 19:00. זהו אחד הסבבים האחרונים של עונת הליגה הסדירה של יורוליג 2025/26. המשחק חשוב לשתי הקבוצות בנוגע למיקומן בדירוג לפלייאין.",
+        route: "LLBG -> LFPG",
+        dest_icao: "LFPG",
+        date: "2026-04-09",
+        time: "08:00",
+        airline: "אל על (צ'ארטר ספורטיבי)",
+        aircraft: "Boeing 737-800",
+        icon: "🏀",
+        source: "Paris Basketball Official / Sofascore / EuroLeague Basketball",
+        isNew: true
+    },
+    {
+        id: "S001",
+        category: "sports-other",
+        title: "נבחרת ג'ודו ישראל | גרנד סלאם דושנבה",
+        mission: "Israeli Judo Team - IJF Grand Slam Dushanbe, Tajikistan",
+        background: "נבחרת ישראל בג'ודו, שהובילה את טבלת המדליות בגרנד סלאם טביליסי במרץ 2026, יוצאת לתחרות הגרנד סלאם בדושנבה, טג'יקיסטן, שתתקיים בין 1 ל-3 במאי 2026. זוהי אחת מתחרויות הדגל של הפדרציה הבינלאומית לג'ודו (IJF) בשנת 2026. הספורטאים הישראלים ייאבקו על נקודות דירוג חשובות לקראת אליפות העולם שתתקיים באוקטובר 2026 בבאקו.",
+        route: "LLBG -> UTDD",
+        dest_icao: "UTDD",
+        date: "2026-04-30",
+        time: "10:00",
+        airline: "אל על / טיסה שכורה",
+        aircraft: "Boeing 737-900",
+        icon: "🏃",
+        source: "IJF.org / European Judo Union (EJU)",
+        isNew: true
+    },
+    {
+        id: "D001",
+        category: "business",
+        title: "שבוע הטכנולוגיה הישראלי | מיאמי 2026",
+        mission: "Israel Tech Week Miami - Israeli Tech Delegation",
+        background: "שבוע הטכנולוגיה הישראלי (ISRTW) חוזר למיאמי, פלורידה, בין 27 ל-30 באפריל 2026. האירוע מאגד מנהלים, יזמים ומשקיעים ישראלים המגיעים לרשת קשרים עסקיים עם השוק האמריקאי. הכנס הגדול מציג תשעה תחומי טכנולוגיה: AI, סייבר, פינטק, בריאות, חלל ועוד. צפויים מעל 1,500 משתתפים ממדינות שונות עם מיקוד מיוחד בסטארטאפים ישראלים. מרכז הכנסים: The LAB Miami, שכונת Wynwood.",
+        route: "LLBG -> KMIA",
+        dest_icao: "KMIA",
+        date: "2026-04-26",
+        time: "22:00",
+        airline: "אל על",
+        aircraft: "Boeing 787-9 Dreamliner",
+        icon: "💼",
+        source: "Israel Tech Week (israeltechweek.com) / BusinessWire",
+        isNew: true
+    }
 ];
