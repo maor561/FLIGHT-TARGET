@@ -496,15 +496,18 @@ async function showFlightDetails(flight) {
 
     const colorScheme = categoryColors[flight.category] || { bg: 'linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)', text: 'טיסה' };
 
-    // Fetch image from Pexels
-    const searchTerm = categorySearchTerms[flight.category] || 'airplane flight';
-    const pexelsImage = await fetchPexelsImage(searchTerm);
+    // Fetch image from sources (priority: sourceImageUrl > Pexels > gradient)
+    let imageUrl = flight.sourceImageUrl || null; // Official image from source website
+    if (!imageUrl) {
+        const searchTerm = categorySearchTerms[flight.category] || 'airplane flight';
+        imageUrl = await fetchPexelsImage(searchTerm); // Fallback to Pexels
+    }
 
-    console.log('🖼️ Flight details:', { title: flight.title, category: flight.category, pexelsImage, isNew: isFlightNew(flight) });
+    console.log('🖼️ Flight details:', { title: flight.title, category: flight.category, sourceImage: flight.sourceImageUrl, pexelsImage: imageUrl, isNew: isFlightNew(flight) });
 
     // Build hero section with image or fallback to gradient
-    const heroHTML = pexelsImage
-        ? `<img src="${pexelsImage}" alt="${flight.title}" class="hero-image">`
+    const heroHTML = imageUrl
+        ? `<img src="${imageUrl}" alt="${flight.title}" class="hero-image">`
         : `<div style="background: ${colorScheme.bg}; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
              <div class="hero-text-overlay">${colorScheme.text}</div>
            </div>`;

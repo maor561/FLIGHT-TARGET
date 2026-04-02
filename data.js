@@ -87,7 +87,7 @@ const flights = [
         aircraft: "Boeing 737-800",
         icon: "🏀",
         source: "EuroLeague Basketball / Eurohoops.net",
-        imageUrl: "https://images.unsplash.com/photo-1546519638-68711109f629?w=800&h=400&fit=crop",
+        sourceImageUrl: "https://euroleague.net/media/",
         createdAt: "2026-04-02T00:00:00Z",
         isNew: true
     },
@@ -123,7 +123,7 @@ const flights = [
         aircraft: "Boeing 737-900",
         icon: "🏃",
         source: "IJF.org / European Judo Union (EJU)",
-        imageUrl: "https://images.unsplash.com/photo-1518611505868-48a87a4d1a72?w=800&h=400&fit=crop",
+        sourceImageUrl: "https://www.ijf.org/media/",
         createdAt: "2026-04-02T00:00:00Z",
         isNew: true
     },
@@ -159,7 +159,7 @@ const flights = [
         aircraft: "Boeing 737-900",
         icon: "⚽",
         source: "UEFA.com / RTÉ.ie / SportsHistori.com",
-        imageUrl: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&h=400&fit=crop",
+        sourceImageUrl: "https://upload.wikimedia.org/wikipedia/en/c/c1/UEFA_Nations_League_Finals_logo.svg",
         createdAt: "2026-04-02T00:00:00Z",
         isNew: true
     },

@@ -1069,7 +1069,7 @@ html[dir="rtl"] .news-ticker {
 /* ==== MODAL HEADER BLOCK ==== */
 .modal-image-hero {
     width: calc(100% + 5rem);
-    height: 340px;
+    height: 170px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
