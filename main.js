@@ -7,6 +7,35 @@ let currentDateFilter = 'all';
 let currentAirlineFilter = 'all';
 let map;
 let flightLayers = [];
+const PEXELS_API_KEY = '23x7wbvKlsAxvOCwf2wRtly1rEN8Xdomc6aBaM4k4MGxmE1B1f1VRPp9';
+
+// ============================================================
+// UTILITIES - "NEW" LOGIC & PEXELS IMAGE FETCHING
+// ============================================================
+
+function isFlightNew(flight) {
+    if (!flight.createdAt) return false;
+    const createdTime = new Date(flight.createdAt).getTime();
+    const now = new Date().getTime();
+    const hoursPassed = (now - createdTime) / (1000 * 60 * 60);
+    return hoursPassed < 24;
+}
+
+async function fetchPexelsImage(searchTerm) {
+    try {
+        const response = await fetch(`https://api.pexels.com/v1/search?query=${encodeURIComponent(searchTerm)}&per_page=1`, {
+            headers: { 'Authorization': PEXELS_API_KEY }
+        });
+        if (!response.ok) throw new Error('Pexels API error');
+        const data = await response.json();
+        if (data.photos && data.photos[0]) {
+            return data.photos[0].src.large; // Return large image URL
+        }
+    } catch (e) {
+        console.warn('Pexels fetch failed for:', searchTerm, e);
+    }
+    return null;
+}
 
 // Initialize Dashboard
 document.addEventListener('DOMContentLoaded', () => {
@@ -431,7 +460,7 @@ function fetchAndAddWeatherMarker(coords, icao, destName) {
 // ============================================================
 // FLIGHT DETAILS MODAL
 // ============================================================
-function showFlightDetails(flight) {
+async function showFlightDetails(flight) {
     const modal = document.getElementById('flight-modal');
     const body  = document.getElementById('modal-body');
     const destInfo = destinations[flight.dest_icao];
@@ -439,7 +468,20 @@ function showFlightDetails(flight) {
         ? destInfo.facts.map(f => `<li><span class="fact-bullet">•</span><span>${f}</span></li>`).join('')
         : '<li><span class="fact-bullet">•</span><span>אין מידע זמין על היעד.</span></li>';
 
-    // Color scheme based on category
+    // Pexels search terms by category
+    const categorySearchTerms = {
+        football: 'soccer match stadium',
+        basketball: 'basketball court game',
+        'sports-other': 'martial arts judo competition',
+        jewish: 'jewish community cultural event',
+        rescue: 'rescue helicopter emergency',
+        diplomatic: 'government parliament building',
+        business: 'tech conference event',
+        culture: 'concert performance stage',
+        vatil: 'flight simulator cockpit'
+    };
+
+    // Color scheme based on category (fallback)
     const categoryColors = {
         football: { bg: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', text: '⚽ משחק כדורגל' },
         basketball: { bg: 'linear-gradient(135deg, #3b82f6 0%, #1e40af 100%)', text: '🏀 משחק כדורסל' },
@@ -454,16 +496,30 @@ function showFlightDetails(flight) {
 
     const colorScheme = categoryColors[flight.category] || { bg: 'linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%)', text: '✈️ טיסה' };
 
-    console.log('🖼️ Flight details:', { title: flight.title, category: flight.category, color: colorScheme });
+    // Fetch image from Pexels
+    const searchTerm = categorySearchTerms[flight.category] || 'airplane flight';
+    const pexelsImage = await fetchPexelsImage(searchTerm);
+
+    console.log('🖼️ Flight details:', { title: flight.title, category: flight.category, pexelsImage, isNew: isFlightNew(flight) });
+
+    // Build hero section with image or fallback to gradient
+    const heroHTML = pexelsImage
+        ? `<img src="${pexelsImage}" alt="${flight.title}" class="hero-image">`
+        : `<div style="background: ${colorScheme.bg}; width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+             <div class="hero-text-overlay">${colorScheme.text}</div>
+           </div>`;
 
     body.innerHTML = `
-        <div class="modal-image-hero" style="background: ${colorScheme.bg};">
-            <div class="hero-text-overlay">${colorScheme.text}</div>
+        <div class="modal-image-hero">
+            ${heroHTML}
         </div>
 
         <div class="modal-header-block">
             <div class="modal-icon">${flight.icon}</div>
-            <h2 class="modal-title">${flight.title}</h2>
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+                <h2 class="modal-title">${flight.title}</h2>
+                ${isFlightNew(flight) ? '<span class="live-badge">🆕 חדש</span>' : ''}
+            </div>
             <p class="modal-subtitle">${flight.mission}</p>
         </div>
 
@@ -604,8 +660,8 @@ async function updateNewsTicker() {
     const ticker = document.getElementById('news-ticker');
     if (!ticker) return;
 
-    // Show only flights marked as NEW
-    const newFlights = flights.filter(f => f.isNew);
+    // Show only flights added in last 24 hours
+    const newFlights = flights.filter(f => isFlightNew(f));
 
     if (newFlights.length === 0) {
         ticker.innerHTML = '<div class="ticker-item"><span style="color:var(--text-muted);">אין אירועים חדשים כעת</span></div>';

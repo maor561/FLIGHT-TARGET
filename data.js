@@ -88,6 +88,7 @@ const flights = [
         icon: "🏀",
         source: "EuroLeague Basketball / Eurohoops.net",
         imageUrl: "https://images.unsplash.com/photo-1546519638-68711109f629?w=800&h=400&fit=crop",
+        createdAt: "2026-04-02T00:00:00Z",
         isNew: true
     },
     {
@@ -105,6 +106,7 @@ const flights = [
         icon: "🏀",
         source: "Paris Basketball Official / Sofascore / EuroLeague Basketball",
         imageUrl: "https://images.unsplash.com/photo-1546519638-68711109f629?w=800&h=400&fit=crop",
+        createdAt: "2026-04-02T00:00:00Z",
         isNew: true
     },
     {
@@ -122,6 +124,7 @@ const flights = [
         icon: "🏃",
         source: "IJF.org / European Judo Union (EJU)",
         imageUrl: "https://images.unsplash.com/photo-1518611505868-48a87a4d1a72?w=800&h=400&fit=crop",
+        createdAt: "2026-04-02T00:00:00Z",
         isNew: true
     },
     {
@@ -139,6 +142,7 @@ const flights = [
         icon: "💼",
         source: "Israel Tech Week (israeltechweek.com) / BusinessWire",
         imageUrl: "https://images.unsplash.com/photo-1540575467063-178f50902556?w=800&h=400&fit=crop",
+        createdAt: "2026-04-02T00:00:00Z",
         isNew: true
     },
     {
@@ -156,6 +160,7 @@ const flights = [
         icon: "⚽",
         source: "UEFA.com / RTÉ.ie / SportsHistori.com",
         imageUrl: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&h=400&fit=crop",
+        createdAt: "2026-04-02T00:00:00Z",
         isNew: true
     },
     {
@@ -173,6 +178,7 @@ const flights = [
         icon: "⚽",
         source: "UEFA.com / IrishTimes.com / Algemeiner.com",
         imageUrl: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&h=400&fit=crop",
+        createdAt: "2026-04-02T00:00:00Z",
         isNew: true
     },
     {
@@ -190,6 +196,7 @@ const flights = [
         icon: "⚽",
         source: "UEFA.com / KOHA.net / SportsHistori.com",
         imageUrl: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&h=400&fit=crop",
+        createdAt: "2026-04-02T00:00:00Z",
         isNew: true
     },
     {
@@ -207,6 +214,7 @@ const flights = [
         icon: "🏃",
         source: "IJF.org / InsideTheGames.biz / EJU.net",
         imageUrl: "https://images.unsplash.com/photo-1518611505868-48a87a4d1a72?w=800&h=400&fit=crop",
+        createdAt: "2026-04-02T00:00:00Z",
         isNew: true
     },
     {
@@ -224,6 +232,7 @@ const flights = [
         icon: "🎭",
         source: "Eurovision.com / Wikipedia Eurovision 2026 / Times of Israel / Algemeiner.com",
         imageUrl: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=400&fit=crop",
+        createdAt: "2026-04-02T00:00:00Z",
         isNew: true
     },
     {
@@ -241,6 +250,7 @@ const flights = [
         icon: "🏃",
         source: "IJF.org / EJU.net / Haaretz 22.03.2026",
         imageUrl: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&h=400&fit=crop",
+        createdAt: "2026-04-02T00:00:00Z",
         isNew: true
     },
     {
@@ -258,6 +268,7 @@ const flights = [
         icon: "🏀",
         source: "EuroLeague.net / Sofascore",
         imageUrl: "https://images.unsplash.com/photo-1546519638-68711109f629?w=800&h=400&fit=crop",
+        createdAt: "2026-04-02T00:00:00Z",
         isNew: true
     },
     {
@@ -275,6 +286,7 @@ const flights = [
         icon: "✡️",
         source: "Jewish Agency / World Jewish Congress / Times of Israel",
         imageUrl: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=400&fit=crop",
+        createdAt: "2026-04-02T00:00:00Z",
         isNew: true
     },
     {
@@ -292,6 +304,7 @@ const flights = [
         icon: "🕊️",
         source: "Israel Ministry of Foreign Affairs / EU Parliament",
         imageUrl: "https://images.unsplash.com/photo-1577720657176-60a6c5f55a7d?w=800&h=400&fit=crop",
+        createdAt: "2026-04-02T00:00:00Z",
         isNew: true
     },
     {
@@ -309,6 +322,7 @@ const flights = [
         icon: "🚁",
         source: "Israeli Ministry of Defense / Cyprus Civil Protection",
         imageUrl: "https://images.unsplash.com/photo-1582053821902-e91ded007c46?w=800&h=400&fit=crop",
+        createdAt: "2026-04-02T00:00:00Z",
         isNew: true
     },
     {
@@ -326,6 +340,7 @@ const flights = [
         icon: "🎮",
         source: "VATIL.online / VATSIM.net / Cybersecurity Authority",
         imageUrl: "https://images.unsplash.com/photo-1538438881759-1fab5d814bd0?w=800&h=400&fit=crop",
+        createdAt: "2026-04-02T00:00:00Z",
         isNew: true
     }
 ];
