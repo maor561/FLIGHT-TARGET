@@ -215,7 +215,7 @@ const flights = [
         aircraft: "Boeing 737-800",
         icon: "🎭",
         source: "Eurovision.com / Wikipedia Eurovision 2026 / Times of Israel / Algemeiner.com",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Eurovision_2026_heart_-_Austria.svg/320px-Eurovision_2026_heart_-_Austria.svg.png",
+        imageUrl: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=400&fit=crop",
         isNew: true
     },
     {
@@ -232,7 +232,7 @@ const flights = [
         aircraft: "Boeing 737-800",
         icon: "🏃",
         source: "IJF.org / EJU.net / Haaretz 22.03.2026",
-        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Raz_Hershko_%28ISR%29_2021.jpg/320px-Raz_Hershko_%28ISR%29_2021.jpg",
+        imageUrl: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&h=400&fit=crop",
         isNew: true
     }
 ];
