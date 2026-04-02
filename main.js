@@ -442,8 +442,11 @@ function showFlightDetails(flight) {
     console.log('🖼️ Flight details:', { title: flight.title, imageUrl: flight.imageUrl });
 
     body.innerHTML = `
-        <div class="modal-image-hero" ${flight.imageUrl ? `style="background-image: url('${flight.imageUrl}')"` : ''}>
-            ${!flight.imageUrl ? `<div class="image-placeholder">${flight.icon}</div>` : ''}
+        <div class="modal-image-hero">
+            ${flight.imageUrl
+                ? `<img src="${flight.imageUrl}" alt="${flight.title}" class="hero-image" loading="lazy" crossorigin="anonymous">`
+                : `<div class="image-placeholder">${flight.icon}</div>`
+            }
         </div>
 
         <div class="modal-header-block">
