@@ -1072,6 +1072,8 @@ html[dir="rtl"] .news-ticker {
     height: 280px;
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
+    background-color: rgba(139, 92, 246, 0.2);
     border-radius: 16px 16px 0 0;
     margin: -2rem -2rem 2rem -2rem;
     position: relative;
@@ -1080,6 +1082,7 @@ html[dir="rtl"] .news-ticker {
     align-items: center;
     justify-content: center;
     box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.4);
+    flex-shrink: 0;
 }
 
 .image-placeholder {

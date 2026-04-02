@@ -439,6 +439,8 @@ function showFlightDetails(flight) {
         ? destInfo.facts.map(f => `<li><span class="fact-bullet">•</span><span>${f}</span></li>`).join('')
         : '<li><span class="fact-bullet">•</span><span>אין מידע זמין על היעד.</span></li>';
 
+    console.log('🖼️ Flight details:', { title: flight.title, imageUrl: flight.imageUrl });
+
     body.innerHTML = `
         <div class="modal-image-hero" ${flight.imageUrl ? `style="background-image: url('${flight.imageUrl}')"` : ''}>
             ${!flight.imageUrl ? `<div class="image-placeholder">${flight.icon}</div>` : ''}
