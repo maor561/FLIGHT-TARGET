@@ -349,9 +349,8 @@ function createFlightCard(flight, index = 0) {
         ? '<span class="dir-badge incoming">⬇ נכנס</span>'
         : '<span class="dir-badge outgoing">⬆ יוצא</span>';
 
-    const newBadge = flight.isNew ? '<span class="new-badge">🆕 חדש</span>' : '';
+    const newBadge = isFlightNew(flight) ? '<span class="new-badge">🆕 חדש</span>' : '';
     card.innerHTML = `
-        <div class="flight-category-icon">${flight.icon}</div>
         <div class="flight-info">
             <div class="flight-title">${flight.title}${newBadge}</div>
             <div class="flight-subtitle">${flight.mission}</div>
