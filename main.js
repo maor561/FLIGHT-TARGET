@@ -459,17 +459,13 @@ function showFlightDetails(flight) {
                 <div class="detail-label">יעד</div>
                 <div class="detail-value" style="color:var(--accent-primary)">${destInfo ? destInfo.name : flight.dest_icao}</div>
             </div>
-            <div class="detail-card">
-                <div class="detail-label">מקור הנתונים</div>
-                <div class="detail-value">${flight.source || 'Claude Scheduled Task'}</div>
-            </div>
         </div>
 
         <div class="modal-description-grid">
-            <div class="modal-description primary-border">
+            <div class="modal-description primary-border full-width">
                 <div class="gradient-bar-primary"></div>
                 <h4 class="description-title"><span class="title-icon">📝</span> רקע ומטרת הטיסה</h4>
-                <p class="description-text">${flight.background}</p>
+                <p class="description-text description-text-large">${flight.background}</p>
                 <div class="airline-status-row">
                     <div class="airline-info">
                         <span class="airline-label">חברת תעופה</span>
@@ -491,6 +487,12 @@ function showFlightDetails(flight) {
                 <h4 class="description-title"><span class="title-icon">🌍</span> 5 עובדות על היעד</h4>
                 <div class="dest-title">${destInfo ? destInfo.name : flight.dest_icao}</div>
                 <ul class="facts-list">${factsHtml}</ul>
+            </div>
+
+            <div class="modal-description source-border full-width">
+                <div class="gradient-bar-source"></div>
+                <h4 class="description-title"><span class="title-icon">📊</span> מקור המידע</h4>
+                <p class="source-text">${flight.source || 'Claude Scheduled Task'}</p>
             </div>
         </div>`;
 

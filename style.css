@@ -855,18 +855,29 @@ body {
 .text-white { color: white !important; }
 
 .modal-description-grid {
-    display: grid; 
-    grid-template-columns: 1.1fr 0.9fr; 
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
     gap: 1.5rem;
 }
 .modal-description {
-    background: rgba(255,255,255,0.03); padding: 1.75rem; border-radius: 18px; border: 1px solid var(--border-color); position: relative; overflow: hidden; display: flex; flex-direction: column;
+    background: rgba(255,255,255,0.03); padding: 2rem; border-radius: 18px; border: 1px solid var(--border-color); position: relative; overflow: hidden; display: flex; flex-direction: column;
+    min-height: 280px;
 }
-.gradient-bar-primary { position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, var(--accent-primary), transparent); opacity: 0.3; }
-.gradient-bar-secondary { position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: linear-gradient(90deg, transparent, var(--accent-secondary), transparent); opacity: 0.3; }
-.description-title { margin-bottom: 1rem; font-weight: 700; color: white; display: flex; align-items: center; gap: 10px; }
-.title-icon { font-size: 1.3rem; }
-.description-text { line-height: 1.7; color: var(--text-secondary); font-size: 1.05rem; padding-bottom: 2rem; }
+.modal-description.full-width {
+    grid-column: 1 / -1;
+}
+.modal-description.source-border {
+    padding: 1.5rem 2rem;
+    min-height: auto;
+}
+.gradient-bar-primary { position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, transparent, var(--accent-primary), transparent); opacity: 0.5; }
+.gradient-bar-secondary { position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, transparent, var(--accent-secondary), transparent); opacity: 0.5; }
+.gradient-bar-source { position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, transparent, #8b5cf6, transparent); opacity: 0.5; }
+.description-title { margin-bottom: 1.25rem; font-weight: 700; color: white; display: flex; align-items: center; gap: 10px; font-size: 1.1rem; }
+.title-icon { font-size: 1.4rem; }
+.description-text { line-height: 1.8; color: var(--text-secondary); font-size: 1.05rem; padding-bottom: 2rem; }
+.description-text-large { font-size: 1.1rem; line-height: 1.9; min-height: 140px; }
+.source-text { color: var(--text-secondary); font-size: 0.95rem; padding: 1rem 0; background: rgba(255,255,255,0.02); padding: 1.25rem; border-radius: 12px; border-left: 3px solid #8b5cf6; }
 .airline-status-row { margin-top: auto; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; }
 .airline-info, .status-info { display: flex; flex-direction: column; gap: 4px; }
 .status-info { align-items: flex-end; }
