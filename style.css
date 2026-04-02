@@ -18,9 +18,9 @@
 }
 
 [data-theme="light"] {
-    --bg-main: #ffffff;
-    --bg-secondary: #ffffff;
-    --bg-glass: rgba(255, 255, 255, 0.95);
+    --bg-main: #f5f5f5;
+    --bg-secondary: #f0f2f5;
+    --bg-glass: rgba(245, 245, 245, 0.95);
     --bg-card: rgba(240, 246, 255, 0.8);
     --text-primary: #0f172a;
     --text-secondary: #334155;
@@ -42,7 +42,7 @@
 }
 
 [data-theme="light"] .sidebar {
-    background: #f8f9fb;
+    background: #f0f2f5;
     box-shadow: 10px 0 30px rgba(0,0,0,0.08);
 }
 
@@ -263,7 +263,7 @@ body {
 }
 
 [data-theme="light"] .content {
-    background: radial-gradient(circle at 50% 50%, #f5f7fa 0%, #ffffff 100%);
+    background: radial-gradient(circle at 50% 50%, #f0f2f5 0%, #f5f5f5 100%);
 }
 .icon-btn {
     background: var(--bg-secondary);
@@ -838,7 +838,7 @@ body {
 }
 
 [data-theme="light"] .leaflet-container {
-    background: #ffffff !important;
+    background: #f5f5f5 !important;
 }
 
 .leaflet-bar a {
