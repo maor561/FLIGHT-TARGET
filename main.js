@@ -351,6 +351,7 @@ function createFlightCard(flight, index = 0) {
 
     const newBadge = isFlightNew(flight) ? '<span class="new-badge">🆕 חדש</span>' : '';
     card.innerHTML = `
+        <div class="flight-category-icon">${flight.icon}</div>
         <div class="flight-info">
             <div class="flight-title">${flight.title}${newBadge}</div>
             <div class="flight-subtitle">${flight.mission}</div>
@@ -517,7 +518,6 @@ async function showFlightDetails(flight) {
         </div>
 
         <div class="modal-header-block">
-            <div class="modal-icon">${flight.icon}</div>
             <div style="display: flex; align-items: center; gap: 0.5rem;">
                 <h2 class="modal-title">${flight.title}</h2>
                 ${isFlightNew(flight) ? '<span class="live-badge">🆕 חדש</span>' : ''}
