@@ -486,7 +486,7 @@ function showFlightDetails(flight) {
                 </div>
             </div>
 
-            <div class="modal-description secondary-border">
+            <div class="modal-description secondary-border full-width">
                 <div class="gradient-bar-secondary"></div>
                 <h4 class="description-title"><span class="title-icon">🌍</span> 5 עובדות על היעד</h4>
                 <div class="dest-title">${destInfo ? destInfo.name : flight.dest_icao}</div>
