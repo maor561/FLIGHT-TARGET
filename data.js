@@ -200,5 +200,39 @@ const flights = [
         icon: "🏃",
         source: "IJF.org / InsideTheGames.biz / EJU.net",
         isNew: true
+    },
+    {
+        id: "C001",
+        category: "culture",
+        title: "ישראל ביורוביזיון 2026 | וינה",
+        mission: "Israel Eurovision 2026 Delegation - Vienna, Austria",
+        background: "ישראל מייצגת את עצמה ב-70 שנות תחרות האירוויזיון בווינה, אוסטריה, כשנועם בתן מגיע עם השיר 'Michelle'. בתן, בן 27, זכה בתכנית 'הכוכב הבא' ב-20 בינואר 2026 והוסמך כנציג ישראל. ישראל תתחרה בחצי הגמר הראשון ב-12 במאי 2026 ב-Wiener Stadthalle בווינה, שמארחת את התחרות לאחר ניצחון אוסטריה ב-2025 עם השיר 'Wasted Love'. ה-EBU אישר את השתתפות ישראל לאחר בדיקת השיר. השיר 'Michelle' הוא שילוב של עברית, צרפתית ואנגלית.",
+        route: "LLBG -> LOWW",
+        dest_icao: "LOWW",
+        date: "2026-05-10",
+        time: "10:00",
+        airline: "אל על",
+        aircraft: "Boeing 737-800",
+        icon: "🎭",
+        source: "Eurovision.com / Wikipedia Eurovision 2026 / Times of Israel / Algemeiner.com",
+        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Eurovision_2026_heart_-_Austria.svg/320px-Eurovision_2026_heart_-_Austria.svg.png",
+        isNew: true
+    },
+    {
+        id: "S003",
+        category: "sports-other",
+        title: "נבחרת ג'ודו ישראל | גרנד סלאם בודפשט",
+        mission: "Israeli Judo Team - IJF Grand Slam Budapest, Hungary",
+        background: "נבחרת ישראל בג'ודו, שהוכיחה עוצמה בגרנד סלאם טביליסי 2026 עם 3 מדליות זהב בראשות רז הרשקו, יוצאת לגרנד סלאם בבודפשט, הונגריה, בין 11 ל-13 בספטמבר 2026. הגרנד סלאם בבודפשט הוא אחת מ-9 תחרויות הדגל של הפדרציה הבינלאומית לג'ודו (IJF) לשנת 2026. בודפשט נחשבת 'בית' ג'ודו – הונגריה היא מעצמת ג'ודו היסטורית. זהו אירוע חשוב לצבירת נקודות דירוג לקראת אולימפיאדת לוס אנג'לס 2028.",
+        route: "LLBG -> LHBP",
+        dest_icao: "LHBP",
+        date: "2026-09-09",
+        time: "08:00",
+        airline: "אל על / Wizz Air",
+        aircraft: "Boeing 737-800",
+        icon: "🏃",
+        source: "IJF.org / EJU.net / Haaretz 22.03.2026",
+        imageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Raz_Hershko_%28ISR%29_2021.jpg/320px-Raz_Hershko_%28ISR%29_2021.jpg",
+        isNew: true
     }
 ];
