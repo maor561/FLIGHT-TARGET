@@ -440,6 +440,10 @@ function showFlightDetails(flight) {
         : '<li><span class="fact-bullet">•</span><span>אין מידע זמין על היעד.</span></li>';
 
     body.innerHTML = `
+        <div class="modal-image-hero" ${flight.imageUrl ? `style="background-image: url('${flight.imageUrl}')"` : ''}>
+            ${!flight.imageUrl ? `<div class="image-placeholder">${flight.icon}</div>` : ''}
+        </div>
+
         <div class="modal-header-block">
             <div class="modal-icon">${flight.icon}</div>
             <h2 class="modal-title">${flight.title}</h2>

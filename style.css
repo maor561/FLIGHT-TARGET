@@ -1067,6 +1067,33 @@ html[dir="rtl"] .news-ticker {
 }
 
 /* ==== MODAL HEADER BLOCK ==== */
+.modal-image-hero {
+    width: 100%;
+    height: 280px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 16px 16px 0 0;
+    margin: -2rem -2rem 2rem -2rem;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.4);
+}
+
+.image-placeholder {
+    font-size: 5rem;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.3), rgba(139, 92, 246, 0.3));
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    border-top: 2px solid rgba(139, 92, 246, 0.5);
+}
+
 .modal-header-block {
     margin-bottom: 2.5rem;
     text-align: center;
