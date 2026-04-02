@@ -87,6 +87,7 @@ const flights = [
         aircraft: "Boeing 737-800",
         icon: "🏀",
         source: "EuroLeague Basketball / Eurohoops.net",
+        imageUrl: "https://images.unsplash.com/photo-1546519638-68711109f629?w=800&h=400&fit=crop",
         isNew: true
     },
     {
@@ -103,6 +104,7 @@ const flights = [
         aircraft: "Boeing 737-800",
         icon: "🏀",
         source: "Paris Basketball Official / Sofascore / EuroLeague Basketball",
+        imageUrl: "https://images.unsplash.com/photo-1546519638-68711109f629?w=800&h=400&fit=crop",
         isNew: true
     },
     {
@@ -119,6 +121,7 @@ const flights = [
         aircraft: "Boeing 737-900",
         icon: "🏃",
         source: "IJF.org / European Judo Union (EJU)",
+        imageUrl: "https://images.unsplash.com/photo-1518611505868-48a87a4d1a72?w=800&h=400&fit=crop",
         isNew: true
     },
     {
@@ -135,6 +138,7 @@ const flights = [
         aircraft: "Boeing 787-9 Dreamliner",
         icon: "💼",
         source: "Israel Tech Week (israeltechweek.com) / BusinessWire",
+        imageUrl: "https://images.unsplash.com/photo-1540575467063-178f50902556?w=800&h=400&fit=crop",
         isNew: true
     },
     {
@@ -151,6 +155,7 @@ const flights = [
         aircraft: "Boeing 737-900",
         icon: "⚽",
         source: "UEFA.com / RTÉ.ie / SportsHistori.com",
+        imageUrl: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&h=400&fit=crop",
         isNew: true
     },
     {
@@ -167,6 +172,7 @@ const flights = [
         aircraft: "Boeing 737-900",
         icon: "⚽",
         source: "UEFA.com / IrishTimes.com / Algemeiner.com",
+        imageUrl: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&h=400&fit=crop",
         isNew: true
     },
     {
@@ -183,6 +189,7 @@ const flights = [
         aircraft: "Airbus A320",
         icon: "⚽",
         source: "UEFA.com / KOHA.net / SportsHistori.com",
+        imageUrl: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&h=400&fit=crop",
         isNew: true
     },
     {
@@ -199,6 +206,7 @@ const flights = [
         aircraft: "Boeing 737-800",
         icon: "🏃",
         source: "IJF.org / InsideTheGames.biz / EJU.net",
+        imageUrl: "https://images.unsplash.com/photo-1518611505868-48a87a4d1a72?w=800&h=400&fit=crop",
         isNew: true
     },
     {
