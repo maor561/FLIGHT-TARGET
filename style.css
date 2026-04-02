@@ -886,7 +886,7 @@ body {
 .status-indicator { color: #4ade80; font-weight: 700; display: flex; align-items: center; gap: 8px; font-size: 1.1rem; }
 .status-dot-pulse { width: 10px; height: 10px; border-radius: 50%; background: #4ade80; box-shadow: 0 0 10px #4ade80; animation: glowPulse 2s infinite; }
 .dest-title { font-size: 1.2rem; font-weight: 800; color: var(--accent-secondary); margin-bottom: 1.25rem; }
-.facts-list { line-height: 1.6; color: var(--text-secondary); font-size: 0.95rem; padding: 0; margin: 0; list-style: none; }
+.facts-list { line-height: 1.8; color: var(--text-secondary); font-size: 0.98rem; padding: 0; margin: 0; list-style: none; min-height: 140px; display: flex; flex-direction: column; justify-content: space-around; }
 
 [data-theme="light"] .modal-description { background: var(--bg-card); }
 [data-theme="light"] .text-white, [data-theme="light"] .airline-name { color: var(--text-primary) !important; }
