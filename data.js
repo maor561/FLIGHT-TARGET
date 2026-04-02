@@ -4,7 +4,7 @@
 // ============================================================
 
 const lastUpdated = {
-    timestamp: "2026-03-31T08:00:00.000Z",
+    timestamp: "2026-04-02T08:00:00.000Z",
     source: "Claude Code Scheduled Task",
     version: "1.1.0"
 };
@@ -338,6 +338,60 @@ const flights = [
         source: "VATIL.online / VATSIM.net / Cybersecurity Authority",
         imageUrl: "https://images.unsplash.com/photo-1538438881759-1fab5d814bd0?w=800&h=400&fit=crop",
         createdAt: "2026-04-02T00:00:00Z",
+        isNew: true
+    },
+    {
+        id: "S004",
+        category: "sports-other",
+        title: "נבחרת ג'ודו ישראל | גרנד סלאם טוקיו",
+        mission: "Israeli Judo Team - IJF Grand Slam Tokyo, Japan",
+        background: "נבחרת ישראל בג'ודו יוצאת לגרנד סלאם טוקיו, יפן, שיתקיים ב-5-6 בדצמבר 2026. זוהי אחת מ-9 תחרויות הדגל של הפדרציה הבינלאומית לג'ודו (IJF) בשנת 2026. הגרנד סלאם בטוקיו מתקיים מדי שנה ביפן ונחשב לאחת מהתחרויות היוקרתיות ביותר בלוח השנה של הג'ודו העולמי. ספורטאי ישראל, בראשות רז הרשקו ומדליסטים מגרנד סלאם טביליסי 2026, ישתתפו בתחרות כחלק מההכנות לאולימפיאדת לוס אנג'לס 2028.",
+        route: "LLBG -> RJTT",
+        dest_icao: "RJTT",
+        date: "2026-12-03",
+        time: "09:00",
+        airline: "אל על",
+        aircraft: "Boeing 787-9 Dreamliner",
+        icon: "🏃",
+        source: "IJF.org / EJU.net",
+        imageUrl: "https://images.pexels.com/photos/6765024/pexels-photo-6765024.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-04-02T08:00:00Z",
+        isNew: true
+    },
+    {
+        id: "D003",
+        category: "diplomatic",
+        title: "משלחת ישראל לעצרת האו״ם 81 | ניו יורק",
+        mission: "Israeli Diplomatic Delegation - 81st UN General Assembly, New York",
+        background: "משלחת ישראל הרשמית, בראשות ראש הממשלה ושר החוץ, נוסעת לניו יורק להשתתף בעצרת הכללית ה-81 של האו״ם. הדיון הכללי ברמה הגבוהה מתחיל ב-22 בספטמבר 2026. ישראל תציג את עמדותיה בנושאים ביטחוניים, מדיניים ובינלאומיים בפני נציגי 193 מדינות חברות. ראש הממשלה נושא נאום שנתי בפני המליאה, כמנהג ישראל בעצרת האו״ם.",
+        route: "LLBG -> KJFK",
+        dest_icao: "KJFK",
+        date: "2026-09-20",
+        time: "10:00",
+        airline: "אל על",
+        aircraft: "Boeing 787-9 Dreamliner",
+        icon: "🕊️",
+        source: "UN.org / Times of Israel / Israeli Ministry of Foreign Affairs",
+        imageUrl: "https://images.pexels.com/photos/33806113/pexels-photo-33806113.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-04-02T08:00:00Z",
+        isNew: true
+    },
+    {
+        id: "D004",
+        category: "diplomatic",
+        title: "משלחת ישראל לאסיפת הבריאות העולמית | ז'נבה 2026",
+        mission: "Israeli Delegation - 79th World Health Assembly, Geneva",
+        background: "המשלחת הרפואית-דיפלומטית הישראלית נוסעת לז'נבה, שוויץ, להשתתף ב-79 אסיפת הבריאות העולמית (WHA79), המתקיימת בין 18-23 במאי 2026 במטה ה-WHO. האסיפה היא הגוף המחליט הגבוה ביותר של ארגון הבריאות העולמי, ואליה מגיעים נציגים מ-194 מדינות חברות. ישראל חברה ב-WHO ומשתתפת בדיוני האסיפה ומציגה עמדות בנושאי בריאות עולמית, מחקר ומדיניות רפואית.",
+        route: "LLBG -> LSGG",
+        dest_icao: "LSGG",
+        date: "2026-05-17",
+        time: "09:00",
+        airline: "אל על",
+        aircraft: "Boeing 737-800",
+        icon: "🕊️",
+        source: "WHO.int / Times of Israel",
+        imageUrl: "https://images.pexels.com/photos/8761656/pexels-photo-8761656.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-04-02T08:00:00Z",
         isNew: true
     }
 ];
