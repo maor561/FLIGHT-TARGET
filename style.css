@@ -1,7 +1,7 @@
 :root {
-    --bg-main: #242b38;
-    --bg-secondary: #2e3748;
-    --bg-glass: rgba(46, 55, 72, 0.85);
+    --bg-main: #313d4d;
+    --bg-secondary: #3a4556;
+    --bg-glass: rgba(58, 69, 86, 0.85);
     --bg-card: rgba(255, 255, 255, 0.03);
     --text-primary: #ffffff;
     --text-secondary: #f1f5f9;
@@ -39,6 +39,15 @@
 [data-theme="light"] .weather-tag {
     background: rgba(255, 255, 255, 0.85);
     color: var(--text-primary);
+}
+
+[data-theme="light"] .sidebar {
+    background: #f8f9fb;
+    box-shadow: 10px 0 30px rgba(0,0,0,0.08);
+}
+
+[data-theme="light"] .category-item {
+    background: rgba(0, 0, 0, 0.02);
 }
 
 @keyframes slideInUp {
@@ -248,9 +257,13 @@ body {
     flex: 1;
     overflow: hidden;
     padding: 2rem;
-    background: radial-gradient(circle at 50% 50%, #1a1f2b 0%, #0a0b10 100%);
+    background: radial-gradient(circle at 50% 50%, #404d5c 0%, #2a3140 100%);
     display: flex;
     flex-direction: column;
+}
+
+[data-theme="light"] .content {
+    background: radial-gradient(circle at 50% 50%, #f5f7fa 0%, #ffffff 100%);
 }
 .icon-btn {
     background: var(--bg-secondary);
@@ -821,7 +834,11 @@ body {
 
 /* Leaflet Overrides */
 .leaflet-container {
-    background: #0a0b10 !important;
+    background: var(--bg-main) !important;
+}
+
+[data-theme="light"] .leaflet-container {
+    background: #ffffff !important;
 }
 
 .leaflet-bar a {
