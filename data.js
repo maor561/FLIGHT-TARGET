@@ -253,7 +253,7 @@ const flights = [
     {
         id: "B003",
         category: "basketball",
-        title: "הפואל תל אביב - יורוליג | איתליה",
+        title: "הפואל תל אביב - יורוליג | איטליה",
         mission: "Hapoel Tel Aviv EuroLeague Away Game vs Umana Reyer Venezia",
         background: "הפואל תל אביב משחקת בוונציה, איטליה, נגד Umana Reyer Venezia ב-23 באפריל 2026, בשעה 20:00. זהו משחק מכריע בליגת האלופות האירופית (יורוליג) כשהקבוצה מתחרה על מקום בפלייאין. וונציה משחקת בארנה פלא בעיר העתיקה של וונציה. הקבוצה הישראלית מחפשת ניצחון בחו״ל חשוב בסיום העונה הסדירה.",
         route: "LLBG -> LIRF",
