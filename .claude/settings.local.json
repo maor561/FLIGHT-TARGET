@@ -15,7 +15,8 @@
       "Bash(node -c data.js)",
       "Bash(node --check data.js)",
       "mcp__scheduled-tasks__list_scheduled_tasks",
-      "Bash(node -c \"C:\\\\cluade\\\\FLIGHT TARGET\\\\data.js\")"
+      "Bash(node -c \"C:\\\\cluade\\\\FLIGHT TARGET\\\\data.js\")",
+      "Bash(curl -I \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Eurovision_2026_heart_-_Austria.svg/320px-Eurovision_2026_heart_-_Austria.svg.png\")"
     ]
   }
 }
