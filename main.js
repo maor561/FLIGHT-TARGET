@@ -498,16 +498,9 @@ function fetchAndAddWeatherMarker(coords, icao, destName) {
                     <span style="font-size:0.9rem; font-weight:800; color:#00d2ff;">${temp}°</span>
                 </div>`,
                 iconSize: [80, 34],
-                iconAnchor: [40, 17]
+                iconAnchor: [-10, 17] // Anchor at left edge + small gap → pill appears to the RIGHT of airport dot
             });
-            // Offset weather marker to avoid overlap with airport marker
-            // Use larger offset: 0.3 degrees = ~33km at equator
-            const randomAngle = Math.random() * Math.PI * 2;
-            const offsetDistance = 0.35; // degrees
-            const offsetLat = coords[0] + (Math.cos(randomAngle) * offsetDistance);
-            const offsetLon = coords[1] + (Math.sin(randomAngle) * offsetDistance);
-            const offsetCoords = [offsetLat, offsetLon];
-            const wMarker = L.marker(offsetCoords, { icon: weatherIcon }).addTo(map);
+            const wMarker = L.marker(coords, { icon: weatherIcon }).addTo(map);
             flightLayers.push(wMarker);
         })
         .catch(err => {
