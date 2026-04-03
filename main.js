@@ -104,6 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
     displayDataLastUpdated();
     displayLastUpdatedTime();
     initMetarBar();
+    trackVisitor();
 });
 
 
@@ -883,4 +884,23 @@ function updateLastUpdatedTime() {
     if (el) el.textContent = new Date().toLocaleTimeString('he-IL', {
         hour: '2-digit', minute: '2-digit', second: '2-digit'
     });
+}
+
+// ============================================================
+// VISITOR COUNTER (CounterAPI)
+// ============================================================
+function trackVisitor() {
+    const el = document.getElementById('visitor-count');
+    if (!el) return;
+
+    // Call counterapi.dev to increment and get count
+    fetch('https://api.counterapi.dev/v1/flight-target/visitors/up')
+        .then(r => r.json())
+        .then(data => {
+            const count = data.count || 0;
+            el.textContent = count.toLocaleString('he-IL');
+        })
+        .catch(() => {
+            el.textContent = '—';
+        });
 }
