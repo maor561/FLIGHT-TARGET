@@ -420,28 +420,33 @@ function createFlightCard(flight, index = 0) {
 
     card.onclick = () => showFlightDetails(flight);
 
-    // Hover: highlight this flight's route on the map
+    // Hover: highlight this flight's route + fit map to full route
     card.onmouseenter = () => {
+        const route = flightRouteMap[flight.id];
+        if (!route) return;
+
         Object.entries(flightRouteMap).forEach(([id, { polyline, marker }]) => {
             if (id === flight.id) {
-                // Highlight: thicker, brighter, solid
                 polyline.setStyle({ weight: 5, opacity: 1, dashArray: null });
                 marker.setStyle({ radius: 10, fillOpacity: 1 });
                 polyline.bringToFront();
             } else {
-                // Dim all others
                 polyline.setStyle({ weight: 1, opacity: 0.15 });
                 marker.setStyle({ fillOpacity: 0.15, opacity: 0.15 });
             }
         });
+
+        // Fit map to show full route with padding
+        map.fitBounds(route.polyline.getBounds(), { padding: [60, 60], maxZoom: 6 });
     };
 
     card.onmouseleave = () => {
         Object.entries(flightRouteMap).forEach(([id, { polyline, marker }]) => {
-            const isIncoming = polyline.options.color === '#ff6b6b';
             polyline.setStyle({ weight: 2, opacity: 0.7, dashArray: '10, 12' });
             marker.setStyle({ radius: 6, fillOpacity: 1, opacity: 1 });
         });
+        // Restore default map view
+        map.setView([35, 20], 3, { animate: true, duration: 0.5 });
     };
 
     return card;
