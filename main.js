@@ -21,6 +21,38 @@ function isFlightNew(flight) {
     return hoursPassed < 24;
 }
 
+// Generate flight-specific search term from flight details
+function generateFlightSpecificSearchTerm(flight) {
+    // Extract keywords from title, mission, and background
+    const titleWords = flight.title
+        .replace(/[|—–]/g, ' ') // Replace separators with space
+        .split(' ')
+        .filter(w => w.length > 2 && !['את', 'של', 'לים', 'מול', 'ללא'].includes(w))
+        .slice(0, 3);
+
+    // Category-based base terms
+    const categoryTerms = {
+        football: ['soccer', 'football', 'match', 'stadium', 'team'],
+        basketball: ['basketball', 'court', 'euroleague', 'game'],
+        'sports-other': ['judo', 'martial arts', 'competition', 'sport'],
+        jewish: ['jewish', 'israel', 'community', 'cultural', 'heritage'],
+        rescue: ['rescue', 'helicopter', 'emergency', 'mission'],
+        diplomatic: ['government', 'parliament', 'diplomatic', 'official'],
+        business: ['tech', 'conference', 'event', 'business'],
+        culture: ['concert', 'performance', 'theater', 'artist', 'music'],
+        vatil: ['flight simulator', 'aviation', 'pilot', 'virtual']
+    };
+
+    // Get category base terms
+    const baseTerms = categoryTerms[flight.category] || ['airplane', 'flight'];
+
+    // Combine title keywords with category terms
+    const searchTerms = [...titleWords, ...baseTerms.slice(0, 2)].slice(0, 4).join(' ');
+
+    console.log('🔍 Flight-specific search:', { title: flight.title.substring(0, 30), searchTerm: searchTerms });
+    return searchTerms;
+}
+
 async function fetchPexelsImage(searchTerm) {
     try {
         const response = await fetch(`https://api.pexels.com/v1/search?query=${encodeURIComponent(searchTerm)}&per_page=1`, {
@@ -499,8 +531,9 @@ async function showFlightDetails(flight) {
     // Fetch image from sources (priority: sourceImageUrl > Pexels > gradient)
     let imageUrl = flight.sourceImageUrl || null; // Official image from source website
     if (!imageUrl) {
-        const searchTerm = categorySearchTerms[flight.category] || 'airplane flight';
-        imageUrl = await fetchPexelsImage(searchTerm); // Fallback to Pexels
+        // Generate flight-specific search term for unique images per flight
+        const searchTerm = generateFlightSpecificSearchTerm(flight);
+        imageUrl = await fetchPexelsImage(searchTerm); // Fallback to Pexels with specific search
     }
 
     console.log('🖼️ Flight details:', { title: flight.title, category: flight.category, sourceImage: flight.sourceImageUrl, pexelsImage: imageUrl, isNew: isFlightNew(flight) });
