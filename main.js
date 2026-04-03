@@ -320,17 +320,16 @@ function initMap() {
     const LLBG_ICON = L.divIcon({
         className: 'custom-div-icon',
         html: `
-            <div style="position:relative;width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
-                <div style="position:absolute;width:20px;height:20px;background:var(--accent-primary);border-radius:50%;box-shadow:0 0 15px var(--accent-glow);border:2px solid white;"></div>
-                <div class="radar-pulse-ring" style="position:absolute;width:20px;height:20px;background:var(--accent-primary);border-radius:50%;opacity:0.5;"></div>
-                <div style="position:absolute;right:-15px;bottom:-5px;background:#003DA5;color:white;padding:2px 6px;border-radius:4px;font-size:9px;font-weight:bold;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.4);">EL AL</div>
+            <div style="position:relative;width:20px;height:20px;">
+                <div style="position:absolute;width:100%;height:100%;background:var(--accent-primary);border-radius:50%;box-shadow:0 0 15px var(--accent-glow);border:2px solid white;"></div>
+                <div class="radar-pulse-ring" style="position:absolute;width:100%;height:100%;background:var(--accent-primary);border-radius:50%;opacity:0.5;"></div>
             </div>`,
-        iconSize: [40, 40],
-        iconAnchor: [20, 20]
+        iconSize: [20, 20],
+        iconAnchor: [10, 10]
     });
 
     L.marker(LLBG_COORDS, { icon: LLBG_ICON }).addTo(map)
-        .bindPopup('<b style="color:#00d2ff">Ben Gurion International Airport</b><br><small>LLBG / TLV – Tel Aviv, Israel</small><br><small style="color:#00d2ff">✈️ El Al – דגל התעופה הישראלי</small>');
+        .bindPopup('<b style="color:#00d2ff">Ben Gurion International Airport</b><br><small>LLBG / TLV – Tel Aviv, Israel</small>');
 }
 
 // ============================================================
@@ -474,7 +473,7 @@ function fetchAndAddWeatherMarker(coords, icao, destName) {
         .then(data => {
             const cur = data.current_weather;
             if (!cur) throw new Error('No weather data');
-            
+
             const temp = Math.round(cur.temperature);
             const wind = Math.round(cur.windspeed);
 
@@ -501,7 +500,9 @@ function fetchAndAddWeatherMarker(coords, icao, destName) {
                 iconSize: [80, 34],
                 iconAnchor: [40, 17]
             });
-            const wMarker = L.marker(coords, { icon: weatherIcon }).addTo(map);
+            // Offset weather marker vertically (above airport marker) so they don't overlap
+            const offsetCoords = [coords[0], coords[1] + 0.15];
+            const wMarker = L.marker(offsetCoords, { icon: weatherIcon }).addTo(map);
             flightLayers.push(wMarker);
         })
         .catch(err => {
