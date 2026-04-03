@@ -7,6 +7,7 @@ let currentDateFilter = 'all';
 let currentAirlineFilter = 'all';
 let map;
 let flightLayers = [];
+let flightRouteMap = {}; // Maps flight.id → { polyline, marker }
 const PEXELS_API_KEY = '23x7wbvKlsAxvOCwf2wRtly1rEN8Xdomc6aBaM4k4MGxmE1B1f1VRPp9';
 
 // ============================================================
@@ -354,6 +355,7 @@ function renderFlights(category = 'all', searchTerm = '') {
     listContainer.innerHTML = '';
     flightLayers.forEach(l => map.removeLayer(l));
     flightLayers = [];
+    flightRouteMap = {};
 
     const today = new Date(); today.setHours(0, 0, 0, 0);
     const nextWeek = new Date(today); nextWeek.setDate(today.getDate() + 7);
@@ -417,6 +419,31 @@ function createFlightCard(flight, index = 0) {
         </div>`;
 
     card.onclick = () => showFlightDetails(flight);
+
+    // Hover: highlight this flight's route on the map
+    card.onmouseenter = () => {
+        Object.entries(flightRouteMap).forEach(([id, { polyline, marker }]) => {
+            if (id === flight.id) {
+                // Highlight: thicker, brighter, solid
+                polyline.setStyle({ weight: 5, opacity: 1, dashArray: null });
+                marker.setStyle({ radius: 10, fillOpacity: 1 });
+                polyline.bringToFront();
+            } else {
+                // Dim all others
+                polyline.setStyle({ weight: 1, opacity: 0.15 });
+                marker.setStyle({ fillOpacity: 0.15, opacity: 0.15 });
+            }
+        });
+    };
+
+    card.onmouseleave = () => {
+        Object.entries(flightRouteMap).forEach(([id, { polyline, marker }]) => {
+            const isIncoming = polyline.options.color === '#ff6b6b';
+            polyline.setStyle({ weight: 2, opacity: 0.7, dashArray: '10, 12' });
+            marker.setStyle({ radius: 6, fillOpacity: 1, opacity: 1 });
+        });
+    };
+
     return card;
 }
 
@@ -462,6 +489,7 @@ function addFlightToMap(flight, index = 0) {
     }, index * 200);
 
     flightLayers.push(polyline, marker);
+    flightRouteMap[flight.id] = { polyline, marker };
 }
 
 function fetchAndAddWeatherMarker(coords, icao, destName) {
