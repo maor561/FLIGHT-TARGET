@@ -87,6 +87,7 @@ const flights = [
         aircraft: "Boeing 737-800",
         icon: "🏀",
         source: "EuroLeague Basketball / Eurohoops.net",
+        imageUrl: "https://images.pexels.com/photos/12316533/pexels-photo-12316533.jpeg?auto=compress&cs=tinysrgb&h=350",
         createdAt: "2026-04-02T00:00:00Z",
         isNew: true
     },
@@ -122,6 +123,7 @@ const flights = [
         aircraft: "Boeing 737-900",
         icon: "🏃",
         source: "IJF.org / European Judo Union (EJU)",
+        imageUrl: "https://images.pexels.com/photos/6765029/pexels-photo-6765029.jpeg?auto=compress&cs=tinysrgb&h=350",
         createdAt: "2026-04-02T00:00:00Z",
         isNew: true
     },
@@ -157,6 +159,7 @@ const flights = [
         aircraft: "Boeing 737-900",
         icon: "⚽",
         source: "UEFA.com / RTÉ.ie / SportsHistori.com",
+        imageUrl: "https://images.pexels.com/photos/15949232/pexels-photo-15949232.jpeg?auto=compress&cs=tinysrgb&h=350",
         createdAt: "2026-04-02T00:00:00Z",
         isNew: true
     },
@@ -246,7 +249,7 @@ const flights = [
         aircraft: "Boeing 737-800",
         icon: "🏃",
         source: "IJF.org / EJU.net / Haaretz 22.03.2026",
-        imageUrl: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=800&h=400&fit=crop",
+        imageUrl: "https://images.pexels.com/photos/6765020/pexels-photo-6765020.jpeg?auto=compress&cs=tinysrgb&h=350",
         createdAt: "2026-04-02T00:00:00Z",
         isNew: true
     },
@@ -392,6 +395,60 @@ const flights = [
         source: "WHO.int / Times of Israel",
         imageUrl: "https://images.pexels.com/photos/8761656/pexels-photo-8761656.jpeg?auto=compress&cs=tinysrgb&h=350",
         createdAt: "2026-04-02T08:00:00Z",
+        isNew: true
+    },
+    {
+        id: "S005",
+        category: "sports-other",
+        title: "נבחרת ג'ודו ישראל | גרנד סלאם לוזאן 2026",
+        mission: "Israeli Judo Team - IJF Grand Slam Lausanne, Switzerland",
+        background: "נבחרת ישראל בג'ודו יוצאת לגרנד סלאם לוזאן, שוויץ, שיתקיים בין 28 ל-30 באוגוסט 2026 ב-Vaudoise Arena. זהו אירוע דגל חדש של הפדרציה הבינלאומית לג'ודו (IJF) – ראשון מסוגו בלוזאן, עיר האולימפיאדה. ישראל, שמדורגת בין המעצמות הג'ודו המובילות באירופה, תשלח ספורטאים במסגרת האיגוד האירופי לג'ודו (EJU). האירוע כולל כ-900 ספורטאים מ-50 מדינות ומהווה תחרות כישורין לאולימפיאדת לוס אנג'לס 2028. עיר לוזאן, מושב הוועד האולימפי הבינלאומי (IOC), מארחת לראשונה תחרות גרנד סלאם.",
+        route: "LLBG -> LSGG",
+        dest_icao: "LSGG",
+        date: "2026-08-26",
+        time: "09:00",
+        airline: "אל על",
+        aircraft: "Boeing 737-800",
+        icon: "🏃",
+        source: "IJF.org/competition/3225 / EJU.net/event/lausanne-grand-slam/406309",
+        imageUrl: "https://images.pexels.com/photos/35283723/pexels-photo-35283723.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-04-03T08:00:00Z",
+        isNew: true
+    },
+    {
+        id: "S006",
+        category: "sports-other",
+        title: "קבוצת השחייה הישראלית | אליפות אירופה אקווטיקס – פריז",
+        mission: "Israeli Swimming Team - European Aquatics Championships Paris 2026",
+        background: "קבוצת השחייה הישראלית יוצאת לפריז, צרפת, להשתתף ב-38 אליפות אירופה לשחייה (European Aquatics Championships), שתתקיים בין 31 ביולי ל-16 באוגוסט 2026 במרכז המימייה האולימפי בפאריז סן-דני. ישראל ייצגה עצמה בהצלחה רבה באליפות 2024 בבלגרד עם 8 מדליות כולל 4 זהב (אנסטסיה גורבנקו, קבוצת השחייה). תוכנית השחייה מתקיימת בין 10 ל-16 באוגוסט. מוצלחת בינלאומית כ'שחיינית ישראלית מס' 1', גורבנקו צפויה להוביל את המשלחת. ישראל חברה בפדרציה האירופית לאקווטיקס (European Aquatics / LEN) ומשתתפת מדי שנה.",
+        route: "LLBG -> LFPG",
+        dest_icao: "LFPG",
+        date: "2026-08-08",
+        time: "10:00",
+        airline: "אל על",
+        aircraft: "Boeing 737-800",
+        icon: "🏊",
+        source: "europeanaquatics.org/paris-2026 / swimswam.com / swimmingworldmagazine.com",
+        imageUrl: "https://images.pexels.com/photos/31033388/pexels-photo-31033388.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-04-03T08:00:00Z",
+        isNew: true
+    },
+    {
+        id: "S007",
+        category: "sports-other",
+        title: "נבחרת ג'ודו ישראל | גרנד סלאם אבו דאבי 2026",
+        mission: "Israeli Judo Team - IJF Grand Slam Abu Dhabi, UAE",
+        background: "נבחרת ישראל בג'ודו יוצאת לגרנד סלאם אבו דאבי, איחוד האמירויות, שיתקיים בין 29 ל-31 באוקטובר 2026. מאז הסכמי אברהם (2020), ישראל ואיחוד האמירויות מנהלות יחסים דיפלומטיים מלאים, ו-El Al מפעילה קווים ישירים לדובאי. ספורטאי ישראל משתתפים בגרנד סלאם אבו דאבי תחת דגלם ולהמנון הלאומי. זהו אירוע כישורין חשוב לאולימפיאדת לוס אנג'לס 2028. אבו דאבי, בירת האמירויות, נמצאת כ-130 ק\"מ מדובאי.",
+        route: "LLBG -> OMDB",
+        dest_icao: "OMDB",
+        date: "2026-10-27",
+        time: "09:00",
+        airline: "אל על",
+        aircraft: "Boeing 737-800",
+        icon: "🏃",
+        source: "IJF.org/competition/3157 / IJF.org/calendar",
+        imageUrl: "https://images.pexels.com/photos/6253163/pexels-photo-6253163.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-04-03T08:00:00Z",
         isNew: true
     }
 ];
