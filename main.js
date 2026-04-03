@@ -320,16 +320,17 @@ function initMap() {
     const LLBG_ICON = L.divIcon({
         className: 'custom-div-icon',
         html: `
-            <div style="position:relative;width:20px;height:20px;">
-                <div style="position:absolute;width:100%;height:100%;background:var(--accent-primary);border-radius:50%;box-shadow:0 0 15px var(--accent-glow);border:2px solid white;"></div>
-                <div class="radar-pulse-ring" style="position:absolute;width:100%;height:100%;background:var(--accent-primary);border-radius:50%;opacity:0.5;"></div>
+            <div style="position:relative;width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
+                <div style="position:absolute;width:20px;height:20px;background:var(--accent-primary);border-radius:50%;box-shadow:0 0 15px var(--accent-glow);border:2px solid white;"></div>
+                <div class="radar-pulse-ring" style="position:absolute;width:20px;height:20px;background:var(--accent-primary);border-radius:50%;opacity:0.5;"></div>
+                <div style="position:absolute;right:-15px;bottom:-5px;background:#003DA5;color:white;padding:2px 6px;border-radius:4px;font-size:9px;font-weight:bold;white-space:nowrap;box-shadow:0 2px 8px rgba(0,0,0,0.4);">EL AL</div>
             </div>`,
-        iconSize: [20, 20],
-        iconAnchor: [10, 10]
+        iconSize: [40, 40],
+        iconAnchor: [20, 20]
     });
 
     L.marker(LLBG_COORDS, { icon: LLBG_ICON }).addTo(map)
-        .bindPopup('<b style="color:#00d2ff">Ben Gurion International Airport</b><br><small>LLBG / TLV – Tel Aviv, Israel</small>');
+        .bindPopup('<b style="color:#00d2ff">Ben Gurion International Airport</b><br><small>LLBG / TLV – Tel Aviv, Israel</small><br><small style="color:#00d2ff">✈️ El Al – דגל התעופה הישראלי</small>');
 }
 
 // ============================================================
@@ -715,23 +716,48 @@ async function updateNewsTicker() {
     const ticker = document.getElementById('news-ticker');
     if (!ticker) return;
 
-    // Show only flights added in last 24 hours
-    const newFlights = flights.filter(f => isFlightNew(f));
+    // Get latest flights sorted by createdAt (newest first)
+    const latestFlights = [...flights].sort((a, b) => {
+        const aTime = new Date(a.createdAt || '2000-01-01').getTime();
+        const bTime = new Date(b.createdAt || '2000-01-01').getTime();
+        return bTime - aTime; // Newest first
+    }).slice(0, 8); // Show last 8 flights added
 
-    if (newFlights.length === 0) {
-        ticker.innerHTML = '<div class="ticker-item"><span style="color:var(--text-muted);">אין אירועים חדשים כעת</span></div>';
+    // Get next upcoming flight
+    const now = new Date();
+    const nextFlight = [...flights]
+        .filter(f => new Date(f.date) > now)
+        .sort((a, b) => new Date(a.date) - new Date(b.date))[0];
+
+    // Calculate days until next flight
+    let timeText = '';
+    if (nextFlight) {
+        const daysUntil = Math.ceil((new Date(nextFlight.date) - now) / (1000 * 60 * 60 * 24));
+        timeText = daysUntil === 0 ? '🎯 היום!' : daysUntil === 1 ? '⏰ מחר!' : `⏰ עוד ${daysUntil} ימים`;
+    }
+
+    if (latestFlights.length === 0) {
+        ticker.innerHTML = '<div class="ticker-item"><span style="color:var(--text-muted);">אין טיסות בקרוב</span></div>';
         return;
     }
 
-    const items = newFlights.map(f => {
+    // Build ticker items with latest flights
+    const items = latestFlights.map(f => {
         const destName = destinations[f.dest_icao]?.name || f.dest_icao;
         return `<div class="ticker-item">
-            <span class="live-badge">🆕 חדש</span>
-            <span>${f.icon} <strong style="color:var(--accent-primary)">${f.title}</strong> – ${f.airline} → ${destName} | ${formatDate(f.date)} ${f.time}</span>
+            <span style="color:var(--accent-primary);font-weight:bold;">✨ נוסף</span>
+            <span>${f.icon} <strong style="color:var(--accent-primary)">${f.title}</strong> → ${destName} | ${formatDate(f.date)} ${f.time}</span>
         </div>`;
     }).join('<div class="ticker-item"><span style="color:var(--text-muted);padding:0 12px;">◆</span></div>');
 
-    ticker.innerHTML = items + '<div class="ticker-item"><span style="color:var(--text-muted);padding:0 12px;">◆</span></div>' + items;
+    // Add "Time to next flight" item at the beginning
+    const timeItem = nextFlight ? `<div class="ticker-item">
+        <span style="color:#fbbf24;font-weight:bold;font-size:1.1em;">${timeText}</span>
+        <span>${nextFlight.icon} הטיסה הבאה: <strong style="color:var(--accent-primary)">${nextFlight.title}</strong> ב-${formatDate(nextFlight.date)}</span>
+    </div>
+    <div class="ticker-item"><span style="color:var(--text-muted);padding:0 12px;">◆◆◆</span></div>` : '';
+
+    ticker.innerHTML = timeItem + items + '<div class="ticker-item"><span style="color:var(--text-muted);padding:0 12px;">◆</span></div>' + items;
 }
 
 // ============================================================
