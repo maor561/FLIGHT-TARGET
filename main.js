@@ -21,36 +21,56 @@ function isFlightNew(flight) {
     return hoursPassed < 24;
 }
 
-// Generate flight-specific search term from flight details
+// Generate unique search term for each flight using destination + mission details
 function generateFlightSpecificSearchTerm(flight) {
-    // Extract keywords from title, mission, and background
-    const titleWords = flight.title
-        .replace(/[|—–]/g, ' ') // Replace separators with space
+    // Get destination info
+    const destInfo = destinations[flight.dest_icao];
+    const destName = destInfo?.name || flight.dest_icao;
+
+    // Extract key mission keywords (English)
+    const missionKeywords = flight.mission
         .split(' ')
-        .filter(w => w.length > 2 && !['את', 'של', 'לים', 'מול', 'ללא'].includes(w))
-        .slice(0, 3);
+        .filter(w => w.length > 3 && !/^[a-z]$/.test(w)) // Filter short words
+        .slice(0, 4)
+        .join(' ');
 
-    // Category-based base terms
-    const categoryTerms = {
-        football: ['soccer', 'football', 'match', 'stadium', 'team'],
-        basketball: ['basketball', 'court', 'euroleague', 'game'],
-        'sports-other': ['judo', 'martial arts', 'competition', 'sport'],
-        jewish: ['jewish', 'israel', 'community', 'cultural', 'heritage'],
-        rescue: ['rescue', 'helicopter', 'emergency', 'mission'],
-        diplomatic: ['government', 'parliament', 'diplomatic', 'official'],
-        business: ['tech', 'conference', 'event', 'business'],
-        culture: ['concert', 'performance', 'theater', 'artist', 'music'],
-        vatil: ['flight simulator', 'aviation', 'pilot', 'virtual']
-    };
+    // Extract category-specific context from mission/background
+    let eventKeyword = '';
+    const missionLower = (flight.mission + ' ' + (flight.background || '')).toLowerCase();
 
-    // Get category base terms
-    const baseTerms = categoryTerms[flight.category] || ['airplane', 'flight'];
+    // Detect specific event types
+    if (missionLower.includes('basketball') || missionLower.includes('euroleague')) {
+        eventKeyword = `${destName} basketball arena`;
+    } else if (missionLower.includes('football') || missionLower.includes('soccer')) {
+        eventKeyword = `${destName} football stadium`;
+    } else if (missionLower.includes('judo') || missionLower.includes('martial')) {
+        eventKeyword = `judo competition athletes`;
+    } else if (missionLower.includes('parliament') || missionLower.includes('eu')) {
+        eventKeyword = `${destName} European Parliament government`;
+    } else if (missionLower.includes('united nations') || missionLower.includes('un general assembly')) {
+        eventKeyword = `${destName} United Nations official`;
+    } else if (missionLower.includes('who') || missionLower.includes('health assembly')) {
+        eventKeyword = `${destName} World Health Organization meeting`;
+    } else if (missionLower.includes('rescue') || missionLower.includes('humanitarian')) {
+        eventKeyword = `rescue helicopter emergency mission`;
+    } else if (missionLower.includes('concert') || missionLower.includes('performance') || missionLower.includes('eurovision')) {
+        eventKeyword = `${destName} concert stage performance`;
+    } else if (missionLower.includes('conference') || missionLower.includes('tech') || missionLower.includes('business')) {
+        eventKeyword = `${destName} tech conference event`;
+    } else if (missionLower.includes('simulator') || missionLower.includes('vatil')) {
+        eventKeyword = `flight simulator cockpit aviation`;
+    } else {
+        // Default: destination + mission
+        eventKeyword = `${destName} ${missionKeywords}`.substring(0, 60);
+    }
 
-    // Combine title keywords with category terms
-    const searchTerms = [...titleWords, ...baseTerms.slice(0, 2)].slice(0, 4).join(' ');
+    console.log('🔍 Unique search:', {
+        flight: flight.title.substring(0, 25),
+        destination: destName,
+        searchTerm: eventKeyword
+    });
 
-    console.log('🔍 Flight-specific search:', { title: flight.title.substring(0, 30), searchTerm: searchTerms });
-    return searchTerms;
+    return eventKeyword;
 }
 
 async function fetchPexelsImage(searchTerm) {
