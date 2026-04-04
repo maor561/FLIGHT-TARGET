@@ -4,9 +4,9 @@
 // ============================================================
 
 const lastUpdated = {
-    timestamp: "2026-04-04T00:00:00.000Z",
+    timestamp: "2026-04-04T08:00:00.000Z",
     source: "Claude Code Scheduled Task",
-    version: "1.1.0"
+    version: "1.1.1"
 };
 
 const destinations = {
@@ -69,7 +69,8 @@ const destinations = {
     "LIPE": { name: "Bologna", coords: [44.5354, 11.2887], facts: ["'הדשנה' – עיר מפורסמת במטבח האיטלקי ובבולונז", "אוניברסיטת בולוניה – הוותיקה בעולם (1088)", "מרכז ספורט – ביתה של Virtus Bologna בכדורסל", "תערוכת ספרים הבינלאומית מתקיימת בה", "מרכז תחבורה ולוגיסטיקה מרכזי באיטליה הצפונית"] },
     "EIDW": { name: "Dublin", coords: [53.4213, -6.2700], facts: ["בירת אירלנד – עיר ויקינגית עתיקה", "אצטדיון אביבה – ביתה של נבחרת כדורגל אירלנד", "מרכז פיננסי ועסקי – מטה Facebook, Google, Apple באירופה", "ידועה בפיולות, מוזיקה ותרבות Pub", "קהילה יהודית קטנה אך פעילה"] },
     "UBBB": { name: "Baku", coords: [40.4675, 50.0467], facts: ["בירת אזרבייג'ן – 'העיר של אש'", "מארחת אליפות העולם בג'ודו 2026", "מרכז נפט וגז – 'ונציה של הקווקז'", "מארחת יורוויזיון 2012 ו-Formula 1 Azerbaijan GP", "עיר ישנה (Icheri Sheher) – מורשת עולמית של UNESCO"] },
-    "HECA": { name: "Cairo", coords: [30.1219, 31.4056], facts: ["בירת מצרים ועיר הגדולה ביותר בעולם הערבי", "הפירמידות וספינקס בסביבתה – מורשת עולמית", "מרכז דיפלומטי מרכזי לתהליכי שלום מזרח תיכוני", "קהיר – מרכז תרבות, קולנוע ומוזיקה ערבית", "נהר הנילוס עובר דרכה – מקור החיים לאגן הנילוס"] }
+    "HECA": { name: "Cairo", coords: [30.1219, 31.4056], facts: ["בירת מצרים ועיר הגדולה ביותר בעולם הערבי", "הפירמידות וספינקס בסביבתה – מורשת עולמית", "מרכז דיפלומטי מרכזי לתהליכי שלום מזרח תיכוני", "קהיר – מרכז תרבות, קולנוע ומוזיקה ערבית", "נהר הנילוס עובר דרכה – מקור החיים לאגן הנילוס"] },
+    "LBSF": { name: "Sofia", coords: [42.6952, 23.4063], facts: ["בירת בולגריה עם 1.3 מיליון תושבים", "ביתה של Arena 8888 – אצטדיון ספורט מודרני מרכזי", "הפועל תל אביב מארח משחקי בית בסופיה בשל שיקולי ביטחון", "עיר עתיקת יומין עם היסטוריה של 7,000 שנה", "מרכז תרבות, אמנות ואקדמיה בבלקן"] }
 };
 
 const flights = [
@@ -449,6 +450,60 @@ const flights = [
         source: "IJF.org/competition/3157 / IJF.org/calendar",
         imageUrl: "https://images.pexels.com/photos/6253163/pexels-photo-6253163.jpeg?auto=compress&cs=tinysrgb&h=350",
         createdAt: "2026-04-03T08:00:00Z",
+        isNew: true
+    },
+    {
+        id: "B004",
+        category: "basketball",
+        title: "הפועל ת\"א - יורוליג | פנרבאחה (בית – סופיה)",
+        mission: "Hapoel IBI Tel Aviv EuroLeague Home Game vs Fenerbahce Beko – Sofia, Bulgaria",
+        background: "הפועל IBI תל אביב מארחת את פנרבאחה בקו איסטנבול ב-Arena 8888, סופיה, בולגריה, ב-7 באפריל 2026. הקבוצה הישראלית מנהלת את משחקי הבית שלה בסופיה בשל שיקולי ביטחון הקשורים לישראל. זהו סבב 36 של עונת היורוליג 2025/26. הפועל תל אביב מתחרה על מקום בפלייאין ועצם הניצחון חיוני לתוצאותיה בעונה.",
+        route: "LLBG -> LBSF",
+        dest_icao: "LBSF",
+        date: "2026-04-07",
+        time: "08:00",
+        airline: "אל על",
+        aircraft: "Boeing 737-800",
+        icon: "🏀",
+        source: "EuroLeague Basketball / Ticombo / Eurohoops.net",
+        imageUrl: "https://images.pexels.com/photos/10412806/pexels-photo-10412806.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-04-04T00:00:00Z",
+        isNew: true
+    },
+    {
+        id: "B005",
+        category: "basketball",
+        title: "הפועל ת\"א - יורוליג | אולימפיאקוס – אתונה",
+        mission: "Hapoel IBI Tel Aviv EuroLeague Away Game vs Olympiacos Piraeus – Athens, Greece",
+        background: "הפועל IBI תל אביב נוסעת לאתונה, יוון, למשחק יורוליג 2025/26 נגד אולימפיאקוס פיראוס (סבב 37) ב-9 באפריל 2026. אולימפיאקוס משחקת בביתה בפיראוס שסמוך לאתונה. זהו אחד הסבבים האחרונים בעונה הסדירה, שמסתיימת ב-17 באפריל. ניצחון בחוץ יהיה קריטי עבור הפועל במרוץ לפלייאין היורוליג.",
+        route: "LLBG -> LGAV",
+        dest_icao: "LGAV",
+        date: "2026-04-09",
+        time: "08:30",
+        airline: "אל על",
+        aircraft: "Boeing 737-800",
+        icon: "🏀",
+        source: "EuroLeague Basketball Official / Sofascore",
+        imageUrl: "https://images.pexels.com/photos/34552176/pexels-photo-34552176.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-04-04T00:00:00Z",
+        isNew: true
+    },
+    {
+        id: "S008",
+        category: "sports-other",
+        title: "נבחרת ג'ודו ישראל | אליפות אירופה – טביליסי",
+        mission: "Israeli Judo Team - European Judo Championships Tbilisi, Georgia",
+        background: "נבחרת ישראל בג'ודו, שהובילה את טבלת המדליות בגרנד סלאם טביליסי מרץ 2026 (3 זהב, 1 כסף, 1 ארד בראשות רז הרשקו), יוצאת לאליפות אירופה לג'ודו 2026 בטביליסי, גאורגיה, בין 16 ל-19 באפריל 2026. אליפות אירופה היא תחרות הדגל הגדולה ביותר של הפדרציה האירופית לג'ודו (EJU), בה משתתפות 46 מדינות ו-411 ספורטאים. ישראל, שמדורגת בין מעצמות הג'ודו המובילות באירופה, שואפת לשמור על מעמדה ולצבור נקודות דירוג לאולימפיאדת לוס אנג'לס 2028. האירוע מתקיים בארמון הספורט האולימפי של טביליסי.",
+        route: "LLBG -> UGTB",
+        dest_icao: "UGTB",
+        date: "2026-04-14",
+        time: "09:00",
+        airline: "אל על",
+        aircraft: "Boeing 737-800",
+        icon: "🏃",
+        source: "IJF.org/competition/3163 / AllSportDB / EJU.net",
+        imageUrl: "https://images.pexels.com/photos/6765033/pexels-photo-6765033.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-04-04T00:00:00Z",
         isNew: true
     }
 ];
