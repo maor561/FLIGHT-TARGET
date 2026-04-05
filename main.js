@@ -93,6 +93,9 @@ async function fetchPexelsImage(searchTerm) {
 // ============================================================
 // DOCTOR SIMULATOR - RSS FEED INTEGRATION
 // ============================================================
+// Track Doctor Simulator flight GUIDs to avoid duplicates
+let doctorSimulatorFlightGuids = new Set();
+
 async function fetchDoctorSimulatorFlights() {
     try {
         const response = await fetch('https://doctor-simulator-flights.vercel.app/api/rss');
@@ -110,11 +113,24 @@ async function fetchDoctorSimulatorFlights() {
         const items = xmlDoc.getElementsByTagName('item');
         console.log(`📡 Found ${items.length} Doctor Simulator flights from RSS`);
 
+        let newFlightsCount = 0;
         for (let item of items) {
             try {
+                // Extract GUID to check for duplicates
+                const guidEl = item.getElementsByTagName('guid')[0];
+                const guid = guidEl ? guidEl.textContent : null;
+
+                // Skip if we've already added this flight
+                if (guid && doctorSimulatorFlightGuids.has(guid)) {
+                    console.log(`⏭️ Skipping duplicate flight: ${guid}`);
+                    continue;
+                }
+
                 const flight = await createFlightFromRSSItem(item);
                 if (flight) {
                     flights.push(flight);
+                    if (guid) doctorSimulatorFlightGuids.add(guid);
+                    newFlightsCount++;
                 }
             } catch (e) {
                 console.warn('Error processing RSS item:', e);
@@ -122,15 +138,28 @@ async function fetchDoctorSimulatorFlights() {
         }
 
         // Refresh UI after adding new flights
-        renderFlights();
-        updateStats();
-        updateNewsTicker();
-        updateCategoryCounts();
+        if (newFlightsCount > 0) {
+            console.log(`✨ Added ${newFlightsCount} new Doctor Simulator flights`);
+            renderFlights();
+            updateStats();
+            updateNewsTicker();
+            updateCategoryCounts();
+        }
 
-        console.log(`✅ Doctor Simulator flights added. Total flights: ${flights.length}`);
+        console.log(`✅ Doctor Simulator flights synced. Total flights: ${flights.length}`);
     } catch (error) {
         console.error('Doctor Simulator RSS fetch error:', error);
     }
+}
+
+// Setup auto-refresh of Doctor Simulator RSS every 3 minutes
+function setupRSSAutoRefresh() {
+    // Fetch immediately on setup (already done in init)
+    // Then fetch every 3 minutes
+    setInterval(() => {
+        console.log(`🔄 Auto-refreshing Doctor Simulator RSS...`);
+        fetchDoctorSimulatorFlights();
+    }, 3 * 60 * 1000); // 3 minutes
 }
 
 async function createFlightFromRSSItem(item) {
@@ -222,6 +251,7 @@ document.addEventListener('DOMContentLoaded', () => {
     populateAirlineFilter();
     renderFlights();
     fetchDoctorSimulatorFlights(); // Fetch RSS flights
+    setupRSSAutoRefresh(); // Setup auto-refresh every 3 minutes
     setupEventListeners();
     updateStats();
     initMobileMenu();
