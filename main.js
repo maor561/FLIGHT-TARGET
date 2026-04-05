@@ -201,6 +201,11 @@ async function createFlightFromRSSItem(item) {
 
         const descText = descEl.textContent;
 
+        // Parse route number FIRST (needed for flightId)
+        const routeNumMatch = descText.match(/Route #:\s*(\d+)/);
+        const routeNum = routeNumMatch ? routeNumMatch[1] : '0';
+        const flightId = `DS${routeNum.padStart(3, '0')}`;  // Now can use in logs
+
         // SIMPLE: Look up airport names from destinations object
         // This is more reliable than regex parsing
         const depName = destinations[depIcao]?.name || depIcao;
@@ -211,29 +216,24 @@ async function createFlightFromRSSItem(item) {
         let date = dateMatch ? dateMatch[1] : null;
 
         if (!date) {
-            console.warn(`⚠️ Date parsing FAILED for flight ${flightId}`);
-            console.warn(`descText sample: ${descText.substring(0, 200)}`);
+            console.warn(`⚠️ ${flightId}: Date parsing FAILED`);
+            console.warn(`   descText sample: ${descText.substring(0, 200)}`);
             date = new Date().toISOString().split('T')[0];
-            console.warn(`Falling back to today: ${date}`);
+            console.warn(`   Falling back to today: ${date}`);
         }
 
         // Parse departure time: "Departure Time: 12:30"
         const timeMatch = descText.match(/Departure Time:\s*([\d:]+)/);
         const time = timeMatch ? timeMatch[1] : '12:00';
 
-        // Parse route number: "Route #: 1 / 47"
-        const routeNumMatch = descText.match(/Route #:\s*(\d+)/);
-        const routeNum = routeNumMatch ? routeNumMatch[1] : '0';
-
         // Parse status: "✅ Completed" or "🕐 Scheduled"
         const statusMatch = descText.match(/Status:<\/b>\s*([^<]+)/);
         const status = statusMatch ? statusMatch[1].trim() : 'Scheduled';
         const isCompleted = status.includes('Completed');
 
-        // Get or create ID
+        // Get or create ID for tracking
         const guidEl = item.getElementsByTagName('guid')[0];
         const guid = guidEl ? guidEl.textContent : `ds-${depIcao}-${arrIcao}-${date}`;
-        const flightId = `DS${routeNum.padStart(3, '0')}`;
 
         // Get destination info from destinations object if available
         const destInfo = destinations[arrIcao] || {};
