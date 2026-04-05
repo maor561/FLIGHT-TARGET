@@ -169,11 +169,31 @@ async function createFlightFromRSSItem(item) {
         if (!titleEl) return null;
 
         const title = titleEl.textContent;
-        const routeMatch = title.match(/([A-Z]{4})\s*→\s*([A-Z]{4})/);
-        if (!routeMatch) return null;
 
-        const depIcao = routeMatch[1];
-        const arrIcao = routeMatch[2];
+        // Extract ICAO codes from title - multiple attempts for robustness
+        let depIcao = null;
+        let arrIcao = null;
+
+        // Try different arrow types: → (unicode), ->, ->
+        const arrowPatterns = [
+            /([A-Z]{4})\s*→\s*([A-Z]{4})/,  // Unicode arrow
+            /([A-Z]{4})\s*->\s*([A-Z]{4})/,  // ASCII arrow
+            /\(([A-Z]{4})\).*?→.*?\(([A-Z]{4})\)/,  // With parentheses
+        ];
+
+        for (const pattern of arrowPatterns) {
+            const match = title.match(pattern);
+            if (match) {
+                depIcao = match[1];
+                arrIcao = match[2];
+                break;
+            }
+        }
+
+        if (!depIcao || !arrIcao) {
+            console.warn('Could not extract ICAO codes from title:', title);
+            return null;
+        }
 
         // Extract description HTML
         const descEl = item.getElementsByTagName('description')[0];
@@ -218,13 +238,21 @@ async function createFlightFromRSSItem(item) {
         const searchTerm = `${arrName} simulator flight`;
         const imageUrl = await fetchPexelsImage(searchTerm);
 
+        // Validate that both airports exist in destinations
+        const depExists = destinations[depIcao];
+        const arrExists = destinations[arrIcao];
+
+        if (!depExists || !arrExists) {
+            console.warn(`Missing destination: ${depIcao}=${depExists ? 'OK' : 'MISSING'}, ${arrIcao}=${arrExists ? 'OK' : 'MISSING'}`);
+        }
+
         const flight = {
             id: flightId,
             category: 'doctor-simulator',
             title: `${depName} → ${arrName}`,
             mission: `Doctor Simulator IFR Training - Flight ${routeNum} of 47`,
             background: `מסע סביב העולם - Leg ${routeNum}/47`,
-            route: `${depIcao} -> ${arrIcao}`,
+            route: `${depIcao} -> ${arrIcao}`,  // Critical: must always have actual departure
             dest_icao: arrIcao,
             date: date,
             time: time,
@@ -236,6 +264,9 @@ async function createFlightFromRSSItem(item) {
             createdAt: new Date().toISOString(),
             isNew: true
         };
+
+        // Log to verify route is set correctly
+        console.log(`✈️ Flight ${routeNum}: ${flight.route} (${depName} → ${arrName})`);
 
         return flight;
     } catch (error) {
@@ -621,27 +652,46 @@ function formatDate(dateStr) {
 // ============================================================
 function addFlightToMap(flight, index = 0) {
     const LLBG = [32.0055, 34.8854];
+    const LLBG_ICAO = 'LLBG';
 
     // Parse route to get departure and arrival ICAO codes
-    let depIcao = 'LLBG';  // Default to LLBG
+    let depIcao = LLBG_ICAO;  // Default to LLBG
     let arrIcao = flight.dest_icao;
 
     if (flight.route) {
-        const routeMatch = flight.route.match(/([A-Z]{4})\s*->\s*([A-Z]{4})/);
-        if (routeMatch) {
-            depIcao = routeMatch[1];
-            arrIcao = routeMatch[2];
+        // Try to extract ICAO codes from route: "LGSR -> LGKF"
+        const routeMatch = flight.route.match(/^([A-Z]{4})\s*->\s*([A-Z]{4})$/);
+        if (routeMatch && routeMatch[1] && routeMatch[2]) {
+            depIcao = routeMatch[1].toUpperCase();
+            arrIcao = routeMatch[2].toUpperCase();
+        } else {
+            console.warn(`Could not parse route for flight ${flight.id}: ${flight.route}`);
         }
     }
 
-    // Look up departure airport
-    const dep = destinations[depIcao] || { coords: LLBG };
+    // Look up departure airport - MUST exist in destinations
+    const dep = destinations[depIcao];
     const dest = destinations[arrIcao];
-    if (!dest) return;
 
-    const isIncoming = arrIcao === 'LLBG';
+    // Both airports must exist
+    if (!dep) {
+        console.warn(`Departure airport not found: ${depIcao} (flight ${flight.id})`);
+        return;
+    }
+    if (!dest) {
+        console.warn(`Arrival airport not found: ${arrIcao} (flight ${flight.id})`);
+        return;
+    }
+
+    const isIncoming = arrIcao === LLBG_ICAO;
     const start = dep.coords;
     const end   = dest.coords;
+
+    // Validate coordinates
+    if (!start || !end) {
+        console.warn(`Invalid coordinates for flight ${flight.id}: ${flight.route}`);
+        return;
+    }
 
     const polyline = L.polyline([start, end], {
         color: isIncoming ? '#ff6b6b' : '#00d2ff',
