@@ -90,12 +90,138 @@ async function fetchPexelsImage(searchTerm) {
     return null;
 }
 
+// ============================================================
+// DOCTOR SIMULATOR - RSS FEED INTEGRATION
+// ============================================================
+async function fetchDoctorSimulatorFlights() {
+    try {
+        const response = await fetch('https://doctor-simulator-flights.vercel.app/api/rss');
+        if (!response.ok) throw new Error('Failed to fetch RSS feed');
+
+        const rssText = await response.text();
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(rssText, 'application/xml');
+
+        // Check for parsing errors
+        if (xmlDoc.getElementsByTagName('parsererror').length > 0) {
+            throw new Error('Failed to parse RSS XML');
+        }
+
+        const items = xmlDoc.getElementsByTagName('item');
+        console.log(`📡 Found ${items.length} Doctor Simulator flights from RSS`);
+
+        for (let item of items) {
+            try {
+                const flight = await createFlightFromRSSItem(item);
+                if (flight) {
+                    flights.push(flight);
+                }
+            } catch (e) {
+                console.warn('Error processing RSS item:', e);
+            }
+        }
+
+        // Refresh UI after adding new flights
+        renderFlights();
+        updateStats();
+        updateNewsTicker();
+        updateCategoryCounts();
+
+        console.log(`✅ Doctor Simulator flights added. Total flights: ${flights.length}`);
+    } catch (error) {
+        console.error('Doctor Simulator RSS fetch error:', error);
+    }
+}
+
+async function createFlightFromRSSItem(item) {
+    try {
+        // Extract title: "🇮🇱 LLBG → LCLK 🇨🇾"
+        const titleEl = item.getElementsByTagName('title')[0];
+        if (!titleEl) return null;
+
+        const title = titleEl.textContent;
+        const routeMatch = title.match(/([A-Z]{4})\s*→\s*([A-Z]{4})/);
+        if (!routeMatch) return null;
+
+        const depIcao = routeMatch[1];
+        const arrIcao = routeMatch[2];
+
+        // Extract description HTML
+        const descEl = item.getElementsByTagName('description')[0];
+        if (!descEl) return null;
+
+        const descText = descEl.textContent;
+
+        // Parse departure info: "<b>Departure:</b> תל אביב (LLBG)"
+        const depMatch = descText.match(/Departure:<\/b>\s*([^(]+)\s*\(/);
+        const depName = depMatch ? depMatch[1].trim() : depIcao;
+
+        // Parse arrival info: "<b>Arrival:</b> לרנקה (LCLK)"
+        const arrMatch = descText.match(/Arrival:<\/b>\s*([^(]+)\s*\(/);
+        const arrName = arrMatch ? arrMatch[1].trim() : arrIcao;
+
+        // Parse date: "<b>Date:</b> 2026-04-04"
+        const dateMatch = descText.match(/Date:<\/b>\s*([\d-]+)/);
+        const date = dateMatch ? dateMatch[1] : new Date().toISOString().split('T')[0];
+
+        // Parse departure time: "<b>Departure Time:</b> 12:30"
+        const timeMatch = descText.match(/Departure Time:<\/b>\s*([\d:]+)/);
+        const time = timeMatch ? timeMatch[1] : '12:00';
+
+        // Parse route number: "<b>Route #:</b> 1 / 47"
+        const routeNumMatch = descText.match(/Route #:<\/b>\s*(\d+)/);
+        const routeNum = routeNumMatch ? routeNumMatch[1] : '0';
+
+        // Parse status: "✅ Completed" or "🕐 Scheduled"
+        const statusMatch = descText.match(/Status:<\/b>\s*([^<]+)/);
+        const status = statusMatch ? statusMatch[1].trim() : 'Scheduled';
+        const isCompleted = status.includes('Completed');
+
+        // Get or create ID
+        const guidEl = item.getElementsByTagName('guid')[0];
+        const guid = guidEl ? guidEl.textContent : `ds-${depIcao}-${arrIcao}-${date}`;
+        const flightId = `DS${routeNum.padStart(3, '0')}`;
+
+        // Get destination info from destinations object if available
+        const destInfo = destinations[arrIcao] || {};
+
+        // Get event-specific image
+        const searchTerm = `${arrName} simulator flight`;
+        const imageUrl = await fetchPexelsImage(searchTerm);
+
+        const flight = {
+            id: flightId,
+            category: 'doctor-simulator',
+            title: `${depName} → ${arrName}`,
+            mission: `Doctor Simulator IFR Training - Flight ${routeNum} of 47`,
+            background: `מסע סביב העולם - Leg ${routeNum}/47`,
+            route: `${depIcao} -> ${arrIcao}`,
+            dest_icao: arrIcao,
+            date: date,
+            time: time,
+            airline: 'סימולטור',
+            aircraft: 'IFR Training',
+            icon: '🏥',
+            source: 'Doctor Simulator World Tour',
+            imageUrl: imageUrl || 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect fill="%23667eea" width="400" height="300"/><text x="50%25" y="50%25" font-size="24" fill="white" text-anchor="middle" dominant-baseline="middle">Doctor Simulator Flight</text></svg>',
+            createdAt: new Date().toISOString(),
+            isNew: true
+        };
+
+        return flight;
+    } catch (error) {
+        console.error('Error creating flight from RSS item:', error);
+        return null;
+    }
+}
+
 // Initialize Dashboard
 document.addEventListener('DOMContentLoaded', () => {
     console.log("✈️ FLIGHT TARGET DASHBOARD v1.1.0 ACTIVE");
     initMap();
     populateAirlineFilter();
     renderFlights();
+    fetchDoctorSimulatorFlights(); // Fetch RSS flights
     setupEventListeners();
     updateStats();
     initMobileMenu();
@@ -829,10 +955,11 @@ function updateCategoryCounts() {
     // Update category headers with counts
     const categoryMap = {
         'cat-sports': ['football', 'basketball', 'sports-other'],
-        'cat-jewish': ['jewish'],
+        'cat-jewish': ['jewish', 'rescue'],
         'cat-business': ['business'],
         'cat-diplomacy': ['diplomatic'],
-        'cat-culture': ['culture']
+        'cat-culture': ['culture'],
+        'cat-community': ['vatil', 'doctor-simulator']
     };
 
     Object.entries(categoryMap).forEach(([elemId, cats]) => {
