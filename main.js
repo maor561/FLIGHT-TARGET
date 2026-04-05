@@ -144,6 +144,7 @@ async function fetchDoctorSimulatorFlights() {
             updateStats();
             updateNewsTicker();
             updateCategoryCounts();
+            renderCalendar();  // CRITICAL: Re-render calendar to show new flight dates
         }
 
         console.log(`✅ Doctor Simulator flights synced. Total flights: ${flights.length}`);
