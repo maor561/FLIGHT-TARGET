@@ -248,12 +248,19 @@ async function createFlightFromRSSItem(item) {
         const searchTerm = `${arrName} simulator flight`;
         const imageUrl = await fetchPexelsImage(searchTerm);
 
-        // Validate that both airports exist in destinations
-        const depExists = destinations[depIcao];
-        const arrExists = destinations[arrIcao];
+        // CRITICAL: Extract coordinates from RSS (not from destinations object)
+        // Parse: "Departure Coordinates: 32.0114°, 34.8867°"
+        const depCoordMatch = descText.match(/Departure Coordinates:\s*([\d.]+)°,\s*([\d.]+)°/);
+        const depCoords = depCoordMatch ? [parseFloat(depCoordMatch[1]), parseFloat(depCoordMatch[2])] : null;
 
-        if (!depExists || !arrExists) {
-            console.warn(`Missing destination: ${depIcao}=${depExists ? 'OK' : 'MISSING'}, ${arrIcao}=${arrExists ? 'OK' : 'MISSING'}`);
+        // Parse: "Arrival Coordinates: 36.3992°, 25.4793°"
+        const arrCoordMatch = descText.match(/Arrival Coordinates:\s*([\d.]+)°,\s*([\d.]+)°/);
+        const arrCoords = arrCoordMatch ? [parseFloat(arrCoordMatch[1]), parseFloat(arrCoordMatch[2])] : null;
+
+        if (!depCoords || !arrCoords) {
+            console.warn(`⚠️ ${flightId}: Missing coordinates from RSS`);
+            console.warn(`   Departure: ${depCoords ? 'OK' : 'MISSING'}, Arrival: ${arrCoords ? 'OK' : 'MISSING'}`);
+            return null;  // Don't create flight if coordinates missing
         }
 
         const flight = {
@@ -272,7 +279,10 @@ async function createFlightFromRSSItem(item) {
             source: 'Doctor Simulator World Tour',
             imageUrl: imageUrl || 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"><rect fill="%23667eea" width="400" height="300"/><text x="50%25" y="50%25" font-size="24" fill="white" text-anchor="middle" dominant-baseline="middle">Doctor Simulator Flight</text></svg>',
             createdAt: new Date().toISOString(),
-            isNew: true
+            isNew: true,
+            // CRITICAL: Store extracted coordinates from RSS for accurate map display
+            depCoords: depCoords,  // [lat, lon]
+            arrCoords: arrCoords   // [lat, lon]
         };
 
         // Log to verify route is set correctly
@@ -664,6 +674,44 @@ function addFlightToMap(flight, index = 0) {
     const LLBG = [32.0055, 34.8854];
     const LLBG_ICAO = 'LLBG';
 
+    // CRITICAL: Check if flight has extracted coordinates from RSS
+    // For Doctor Simulator flights, use direct coordinates from RSS
+    if (flight.depCoords && flight.arrCoords) {
+        console.log(`✅ ${flight.id}: Using extracted RSS coordinates`);
+        const start = flight.depCoords;  // [lat, lon]
+        const end = flight.arrCoords;    // [lat, lon]
+
+        const isIncoming = flight.route.includes('LLBG') && flight.dest_icao === LLBG_ICAO;
+
+        const polyline = L.polyline([start, end], {
+            color: isIncoming ? '#ff6b6b' : '#00d2ff',
+            weight: 2, opacity: 0.7,
+            dashArray: '10, 12',
+            lineCap: 'round',
+            className: 'animated-path'
+        }).addTo(map);
+
+        const marker = L.circleMarker(end, {
+            radius: 6,
+            fillColor: isIncoming ? '#ff6b6b' : '#ffd700',
+            color: '#fff', weight: 2, opacity: 1, fillOpacity: 1
+        }).addTo(map).bindPopup(`
+            <div style="direction:rtl;font-family:Assistant,sans-serif;">
+                <strong style="color:var(--accent-primary);">${flight.title}</strong><br>
+                <span style="color:#999;font-size:.8rem;">${flight.route}</span>
+            </div>`);
+
+        // Add weather marker for arrival with staggering
+        setTimeout(() => {
+            fetchAndAddWeatherMarker(end, flight.dest_icao, flight.title);
+        }, index * 200);
+
+        flightLayers.push(polyline, marker);
+        flightRouteMap[flight.id] = { polyline, marker };
+        return;
+    }
+
+    // FALLBACK: For regular flights, use destinations object lookup
     // CRITICAL: Parse route to get departure and arrival ICAO codes
     let depIcao = LLBG_ICAO;  // Default to LLBG
     let arrIcao = flight.dest_icao;
