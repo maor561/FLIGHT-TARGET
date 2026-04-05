@@ -691,7 +691,7 @@ function addFlightToMap(flight, index = 0) {
     const LLBG = [32.0055, 34.8854];
     const LLBG_ICAO = 'LLBG';
 
-    // Parse route to get departure and arrival ICAO codes
+    // CRITICAL: Parse route to get departure and arrival ICAO codes
     let depIcao = LLBG_ICAO;  // Default to LLBG
     let arrIcao = flight.dest_icao;
 
@@ -701,9 +701,13 @@ function addFlightToMap(flight, index = 0) {
         if (routeMatch && routeMatch[1] && routeMatch[2]) {
             depIcao = routeMatch[1].toUpperCase();
             arrIcao = routeMatch[2].toUpperCase();
+            console.log(`✈️ ${flight.id}: Parsed route correctly: ${depIcao} -> ${arrIcao} (from: ${flight.route})`);
         } else {
-            console.warn(`Could not parse route for flight ${flight.id}: ${flight.route}`);
+            console.warn(`⚠️ ${flight.id}: Could not parse route: "${flight.route}"`);
+            console.warn(`   Pattern expected: XXXX -> YYYY, got: ${flight.route}`);
         }
+    } else {
+        console.warn(`⚠️ ${flight.id}: No route field! Using dest_icao=${arrIcao}, defaulting dep to LLBG`);
     }
 
     // Look up departure airport - MUST exist in destinations
@@ -712,11 +716,12 @@ function addFlightToMap(flight, index = 0) {
 
     // Both airports must exist
     if (!dep) {
-        console.warn(`Departure airport not found: ${depIcao} (flight ${flight.id})`);
+        console.error(`❌ ${flight.id}: Departure airport NOT FOUND: ${depIcao}`);
+        console.error(`   Available airports: ${Object.keys(destinations).join(', ')}`);
         return;
     }
     if (!dest) {
-        console.warn(`Arrival airport not found: ${arrIcao} (flight ${flight.id})`);
+        console.error(`❌ ${flight.id}: Arrival airport NOT FOUND: ${arrIcao}`);
         return;
     }
 
@@ -726,9 +731,11 @@ function addFlightToMap(flight, index = 0) {
 
     // Validate coordinates
     if (!start || !end) {
-        console.warn(`Invalid coordinates for flight ${flight.id}: ${flight.route}`);
+        console.error(`❌ ${flight.id}: Invalid coordinates for ${depIcao}->${arrIcao}`);
         return;
     }
+
+    console.log(`✅ ${flight.id}: Drawing route ${depIcao} (${dep.name}) -> ${arrIcao} (${dest.name})`);
 
     const polyline = L.polyline([start, end], {
         color: isIncoming ? '#ff6b6b' : '#00d2ff',
