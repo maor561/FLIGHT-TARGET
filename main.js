@@ -621,12 +621,27 @@ function formatDate(dateStr) {
 // ============================================================
 function addFlightToMap(flight, index = 0) {
     const LLBG = [32.0055, 34.8854];
-    const dest = destinations[flight.dest_icao];
+
+    // Parse route to get departure and arrival ICAO codes
+    let depIcao = 'LLBG';  // Default to LLBG
+    let arrIcao = flight.dest_icao;
+
+    if (flight.route) {
+        const routeMatch = flight.route.match(/([A-Z]{4})\s*->\s*([A-Z]{4})/);
+        if (routeMatch) {
+            depIcao = routeMatch[1];
+            arrIcao = routeMatch[2];
+        }
+    }
+
+    // Look up departure airport
+    const dep = destinations[depIcao] || { coords: LLBG };
+    const dest = destinations[arrIcao];
     if (!dest) return;
 
-    const isIncoming = flight.route && flight.route.endsWith('-> LLBG');
-    const start = isIncoming ? dest.coords : LLBG;
-    const end   = isIncoming ? LLBG : dest.coords;
+    const isIncoming = arrIcao === 'LLBG';
+    const start = dep.coords;
+    const end   = dest.coords;
 
     const polyline = L.polyline([start, end], {
         color: isIncoming ? '#ff6b6b' : '#00d2ff',
