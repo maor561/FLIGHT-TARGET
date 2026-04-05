@@ -199,7 +199,11 @@ async function createFlightFromRSSItem(item) {
         const descEl = item.getElementsByTagName('description')[0];
         if (!descEl) return null;
 
-        const descText = descEl.textContent;
+        // CRITICAL: Remove HTML tags from description text
+        // RSS descriptions contain CDATA with HTML, need to clean it
+        let descText = descEl.textContent;
+        descText = descText.replace(/<[^>]*>/g, '');  // Remove all HTML tags
+        descText = descText.replace(/\s+/g, ' ').trim();  // Normalize whitespace
 
         // Parse route number FIRST (needed for flightId)
         const routeNumMatch = descText.match(/Route #:\s*(\d+)/);
