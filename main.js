@@ -129,9 +129,11 @@ async function fetchDoctorSimulatorFlights() {
                 const flight = await createFlightFromRSSItem(item);
                 if (flight) {
                     flights.push(flight);
-                    if (guid) doctorSimulatorFlightGuids.add(guid);
                     newFlightsCount++;
                 }
+                // CRITICAL: Mark GUID as processed even if flight creation failed
+                // This prevents re-processing the same RSS item on next refresh
+                if (guid) doctorSimulatorFlightGuids.add(guid);
             } catch (e) {
                 console.warn('Error processing RSS item:', e);
             }
