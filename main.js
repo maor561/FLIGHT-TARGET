@@ -985,9 +985,12 @@ function updateCategoryCounts() {
         'basketball': 0,
         'sports-other': 0,
         'jewish': 0,
+        'rescue': 0,
         'diplomatic': 0,
         'business': 0,
-        'culture': 0
+        'culture': 0,
+        'vatil': 0,
+        'doctor-simulator': 0
     };
 
     flights.forEach(f => {
