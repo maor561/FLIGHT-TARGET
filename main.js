@@ -105,6 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
     displayLastUpdatedTime();
     initMetarBar();
     trackVisitor();
+    initCalendar();
 });
 
 
@@ -883,6 +884,137 @@ function updateLastUpdatedTime() {
     const el = document.getElementById('last-updated-time');
     if (el) el.textContent = new Date().toLocaleTimeString('he-IL', {
         hour: '2-digit', minute: '2-digit', second: '2-digit'
+    });
+}
+
+// ============================================================
+// CALENDAR VIEW
+// ============================================================
+let currentCalendarMonth = new Date();
+
+function initCalendar() {
+    renderCalendar();
+    setupCalendarEventListeners();
+}
+
+function renderCalendar() {
+    const year = currentCalendarMonth.getFullYear();
+    const month = currentCalendarMonth.getMonth();
+
+    // Update header
+    const monthNames = ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'];
+    document.getElementById('calendar-month').textContent = `${monthNames[month]} ${year}`;
+
+    // Clear grid
+    const grid = document.getElementById('calendar-grid');
+    grid.innerHTML = '';
+
+    // Add day headers
+    const dayHeaders = ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ש'];
+    dayHeaders.forEach(day => {
+        const header = document.createElement('div');
+        header.className = 'calendar-day-header';
+        header.textContent = day;
+        grid.appendChild(header);
+    });
+
+    // Get first day and number of days
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const daysInPrevMonth = new Date(year, month, 0).getDate();
+
+    // Get flights by date for highlighting
+    const flightsByDate = {};
+    flights.forEach(f => {
+        if (!flightsByDate[f.date]) flightsByDate[f.date] = [];
+        flightsByDate[f.date].push(f);
+    });
+
+    // Previous month's days
+    for (let i = firstDay - 1; i >= 0; i--) {
+        const day = document.createElement('div');
+        day.className = 'calendar-day other-month';
+        day.textContent = daysInPrevMonth - i;
+        grid.appendChild(day);
+    }
+
+    // Current month's days
+    const today = new Date();
+    for (let date = 1; date <= daysInMonth; date++) {
+        const day = document.createElement('div');
+        day.className = 'calendar-day';
+        day.textContent = date;
+
+        // Format date for comparison
+        const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(date).padStart(2, '0')}`;
+
+        // Check if today
+        if (year === today.getFullYear() && month === today.getMonth() && date === today.getDate()) {
+            day.classList.add('today');
+        }
+
+        // Check if has flights
+        if (flightsByDate[dateStr]) {
+            day.classList.add('has-flights');
+            day.addEventListener('click', () => showCalendarFlights(dateStr));
+        }
+
+        grid.appendChild(day);
+    }
+
+    // Next month's days
+    const totalCells = grid.children.length - 7; // minus headers
+    const remainingCells = 42 - totalCells; // 6 rows × 7 days
+    for (let i = 1; i <= remainingCells; i++) {
+        const day = document.createElement('div');
+        day.className = 'calendar-day other-month';
+        day.textContent = i;
+        grid.appendChild(day);
+    }
+}
+
+function showCalendarFlights(dateStr) {
+    const flightList = flights.filter(f => f.date === dateStr);
+    const panel = document.getElementById('calendar-flights-panel');
+    const listEl = document.getElementById('calendar-flights-list');
+    const dateDisplay = document.getElementById('selected-date-display');
+
+    // Format date for display
+    const [year, month, day] = dateStr.split('-');
+    const date = new Date(year, month - 1, day);
+    dateDisplay.textContent = date.toLocaleDateString('he-IL', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+    listEl.innerHTML = '';
+    flightList.forEach(flight => {
+        const item = document.createElement('div');
+        item.className = 'calendar-flight-item';
+        item.innerHTML = `
+            <div class="calendar-flight-title">
+                <span class="calendar-flight-icon">${flight.icon}</span>
+                ${flight.title}
+            </div>
+            <div class="calendar-flight-route">${flight.route} | ${flight.time}</div>
+        `;
+        item.addEventListener('click', () => showFlightDetails(flight));
+        listEl.appendChild(item);
+    });
+
+    panel.style.display = 'block';
+}
+
+function setupCalendarEventListeners() {
+    document.getElementById('calendar-prev').addEventListener('click', () => {
+        currentCalendarMonth.setMonth(currentCalendarMonth.getMonth() - 1);
+        renderCalendar();
+    });
+
+    document.getElementById('calendar-next').addEventListener('click', () => {
+        currentCalendarMonth.setMonth(currentCalendarMonth.getMonth() + 1);
+        renderCalendar();
+    });
+
+    document.getElementById('close-flights-panel').addEventListener('click', () => {
+        document.getElementById('calendar-flights-panel').style.display = 'none';
     });
 }
 
