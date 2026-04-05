@@ -1219,7 +1219,7 @@ html[dir="rtl"] .news-ticker {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.75rem;
 }
 
 .list-title {
