@@ -1246,6 +1246,8 @@ function renderCalendar() {
 
     // Current month's days
     const today = new Date();
+    today.setHours(0, 0, 0, 0); // Reset time for accurate date comparison
+
     for (let date = 1; date <= daysInMonth; date++) {
         const day = document.createElement('div');
         day.className = 'calendar-day';
@@ -1253,6 +1255,12 @@ function renderCalendar() {
 
         // Format date for comparison
         const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(date).padStart(2, '0')}`;
+        const currentDate = new Date(year, month, date);
+
+        // Check if date is in the past
+        if (currentDate < today) {
+            day.classList.add('past-event');
+        }
 
         // Check if today
         if (year === today.getFullYear() && month === today.getMonth() && date === today.getDate()) {

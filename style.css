@@ -1064,6 +1064,19 @@ html[dir="rtl"] .news-ticker {
     color: #ffd700;
 }
 
+.calendar-day.past-event {
+    background: rgba(255, 107, 107, 0.15);
+    border-color: #ff6b6b;
+    color: #ff6b6b;
+}
+
+.calendar-day.past-event.has-flights {
+    background: rgba(255, 107, 107, 0.2);
+    border-color: #ff6b6b;
+    color: #ff6b6b;
+    box-shadow: 0 0 10px rgba(255, 107, 107, 0.3);
+}
+
 .calendar-flights-panel {
     background: rgba(0, 210, 255, 0.1);
     border: 1px solid var(--accent-primary);
@@ -1145,6 +1158,18 @@ html[dir="rtl"] .news-ticker {
     background: rgba(2, 132, 199, 0.1);
     border-color: #0284c7;
     color: #0284c7;
+}
+
+[data-theme="light"] .calendar-day.past-event {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: #ef4444;
+    color: #ef4444;
+}
+
+[data-theme="light"] .calendar-day.past-event.has-flights {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: #ef4444;
+    color: #ef4444;
 }
 
 /* ==== SIDEBAR FOOTER ==== */
