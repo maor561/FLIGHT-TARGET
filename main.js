@@ -1257,11 +1257,6 @@ function renderCalendar() {
         const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(date).padStart(2, '0')}`;
         const currentDate = new Date(year, month, date);
 
-        // Check if date is in the past
-        if (currentDate < today) {
-            day.classList.add('past-event');
-        }
-
         // Check if today
         if (year === today.getFullYear() && month === today.getMonth() && date === today.getDate()) {
             day.classList.add('today');
@@ -1270,6 +1265,12 @@ function renderCalendar() {
         // Check if has flights
         if (flightsByDate[dateStr]) {
             day.classList.add('has-flights');
+
+            // Mark as past event ONLY if has flights AND date is in the past
+            if (currentDate < today) {
+                day.classList.add('past-event');
+            }
+
             day.addEventListener('click', () => showCalendarFlights(dateStr));
         }
 
