@@ -16,7 +16,16 @@
       "Bash(node --check data.js)",
       "mcp__scheduled-tasks__list_scheduled_tasks",
       "Bash(node -c \"C:\\\\cluade\\\\FLIGHT TARGET\\\\data.js\")",
-      "Bash(curl -I \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Eurovision_2026_heart_-_Austria.svg/320px-Eurovision_2026_heart_-_Austria.svg.png\")"
+      "Bash(curl -I \"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Eurovision_2026_heart_-_Austria.svg/320px-Eurovision_2026_heart_-_Austria.svg.png\")",
+      "Bash(sed 's/isNew: true/createdAt: \"\"\"\"2026-04-02T00:00:00Z\"\"\"\",\\\\n        isNew: true/g')",
+      "Bash(grep -r איטלה C:cluadeFLIGHT TARGET --include=*.js --include=*.html --include=*.css)",
+      "Bash(node -e \"const fs = require\\(''fs''\\); const content = fs.readFileSync\\(''data.js'', ''utf8''\\); console.log\\(content.substring\\(0, 500\\)\\);\")",
+      "Bash(node -e \"const fs = require\\(''fs''\\); const content = fs.readFileSync\\(''data.js'', ''utf8''\\); const match = content.match\\(/const flights = \\\\[\\([\\\\s\\\\S]*?\\)^\\\\];/m\\); console.log\\(match ? match[0].substring\\(0, 1000\\) : ''not found''\\);\")",
+      "Bash(python3 -c \":*)",
+      "Bash(node -e \":*)",
+      "Bash(curl -sI \"https://raw.githubusercontent.com/maor561/FLIGHT-TARGET/master/data.js\")",
+      "Bash(curl -sI \"https://flight-target.vercel.app/data.js\")",
+      "Bash(curl -s \"https://flight-target.vercel.app/data.js\")"
     ]
   }
 }
