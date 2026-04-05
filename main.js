@@ -152,12 +152,12 @@ async function createFlightFromRSSItem(item) {
 
         const descText = descEl.textContent;
 
-        // Parse departure info: "<b>Departure:</b> תל אביב (LLBG)"
-        const depMatch = descText.match(/Departure:<\/b>\s*([^(]+)\s*\(/);
+        // Parse departure info: "Departure: תל אביב (LLBG)"
+        const depMatch = descText.match(/Departure:\s*([^(]+)\s*\(/);
         const depName = depMatch ? depMatch[1].trim() : depIcao;
 
-        // Parse arrival info: "<b>Arrival:</b> לרנקה (LCLK)"
-        const arrMatch = descText.match(/Arrival:<\/b>\s*([^(]+)\s*\(/);
+        // Parse arrival info: "Arrival: לרנקה (LCLK)"
+        const arrMatch = descText.match(/Arrival:\s*([^(]+)\s*\(/);
         const arrName = arrMatch ? arrMatch[1].trim() : arrIcao;
 
         // Parse date: "<b>Date:</b> 2026-04-04"
