@@ -155,6 +155,7 @@ async function fetchDoctorSimulatorFlights() {
 
 // Setup auto-refresh of Doctor Simulator RSS every 3 minutes
 function setupRSSAutoRefresh() {
+    console.log('⏰ RSS Auto-refresh ENABLED - fetching every 3 minutes');
     // Fetch immediately on setup (already done in init)
     // Then fetch every 3 minutes
     setInterval(() => {
@@ -248,19 +249,29 @@ async function createFlightFromRSSItem(item) {
         const searchTerm = `${arrName} simulator flight`;
         const imageUrl = await fetchPexelsImage(searchTerm);
 
-        // CRITICAL: Extract coordinates from RSS (not from destinations object)
+        // CRITICAL: Extract coordinates from RSS, fallback to destinations object if missing
         // Parse: "Departure Coordinates: 32.0114°, 34.8867°"
         const depCoordMatch = descText.match(/Departure Coordinates:\s*([\d.]+)°,\s*([\d.]+)°/);
-        const depCoords = depCoordMatch ? [parseFloat(depCoordMatch[1]), parseFloat(depCoordMatch[2])] : null;
+        let depCoords = depCoordMatch ? [parseFloat(depCoordMatch[1]), parseFloat(depCoordMatch[2])] : null;
 
         // Parse: "Arrival Coordinates: 36.3992°, 25.4793°"
         const arrCoordMatch = descText.match(/Arrival Coordinates:\s*([\d.]+)°,\s*([\d.]+)°/);
-        const arrCoords = arrCoordMatch ? [parseFloat(arrCoordMatch[1]), parseFloat(arrCoordMatch[2])] : null;
+        let arrCoords = arrCoordMatch ? [parseFloat(arrCoordMatch[1]), parseFloat(arrCoordMatch[2])] : null;
+
+        // FALLBACK: Use destinations object if coordinates missing from RSS
+        if (!depCoords && destinations[depIcao]) {
+            depCoords = destinations[depIcao].coords;
+            console.log(`📍 ${flightId}: Using fallback departure coordinates from destinations object`);
+        }
+        if (!arrCoords && destinations[arrIcao]) {
+            arrCoords = destinations[arrIcao].coords;
+            console.log(`📍 ${flightId}: Using fallback arrival coordinates from destinations object`);
+        }
 
         if (!depCoords || !arrCoords) {
-            console.warn(`⚠️ ${flightId}: Missing coordinates from RSS`);
+            console.warn(`❌ ${flightId}: Could not find coordinates from RSS or destinations object`);
             console.warn(`   Departure: ${depCoords ? 'OK' : 'MISSING'}, Arrival: ${arrCoords ? 'OK' : 'MISSING'}`);
-            return null;  // Don't create flight if coordinates missing
+            return null;  // Don't create flight if coordinates still missing
         }
 
         const flight = {
