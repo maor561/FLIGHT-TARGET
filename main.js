@@ -209,16 +209,16 @@ async function createFlightFromRSSItem(item) {
         const arrMatch = descText.match(/Arrival:\s*([^(]+)\s*\(/);
         const arrName = arrMatch ? arrMatch[1].trim() : arrIcao;
 
-        // Parse date: "<b>Date:</b> 2026-04-04"
-        const dateMatch = descText.match(/Date:<\/b>\s*([\d-]+)/);
+        // Parse date: "Date: 2026-04-04"
+        const dateMatch = descText.match(/Date:\s*([\d-]+)/);
         const date = dateMatch ? dateMatch[1] : new Date().toISOString().split('T')[0];
 
-        // Parse departure time: "<b>Departure Time:</b> 12:30"
-        const timeMatch = descText.match(/Departure Time:<\/b>\s*([\d:]+)/);
+        // Parse departure time: "Departure Time: 12:30"
+        const timeMatch = descText.match(/Departure Time:\s*([\d:]+)/);
         const time = timeMatch ? timeMatch[1] : '12:00';
 
-        // Parse route number: "<b>Route #:</b> 1 / 47"
-        const routeNumMatch = descText.match(/Route #:<\/b>\s*(\d+)/);
+        // Parse route number: "Route #: 1 / 47"
+        const routeNumMatch = descText.match(/Route #:\s*(\d+)/);
         const routeNum = routeNumMatch ? routeNumMatch[1] : '0';
 
         // Parse status: "✅ Completed" or "🕐 Scheduled"
