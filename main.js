@@ -201,17 +201,54 @@ async function createFlightFromRSSItem(item) {
 
         const descText = descEl.textContent;
 
-        // Parse departure info: "Departure: תל אביב (LLBG)"
-        const depMatch = descText.match(/Departure:\s*([^(]+)\s*\(/);
-        const depName = depMatch ? depMatch[1].trim() : depIcao;
+        // Parse departure info - supports both formats:
+        // Old: "Departure: תל אביב (LLBG)"
+        // New: "Departure: LLBG"
+        let depName = depIcao;  // Default to ICAO code
 
-        // Parse arrival info: "Arrival: לרנקה (LCLK)"
-        const arrMatch = descText.match(/Arrival:\s*([^(]+)\s*\(/);
-        const arrName = arrMatch ? arrMatch[1].trim() : arrIcao;
+        const depMatch = descText.match(/Departure:\s*([^\n<]+?)(?:\(|$|Arrival)/i);
+        if (depMatch) {
+            const depText = depMatch[1].trim();
+            // If it's a name (not an ICAO code), use it
+            if (!depText.match(/^[A-Z]{4}$/)) {
+                depName = depText.replace(/\([A-Z]{4}\)/, '').trim();
+            }
+        }
 
-        // Parse date: "Date: 2026-04-04"
-        const dateMatch = descText.match(/Date:\s*([\d-]+)/);
-        const date = dateMatch ? dateMatch[1] : new Date().toISOString().split('T')[0];
+        // Look up actual airport name from destinations
+        if (destinations[depIcao]?.name) {
+            depName = destinations[depIcao].name;
+        }
+
+        // Parse arrival info - supports both formats:
+        // Old: "Arrival: לרנקה (LCLK)"
+        // New: "Arrival: LCEN"
+        let arrName = arrIcao;  // Default to ICAO code
+
+        const arrMatch = descText.match(/Arrival:\s*([^\n<]+?)(?:\(|$|Date)/i);
+        if (arrMatch) {
+            const arrText = arrMatch[1].trim();
+            // If it's a name (not an ICAO code), use it
+            if (!arrText.match(/^[A-Z]{4}$/)) {
+                arrName = arrText.replace(/\([A-Z]{4}\)/, '').trim();
+            }
+        }
+
+        // Look up actual airport name from destinations
+        if (destinations[arrIcao]?.name) {
+            arrName = destinations[arrIcao].name;
+        }
+
+        // Parse date: "Date: 2026-04-04" (CRITICAL - must match exactly)
+        const dateMatch = descText.match(/Date:\s*([\d]{4}-[\d]{2}-[\d]{2})/);
+        let date = dateMatch ? dateMatch[1] : null;
+
+        if (!date) {
+            console.warn(`⚠️ Date parsing FAILED for flight ${flightId}`);
+            console.warn(`descText sample: ${descText.substring(0, 200)}`);
+            date = new Date().toISOString().split('T')[0];
+            console.warn(`Falling back to today: ${date}`);
+        }
 
         // Parse departure time: "Departure Time: 12:30"
         const timeMatch = descText.match(/Departure Time:\s*([\d:]+)/);
