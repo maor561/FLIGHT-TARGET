@@ -231,8 +231,9 @@ async function createFlightFromRSSItem(item) {
         const timeMatch = descText.match(/Departure Time:\s*([\d:]+)/);
         const time = timeMatch ? timeMatch[1] : '12:00';
 
-        // Parse status: "✅ Completed" or "🕐 Scheduled"
-        const statusMatch = descText.match(/Status:<\/b>\s*([^<]+)/);
+        // Parse status: "Status: ✅ Completed" or "Status: 🕐 Scheduled"
+        // (HTML already cleaned, no need to look for tags)
+        const statusMatch = descText.match(/Status:\s*([^R]+?)(?:Route|$)/);
         const status = statusMatch ? statusMatch[1].trim() : 'Scheduled';
         const isCompleted = status.includes('Completed');
 
