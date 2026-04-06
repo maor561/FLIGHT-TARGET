@@ -570,6 +570,7 @@ body {
     color: var(--accent-secondary);
     line-height: 1.2;
     text-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+    margin-top: 0.5rem;
 }
 
 .stat-label {
