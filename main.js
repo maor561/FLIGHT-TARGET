@@ -1417,14 +1417,13 @@ function displayVatsimControllers(controllers) {
         'LLBG_GND': { name: 'GND', type: 'gnd' },
         'LLBG_TWR': { name: 'TWR', type: 'twr' },
         'LLBG_APP': { name: 'APP', type: 'app' },
-        'LLBG_DEP': { name: 'DEP', type: 'dep' },
         'LLBG_CTR': { name: 'CTR', type: 'ctr' }
     };
 
     let html = '';
 
-    // Standard VATSIM position order
-    const positionOrder = ['LLBG_ATIS', 'LLBG_DEL', 'LLBG_GND', 'LLBG_TWR', 'LLBG_APP', 'LLBG_DEP', 'LLBG_CTR'];
+    // Position order: ATIS (right) → DEL → GND → TWR → APP → CTR (left)
+    const positionOrder = ['LLBG_ATIS', 'LLBG_DEL', 'LLBG_GND', 'LLBG_TWR', 'LLBG_APP', 'LLBG_CTR'];
 
     positionOrder.forEach(callsign => {
         const info = positions[callsign];

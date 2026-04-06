@@ -335,7 +335,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-width: 600px;
+    min-width: 550px;
     height: 100px;
     background: var(--bg-glass);
     overflow: visible;
@@ -352,7 +352,7 @@ body {
 
 .atc-controllers {
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     gap: 6px;
     align-items: center;
     width: 100%;
@@ -420,13 +420,6 @@ body {
     border-color: #00B050;
     color: #fff;
     box-shadow: 0 0 15px rgba(0, 176, 80, 0.5);
-}
-
-.atc-controller.dep.online {
-    background: #003DA5;
-    border-color: #003DA5;
-    color: #fff;
-    box-shadow: 0 0 15px rgba(0, 61, 165, 0.5);
 }
 
 .atc-controller.ctr.online {
