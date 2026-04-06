@@ -78,7 +78,8 @@ const destinations = {
     "LFMN": { name: "Nice", coords: [43.6641, 7.2148], facts: ["עיר יפה בחוף הים התיכון של צרפת", "מרכז תיירות חשוב במדיטראנאן", "דוקטור סימולטור - תחנה בדרך אירופה", "עיר עם חוף רחוק והיסטוריה עשירה", "שדה תעופה בינלאומי חשוב"] },
     "LCRA": { name: "Larnaca Unrecognized", coords: [34.8756, 33.6237], facts: ["שדה תעופה בקפריסין", "אזור ניסיוני או צבאי", "דוקטור סימולטור - תחנה בטיול", "שדה תעופה בשימוש מוגבל", "מקום עם משמעות היסטורית"] },
     "LFPB": { name: "Paris Beauvais", coords: [49.4544, 2.1127], facts: ["שדה תעופה בפריז, צרפת", "מרחק 80 ק״מ מצפון לפריז", "שדה תעופה משני בפריז לטיסות תקבולי", "שדה תעופה בינלאומי עם חיבורים לאירופה", "דוקטור סימולטור - תחנה בטיול סביב העולם"] },
-    "EGBB": { name: "Birmingham", coords: [52.4539, -1.7480], facts: ["שדה תעופה בברמינגהם, אנגליה", "רביעי בגודלו בבריטניה לאחר Heathrow, Gatwick ו-Stansted", "חיבורים לאירופה ובעולם", "מטה רברי Ryanair בנתב עיר", "דוקטור סימולטור - תחנה בטיול סביב העולם"] }
+    "EGBB": { name: "Birmingham", coords: [52.4539, -1.7480], facts: ["שדה תעופה בברמינגהם, אנגליה", "רביעי בגודלו בבריטניה לאחר Heathrow, Gatwick ו-Stansted", "חיבורים לאירופה ובעולם", "מטה רברי Ryanair בנתב עיר", "דוקטור סימולטור - תחנה בטיול סביב העולם"] },
+    "LYBE": { name: "Belgrade", coords: [44.8184, 20.3091], facts: ["בירת סרביה עם 1.7 מיליון תושבים", "ביתם הזמני של מכבי תל אביב לכדורסל עונת 2025/26", "נמל תעופה ניקולה טסלה – על שם הממציא הסרבי-אמריקאי", "ממוקמת בצומת נהרות סאבה ודנובה", "מרכז תרבות ואמנות בלקני חשוב"] }
 };
 
 const flights = [
@@ -512,6 +513,24 @@ const flights = [
         source: "IJF.org/competition/3163 / AllSportDB / EJU.net",
         imageUrl: "https://images.pexels.com/photos/6765033/pexels-photo-6765033.jpeg?auto=compress&cs=tinysrgb&h=350",
         createdAt: "2026-04-04T00:00:00Z",
+        isNew: true
+    },
+    {
+        id: "B006",
+        category: "basketball",
+        title: "דרבי ישראלי - יורוליג | מכבי מול הפועל – בלגרד",
+        mission: "Israeli EuroLeague Derby - Maccabi Tel Aviv vs Hapoel IBI Tel Aviv – Belgrade (Round 30 Rescheduled)",
+        background: "דרבי ישראלי מרגש ביורוליג 2025/26 – מכבי ר' תל אביב מארחת את הפועל IBI תל אביב באצטדיון אלכסנדר ניקוליץ' בבלגרד, סרביה, ב-12 באפריל 2026. זהו משחק סבב 30 שנדחה ועתה מתקיים לקראת סוף העונה הסדירה. מכבי מנהלת את משחקי הבית שלה בבלגרד בשל המצב הביטחוני בישראל, ועתה מארחת את המתחרה הישראלית בדרבי. הפועל IBI תל אביב תיסע לבלגרד בסבב קריטי הקובע מיקומים לפלייאין היורוליג. זהו דרבי ישראלי נדיר שנערך על אדמת אירופה.",
+        route: "LLBG -> LYBE",
+        dest_icao: "LYBE",
+        date: "2026-04-12",
+        time: "09:00",
+        airline: "אל על",
+        aircraft: "Boeing 737-800",
+        icon: "🏀",
+        source: "EuroLeague Basketball / Eurohoops.net / Basketball Sphere",
+        imageUrl: "https://images.pexels.com/photos/11686275/pexels-photo-11686275.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-04-06T08:00:00Z",
         isNew: true
     }
 ];
