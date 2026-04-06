@@ -1410,51 +1410,44 @@ function displayVatsimControllers(controllers) {
     const container = document.getElementById('atc-controllers');
     if (!container) return;
 
-    if (controllers.length === 0) {
-        container.innerHTML = '<div class="atc-loading">אין בקרות פעילות כרגע</div>';
-        return;
-    }
-
-    // Define LLBG positions with display names
+    // Define LLBG positions with display names and VATSIM colors
     const positions = {
-        'LLBG_APP': { name: 'APP', facility: 2 },
-        'LLBG_TWR': { name: 'TWR', facility: 3 },
-        'LLBG_GND': { name: 'GND', facility: 4 },
-        'LLBG_DEL': { name: 'DEL', facility: 1 },
-        'LLBG_ATIS': { name: 'ATIS', facility: 1 }
+        'LLBG_ATIS': { name: 'ATIS', type: 'atis' },
+        'LLBG_DEL': { name: 'DEL', type: 'del' },
+        'LLBG_GND': { name: 'GND', type: 'gnd' },
+        'LLBG_TWR': { name: 'TWR', type: 'twr' },
+        'LLBG_APP': { name: 'APP', type: 'app' },
+        'LLBG_DEP': { name: 'DEP', type: 'dep' },
+        'LLBG_CTR': { name: 'CTR', type: 'ctr' }
     };
 
     let html = '';
 
-    // Sort positions by standard order: DEL, GND, TWR, APP
-    const positionOrder = ['LLBG_DEL', 'LLBG_GND', 'LLBG_TWR', 'LLBG_APP', 'LLBG_ATIS'];
+    // Standard VATSIM position order
+    const positionOrder = ['LLBG_ATIS', 'LLBG_DEL', 'LLBG_GND', 'LLBG_TWR', 'LLBG_APP', 'LLBG_DEP', 'LLBG_CTR'];
 
     positionOrder.forEach(callsign => {
         const info = positions[callsign];
         const controller = controllers.find(c => c.callsign === callsign);
 
-        if (controller) {
-            // Online controller
-            const frequency = controller.frequency || '—';
-            html += `
-                <div class="atc-controller online" title="${controller.name} (${controller.callsign})">
-                    <div class="atc-position">${info.name}</div>
-                    <div class="atc-frequency">${frequency}</div>
-                </div>
-            `;
-        } else {
-            // Offline position
-            html += `
-                <div class="atc-controller offline" title="${callsign}">
-                    <div class="atc-position">${info.name}</div>
-                    <div class="atc-frequency">—</div>
-                </div>
-            `;
-        }
+        // Always show the position, whether online or offline
+        const isOnline = !!controller;
+        const status = isOnline ? 'online' : 'offline';
+        const frequency = controller?.frequency || '—';
+        const controllerName = controller?.name || '';
+        const title = isOnline ? `${controllerName} (${callsign})` : `${callsign} - ממתין לחיבור`;
+
+        html += `
+            <div class="atc-controller ${info.type} ${status}" title="${title}">
+                <div class="atc-position">${info.name}</div>
+                <div class="atc-frequency">${frequency}</div>
+            </div>
+        `;
     });
 
     container.innerHTML = html;
-    console.log(`✈️ VATSIM LLBG: ${controllers.length} controllers online`);
+    const onlineCount = controllers.length;
+    console.log(`✈️ VATSIM LLBG: ${onlineCount} controllers online`);
 }
 
 // Vercel cache bust Mon Apr  6 21:44:53 JST 2026
