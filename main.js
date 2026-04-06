@@ -347,16 +347,40 @@ function initMobileMenu() {
 // ============================================================
 // DATA LAST UPDATED (from scheduled task)
 // ============================================================
-function displayDataLastUpdated() {
+async function displayDataLastUpdated() {
     const el = document.getElementById('data-last-updated');
-    if (!el || typeof lastUpdated === 'undefined') return;
+    if (!el) return;
 
-    // Use data.js timestamp (when data was actually updated, not when page is refreshed)
-    const d = new Date(lastUpdated.timestamp);
-    el.textContent = d.toLocaleString('he-IL', {
-        day: '2-digit', month: '2-digit', year: 'numeric',
-        hour: '2-digit', minute: '2-digit'
-    });
+    try {
+        // Fetch the latest commit timestamp from GitHub API
+        const response = await fetch('https://api.github.com/repos/maor561/FLIGHT-TARGET/commits?per_page=1');
+        if (!response.ok) throw new Error('GitHub API error');
+
+        const data = await response.json();
+        if (!data || data.length === 0) throw new Error('No commits found');
+
+        const commitTime = data[0].commit.author.date;
+        const d = new Date(commitTime);
+
+        // Convert to Israeli time (UTC+3)
+        const hebrewTime = d.toLocaleString('he-IL', {
+            day: '2-digit', month: '2-digit', year: 'numeric',
+            hour: '2-digit', minute: '2-digit'
+        });
+
+        el.textContent = hebrewTime;
+        console.log('✅ Updated timestamp from GitHub:', hebrewTime);
+    } catch (e) {
+        console.warn('Failed to fetch GitHub commit time:', e.message);
+        // Fallback to data.js timestamp
+        if (typeof lastUpdated !== 'undefined') {
+            const d = new Date(lastUpdated.timestamp);
+            el.textContent = d.toLocaleString('he-IL', {
+                day: '2-digit', month: '2-digit', year: 'numeric',
+                hour: '2-digit', minute: '2-digit'
+            });
+        }
+    }
 }
 
 function displayLastUpdatedTime() {
