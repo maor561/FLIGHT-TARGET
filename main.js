@@ -1057,6 +1057,15 @@ function setupEventListeners() {
 // ============================================================
 // NEWS TICKER - Only NEW flights
 // ============================================================
+function getFlightIconHTML(flight) {
+    if (flight.category === 'doctor-simulator') {
+        return '<img src="logo1.png?v=47" alt="Doctor Simulator" style="width: 20px; height: 20px; object-fit: contain; display: inline-block; margin-left: 4px;">';
+    } else if (flight.category === 'vatil') {
+        return '<img src="logo2.jpg?v=47" alt="VATIL" style="width: 20px; height: 20px; object-fit: contain; display: inline-block; margin-left: 4px;">';
+    }
+    return flight.icon;
+}
+
 async function updateNewsTicker() {
     const ticker = document.getElementById('news-ticker');
     if (!ticker) return;
@@ -1091,14 +1100,14 @@ async function updateNewsTicker() {
         const destName = destinations[f.dest_icao]?.name || f.dest_icao;
         return `<div class="ticker-item">
             <span style="color:var(--accent-primary);font-weight:bold;">✨ נוסף</span>
-            <span>${f.icon} <strong style="color:var(--accent-primary)">${f.title}</strong> → ${destName} | ${formatDate(f.date)} ${f.time}</span>
+            <span>${getFlightIconHTML(f)} <strong style="color:var(--accent-primary)">${f.title}</strong> → ${destName} | ${formatDate(f.date)} ${f.time}</span>
         </div>`;
     }).join('<div class="ticker-item"><span style="color:var(--text-muted);padding:0 12px;">◆</span></div>');
 
     // Add "Time to next flight" item at the beginning
     const timeItem = nextFlight ? `<div class="ticker-item">
         <span style="color:#fbbf24;font-weight:bold;font-size:1.1em;">${timeText}</span>
-        <span>${nextFlight.icon} הטיסה הבאה: <strong style="color:var(--accent-primary)">${nextFlight.title}</strong> ב-${formatDate(nextFlight.date)}</span>
+        <span>${getFlightIconHTML(nextFlight)} הטיסה הבאה: <strong style="color:var(--accent-primary)">${nextFlight.title}</strong> ב-${formatDate(nextFlight.date)}</span>
     </div>
     <div class="ticker-item"><span style="color:var(--text-muted);padding:0 12px;">◆◆◆</span></div>` : '';
 
