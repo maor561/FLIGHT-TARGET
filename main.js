@@ -348,31 +348,14 @@ function initMobileMenu() {
 // ============================================================
 function displayDataLastUpdated() {
     const el = document.getElementById('data-last-updated');
-    if (!el) return;
+    if (!el || typeof lastUpdated === 'undefined') return;
 
-    // Fetch latest commit timestamp from GitHub API
-    fetch('https://api.github.com/repos/maor561/FLIGHT-TARGET/commits?per_page=1')
-        .then(r => r.json())
-        .then(data => {
-            if (data && data[0]) {
-                const d = new Date(data[0].commit.author.date);
-                el.textContent = d.toLocaleString('he-IL', {
-                    day: '2-digit', month: '2-digit', year: 'numeric',
-                    hour: '2-digit', minute: '2-digit'
-                });
-            }
-        })
-        .catch(err => {
-            // Fallback to data.js timestamp if API fails
-            if (typeof lastUpdated !== 'undefined') {
-                const d = new Date(lastUpdated.timestamp);
-                el.textContent = d.toLocaleString('he-IL', {
-                    day: '2-digit', month: '2-digit', year: 'numeric',
-                    hour: '2-digit', minute: '2-digit'
-                });
-            }
-            console.warn('GitHub API error:', err);
-        });
+    // Use data.js timestamp (when data was actually updated, not when page is refreshed)
+    const d = new Date(lastUpdated.timestamp);
+    el.textContent = d.toLocaleString('he-IL', {
+        day: '2-digit', month: '2-digit', year: 'numeric',
+        hour: '2-digit', minute: '2-digit'
+    });
 }
 
 function displayLastUpdatedTime() {
