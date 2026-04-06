@@ -336,24 +336,6 @@ const flights = [
         isNew: true
     },
     {
-        id: "T001",
-        category: "vatil",
-        title: "תחרות סימולציית טיסה VATIL | מטה קיברנט",
-        mission: "VATIL Flight Simulation Championship - Israeli Division",
-        background: "בחינת הסימולציה של טיסה הישראלית (VATIL - חטיבה הישראלית של VATSIM) מתקיימת ב-11 באפריל 2026 במטה הקיברנט הישראלי בתל אביב. אלפי טייסים וירטואליים משתתפים בהשתלמות טיסה ואימונים על סימולטורים מתקדמים. התחרות כוללות ניווט דיוק, תכנון מסלול וטיסה בתנאים מסובכים בסימולציה מציאותית של סביבת VATSIM.",
-        route: "LLBG -> LLBG",
-        dest_icao: "LLBG",
-        date: "2026-04-10",
-        time: "18:00",
-        airline: "אל על",
-        aircraft: "Boeing 737-800",
-        icon: "🎮",
-        source: "VATIL.online / VATSIM.net / Cybersecurity Authority",
-        imageUrl: "https://images.unsplash.com/photo-1538438881759-1fab5d814bd0?w=800&h=400&fit=crop",
-        createdAt: "2026-04-02T00:00:00Z",
-        isNew: true
-    },
-    {
         id: "S004",
         category: "sports-other",
         title: "נבחרת ג'ודו ישראל | גרנד סלאם טוקיו",
