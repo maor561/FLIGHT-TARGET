@@ -328,6 +328,80 @@ body {
     width: 230px;
 }
 
+.atc-display {
+    flex: 1;
+    margin: 0 1.5rem;
+    padding: 1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 350px;
+    height: 100px;
+    background: var(--bg-glass);
+    overflow: hidden;
+}
+
+.atc-title {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent-primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+
+.atc-controllers {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+    overflow-y: auto;
+    max-height: 60px;
+}
+
+.atc-controller {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 2px solid;
+    transition: all 0.3s ease;
+    min-width: 65px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.atc-controller.online {
+    background: rgba(0, 255, 100, 0.15);
+    border-color: rgba(0, 255, 100, 0.5);
+    box-shadow: 0 0 15px rgba(0, 255, 100, 0.3);
+}
+
+.atc-controller.offline {
+    background: rgba(100, 100, 100, 0.15);
+    border-color: rgba(100, 100, 100, 0.3);
+    opacity: 0.5;
+}
+
+.atc-position {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-transform: uppercase;
+}
+
+.atc-frequency {
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+}
+
+.atc-loading {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+}
+
 .metar-display {
     flex: 1;
     margin: 0 1.5rem;

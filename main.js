@@ -329,6 +329,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initMetarBar();
     trackVisitor();
     initCalendar();
+    initVatsimATC(); // Fetch and display VATSIM ATC data
 });
 
 
@@ -1372,4 +1373,88 @@ function trackVisitor() {
             el.textContent = '—';
         });
 }
+
+// ============================================================
+// VATSIM ATC DISPLAY FOR LLBG
+// ============================================================
+async function initVatsimATC() {
+    await fetchAndDisplayVatsimATC();
+    // Refresh every 30 seconds
+    setInterval(fetchAndDisplayVatsimATC, 30 * 1000);
+}
+
+async function fetchAndDisplayVatsimATC() {
+    try {
+        const response = await fetch('https://data.vatsim.net/v3/vatsim-data.json');
+        if (!response.ok) throw new Error('VATSIM API error');
+
+        const data = await response.json();
+        const controllers = data.controllers || [];
+
+        // Filter controllers for LLBG (natively named Ben Gurion)
+        const llbgControllers = controllers.filter(c =>
+            c.callsign.startsWith('LLBG_') && c.facility >= 1
+        );
+
+        displayVatsimControllers(llbgControllers);
+    } catch (e) {
+        console.warn('VATSIM fetch error:', e.message);
+        const container = document.getElementById('atc-controllers');
+        if (container) {
+            container.innerHTML = '<div class="atc-loading">לא ניתן להתחבר ל-VATSIM</div>';
+        }
+    }
+}
+
+function displayVatsimControllers(controllers) {
+    const container = document.getElementById('atc-controllers');
+    if (!container) return;
+
+    if (controllers.length === 0) {
+        container.innerHTML = '<div class="atc-loading">אין בקרות פעילות כרגע</div>';
+        return;
+    }
+
+    // Define LLBG positions with display names
+    const positions = {
+        'LLBG_APP': { name: 'APP', facility: 2 },
+        'LLBG_TWR': { name: 'TWR', facility: 3 },
+        'LLBG_GND': { name: 'GND', facility: 4 },
+        'LLBG_DEL': { name: 'DEL', facility: 1 },
+        'LLBG_ATIS': { name: 'ATIS', facility: 1 }
+    };
+
+    let html = '';
+
+    // Sort positions by standard order: DEL, GND, TWR, APP
+    const positionOrder = ['LLBG_DEL', 'LLBG_GND', 'LLBG_TWR', 'LLBG_APP', 'LLBG_ATIS'];
+
+    positionOrder.forEach(callsign => {
+        const info = positions[callsign];
+        const controller = controllers.find(c => c.callsign === callsign);
+
+        if (controller) {
+            // Online controller
+            const frequency = controller.frequency || '—';
+            html += `
+                <div class="atc-controller online" title="${controller.name} (${controller.callsign})">
+                    <div class="atc-position">${info.name}</div>
+                    <div class="atc-frequency">${frequency}</div>
+                </div>
+            `;
+        } else {
+            // Offline position
+            html += `
+                <div class="atc-controller offline" title="${callsign}">
+                    <div class="atc-position">${info.name}</div>
+                    <div class="atc-frequency">—</div>
+                </div>
+            `;
+        }
+    });
+
+    container.innerHTML = html;
+    console.log(`✈️ VATSIM LLBG: ${controllers.length} controllers online`);
+}
+
 // Vercel cache bust Mon Apr  6 21:44:53 JST 2026
