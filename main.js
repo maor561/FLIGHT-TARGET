@@ -629,8 +629,17 @@ function createFlightCard(flight, index = 0) {
         : '<span class="dir-badge outgoing">⬆ יוצא</span>';
 
     const newBadge = isFlightNew(flight) ? '<span class="new-badge">🆕 חדש</span>' : '';
+
+    // Use custom logos for Doctor Simulator and VATIL flights
+    let categoryIcon = flight.icon;
+    if (flight.category === 'doctor-simulator') {
+        categoryIcon = '<img src="logo1.png?v=47" alt="Doctor Simulator" style="width: 100%; height: 100%; object-fit: contain;">';
+    } else if (flight.category === 'vatil') {
+        categoryIcon = '<img src="logo2.jpg?v=47" alt="VATIL" style="width: 100%; height: 100%; object-fit: contain;">';
+    }
+
     card.innerHTML = `
-        <div class="flight-category-icon">${flight.icon}</div>
+        <div class="flight-category-icon">${categoryIcon}</div>
         <div class="flight-info">
             <div class="flight-title">${flight.title}${newBadge}</div>
             <div class="flight-subtitle">${flight.mission}</div>
