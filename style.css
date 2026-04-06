@@ -453,28 +453,29 @@ body {
 .metar-display {
     flex: 1;
     margin: 0 1.5rem;
-    padding: 1rem 1.25rem;
+    padding: 1rem 1rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     min-width: 300px;
     height: 100px;
     background: var(--bg-glass);
+    overflow: hidden;
 }
 
 .metar-title {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 700;
     color: var(--accent-primary);
     text-transform: uppercase;
     letter-spacing: 1px;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .metar-content {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 5px;
 }
 
 .metar-raw-data {
@@ -483,7 +484,7 @@ body {
 
 .metar-parsed {
     display: flex;
-    gap: 8px;
+    gap: 5px;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
@@ -492,13 +493,14 @@ body {
 .metar-chip {
     background: rgba(0, 210, 255, 0.12);
     border: 1px solid rgba(0, 210, 255, 0.25);
-    border-radius: 6px;
-    padding: 6px 12px;
+    border-radius: 4px;
+    padding: 4px 8px;
     color: var(--text-primary);
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 600;
     white-space: nowrap;
     transition: all 0.3s ease;
+    flex-shrink: 0;
 }
 
 .metar-chip:hover {
