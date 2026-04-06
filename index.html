@@ -29,6 +29,23 @@
                     <span class="label">הכל</span>
                 </button>
 
+                <!-- Calendar View -->
+                <div class="calendar-section">
+                    <div class="calendar-header">
+                        <button id="calendar-prev" class="calendar-nav">◀</button>
+                        <div id="calendar-month" class="calendar-title">אפריל 2026</div>
+                        <button id="calendar-next" class="calendar-nav">▶</button>
+                    </div>
+                    <div id="calendar-grid" class="calendar-grid"></div>
+                    <div id="calendar-flights-panel" class="calendar-flights-panel" style="display:none;">
+                        <div class="calendar-flights-header">
+                            <span id="selected-date-display"></span>
+                            <button id="close-flights-panel" class="close-btn">✕</button>
+                        </div>
+                        <div id="calendar-flights-list" class="calendar-flights-list"></div>
+                    </div>
+                </div>
+
                 <!-- Sport Category -->
                 <div class="category-item" id="cat-sports">
                     <div class="category-header">
@@ -126,23 +143,6 @@
                             <span class="icon">🏥</span>
                             <span class="label">דוקטור סימולטור</span>
                         </button>
-                    </div>
-                </div>
-
-                <!-- Calendar View -->
-                <div class="calendar-section">
-                    <div class="calendar-header">
-                        <button id="calendar-prev" class="calendar-nav">◀</button>
-                        <div id="calendar-month" class="calendar-title">אפריל 2026</div>
-                        <button id="calendar-next" class="calendar-nav">▶</button>
-                    </div>
-                    <div id="calendar-grid" class="calendar-grid"></div>
-                    <div id="calendar-flights-panel" class="calendar-flights-panel" style="display:none;">
-                        <div class="calendar-flights-header">
-                            <span id="selected-date-display"></span>
-                            <button id="close-flights-panel" class="close-btn">✕</button>
-                        </div>
-                        <div id="calendar-flights-list" class="calendar-flights-list"></div>
                     </div>
                 </div>
 
