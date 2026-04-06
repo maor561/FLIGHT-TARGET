@@ -1059,9 +1059,9 @@ function setupEventListeners() {
 // ============================================================
 function getFlightIconHTML(flight) {
     if (flight.category === 'doctor-simulator') {
-        return '<img src="logo1.png?v=47" alt="Doctor Simulator" style="width: 20px; height: 20px; object-fit: contain; display: inline-block; margin-left: 4px;">';
+        return '<img src="logo1.png?v=47" alt="Doctor Simulator" style="width: 20px; height: 20px; object-fit: contain; display: inline-block; margin-left: 4px; border-radius: 50%;">';
     } else if (flight.category === 'vatil') {
-        return '<img src="logo2.jpg?v=47" alt="VATIL" style="width: 20px; height: 20px; object-fit: contain; display: inline-block; margin-left: 4px;">';
+        return '<img src="logo2.jpg?v=47" alt="VATIL" style="width: 20px; height: 20px; object-fit: contain; display: inline-block; margin-left: 4px; border-radius: 50%;">';
     }
     return flight.icon;
 }
