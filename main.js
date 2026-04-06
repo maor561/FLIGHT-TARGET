@@ -1008,8 +1008,11 @@ function setupEventListeners() {
     }
 
     // Search
-    document.getElementById('search-input').oninput = e =>
-        renderFlights(currentCategory, e.target.value);
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) {
+        searchInput.oninput = e =>
+            renderFlights(currentCategory, e.target.value);
+    }
 
     // Date filters
     document.querySelectorAll('.filter-tag').forEach(tag => {
@@ -1018,15 +1021,20 @@ function setupEventListeners() {
             tag.classList.add('active');
             const txt = tag.textContent.trim();
             currentDateFilter = txt === 'היום' ? 'today' : txt === 'השבוע' ? 'weekly' : 'all';
-            renderFlights(currentCategory, document.getElementById('search-input').value);
+            const searchVal = searchInput ? searchInput.value : '';
+            renderFlights(currentCategory, searchVal);
         };
     });
 
     // Airline filter
-    document.getElementById('airline-filter').onchange = e => {
-        currentAirlineFilter = e.target.value;
-        renderFlights(currentCategory, document.getElementById('search-input').value);
-    };
+    const airlineFilter = document.getElementById('airline-filter');
+    if (airlineFilter) {
+        airlineFilter.onchange = e => {
+            currentAirlineFilter = e.target.value;
+            const searchVal = searchInput ? searchInput.value : '';
+            renderFlights(currentCategory, searchVal);
+        };
+    }
 
     // Refresh button
     const refreshBtn = document.getElementById('refresh-btn');
