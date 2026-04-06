@@ -1029,22 +1029,24 @@ function setupEventListeners() {
         };
     }
 
-    // Refresh button
+    // Refresh button (removed from UI but keeping handler for compatibility)
     const refreshBtn = document.getElementById('refresh-btn');
     const overlay    = document.getElementById('scanning-overlay');
-    refreshBtn.onclick = async () => {
-        if (refreshBtn.classList.contains('spinning')) return;
-        refreshBtn.classList.add('spinning');
-        if (overlay) overlay.style.display = 'flex';
+    if (refreshBtn) {
+        refreshBtn.onclick = async () => {
+            if (refreshBtn.classList.contains('spinning')) return;
+            refreshBtn.classList.add('spinning');
+            if (overlay) overlay.style.display = 'flex';
 
-        await new Promise(r => setTimeout(r, 1800));
-        await fetchAndDisplayMetar();
-        renderFlights(currentCategory, document.getElementById('search-input').value);
-        updateLastUpdatedTime();
+            await new Promise(r => setTimeout(r, 1800));
+            await fetchAndDisplayMetar();
+            renderFlights(currentCategory, document.getElementById('search-input').value);
+            updateLastUpdatedTime();
 
-        refreshBtn.classList.remove('spinning');
-        if (overlay) overlay.style.display = 'none';
-    };
+            refreshBtn.classList.remove('spinning');
+            if (overlay) overlay.style.display = 'none';
+        };
+    }
 
     // Modal close
     document.querySelector('.close-modal').onclick = () =>
