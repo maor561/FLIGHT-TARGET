@@ -401,9 +401,19 @@ async function fetchAndDisplayMetar() {
             throw new Error('No METAR data available');
         }
     } catch (e) {
-        const rawEl = document.getElementById('metar-raw');
-        if (rawEl) rawEl.textContent = 'אין חיבור ל-API';
         console.warn('METAR fetch error:', e.message);
+        // Set default values instead of dashes
+        const tempEl = document.getElementById('metar-temp');
+        const windEl = document.getElementById('metar-wind');
+        const visEl = document.getElementById('metar-vis');
+        const qnhEl = document.getElementById('metar-qnh');
+        const condEl = document.getElementById('metar-condition');
+
+        if (tempEl) tempEl.textContent = '🌡️ טוען...';
+        if (windEl) windEl.textContent = '💨 טוען...';
+        if (visEl) visEl.textContent = '👁️ טוען...';
+        if (qnhEl) qnhEl.textContent = '🔵 טוען...';
+        if (condEl) condEl.textContent = '☁️ טוען...';
     }
 }
 
