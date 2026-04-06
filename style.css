@@ -329,16 +329,16 @@ body {
 }
 
 .atc-display {
-    flex: 1;
+    flex: 2;
     margin: 0 1.5rem;
     padding: 1rem 1.25rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-width: 450px;
+    min-width: 600px;
     height: 100px;
     background: var(--bg-glass);
-    overflow: hidden;
+    overflow: visible;
 }
 
 .atc-title {
@@ -351,12 +351,11 @@ body {
 }
 
 .atc-controllers {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
     align-items: center;
-    overflow-y: auto;
-    max-height: 65px;
+    width: 100%;
 }
 
 .atc-controller {
@@ -364,112 +363,86 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 3px;
-    padding: 8px 12px;
+    gap: 2px;
+    padding: 6px 8px;
     border-radius: 4px;
     border: 1px solid;
     transition: all 0.3s ease;
-    min-width: 70px;
     text-align: center;
-    white-space: nowrap;
     font-weight: 700;
+    min-height: 50px;
 }
 
 .atc-position {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
 .atc-frequency {
-    font-size: 0.75rem;
+    font-size: 0.65rem;
     font-weight: 600;
+    line-height: 1;
 }
 
-/* VATSIM Color Scheme */
+/* VATSIM Color Scheme - Online */
 .atc-controller.atis.online {
     background: #FDB913;
     border-color: #FDB913;
     color: #000;
-    box-shadow: 0 0 15px rgba(253, 185, 19, 0.4);
-}
-.atc-controller.atis.offline {
-    background: rgba(253, 185, 19, 0.3);
-    border-color: rgba(253, 185, 19, 0.5);
-    color: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 15px rgba(253, 185, 19, 0.5);
 }
 
 .atc-controller.del.online {
     background: #003DA5;
     border-color: #003DA5;
     color: #fff;
-    box-shadow: 0 0 15px rgba(0, 61, 165, 0.4);
-}
-.atc-controller.del.offline {
-    background: rgba(0, 61, 165, 0.3);
-    border-color: rgba(0, 61, 165, 0.5);
-    color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 15px rgba(0, 61, 165, 0.5);
 }
 
 .atc-controller.gnd.online {
     background: #00B050;
     border-color: #00B050;
     color: #fff;
-    box-shadow: 0 0 15px rgba(0, 176, 80, 0.4);
-}
-.atc-controller.gnd.offline {
-    background: rgba(0, 176, 80, 0.3);
-    border-color: rgba(0, 176, 80, 0.5);
-    color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 15px rgba(0, 176, 80, 0.5);
 }
 
 .atc-controller.twr.online {
     background: #FF0000;
     border-color: #FF0000;
     color: #fff;
-    box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
-}
-.atc-controller.twr.offline {
-    background: rgba(255, 0, 0, 0.3);
-    border-color: rgba(255, 0, 0, 0.5);
-    color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
 }
 
 .atc-controller.app.online {
     background: #00B050;
     border-color: #00B050;
     color: #fff;
-    box-shadow: 0 0 15px rgba(0, 176, 80, 0.4);
-}
-.atc-controller.app.offline {
-    background: rgba(0, 176, 80, 0.3);
-    border-color: rgba(0, 176, 80, 0.5);
-    color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 15px rgba(0, 176, 80, 0.5);
 }
 
 .atc-controller.dep.online {
     background: #003DA5;
     border-color: #003DA5;
     color: #fff;
-    box-shadow: 0 0 15px rgba(0, 61, 165, 0.4);
-}
-.atc-controller.dep.offline {
-    background: rgba(0, 61, 165, 0.3);
-    border-color: rgba(0, 61, 165, 0.5);
-    color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 15px rgba(0, 61, 165, 0.5);
 }
 
 .atc-controller.ctr.online {
     background: #003DA5;
     border-color: #003DA5;
     color: #fff;
-    box-shadow: 0 0 15px rgba(0, 61, 165, 0.4);
+    box-shadow: 0 0 15px rgba(0, 61, 165, 0.5);
 }
-.atc-controller.ctr.offline {
-    background: rgba(0, 61, 165, 0.3);
-    border-color: rgba(0, 61, 165, 0.5);
-    color: rgba(255, 255, 255, 0.5);
+
+/* VATSIM Color Scheme - Offline (Gray) */
+.atc-controller.offline {
+    background: #666666;
+    border-color: #666666;
+    color: #aaa;
+    box-shadow: none;
+    opacity: 0.6;
 }
 
 .atc-loading {
