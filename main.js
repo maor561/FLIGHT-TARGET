@@ -1023,6 +1023,31 @@ async function showFlightDetails(flight) {
 }
 
 // ============================================================
+// CATEGORY DISPLAY
+// ============================================================
+function updateCategoryDisplay(category) {
+    const displayEl = document.getElementById('category-filter-display');
+    if (!displayEl) return;
+
+    const categoryNames = {
+        'all': '',
+        'football': '⚽ כדורגל',
+        'basketball': '🏀 כדורסל',
+        'sports-other': '🏅 ענפים נוספים',
+        'jewish': '✡️ קהילה ויהדות',
+        'rescue': '🚁 הצלה והומניטרי',
+        'business': '💼 עסקים וטכנולוגיה',
+        'diplomatic': '🏛️ דיפלומטיה וממשל',
+        'culture': '🎨 תרבות ואומנות',
+        'vatil': '🛩️ סימולטור טיסה',
+        'doctor-simulator': '🏥 טיסות קהילה'
+    };
+
+    const displayName = categoryNames[category] || category;
+    displayEl.textContent = displayName ? ` (${displayName})` : '';
+}
+
+// ============================================================
 // EVENT LISTENERS
 // ============================================================
 function setupEventListeners() {
@@ -1033,6 +1058,7 @@ function setupEventListeners() {
             document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
             item.classList.add('active');
             currentCategory = item.dataset.category;
+            updateCategoryDisplay(currentCategory);
             renderFlights(currentCategory, document.getElementById('search-input').value);
         };
     });
