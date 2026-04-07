@@ -1064,7 +1064,10 @@ function setupEventListeners() {
             item.classList.add('active');
             currentCategory = item.dataset.category;
             updateCategoryDisplay(currentCategory);
-            renderFlights(currentCategory, document.getElementById('search-input').value);
+            // search-input was removed, so use empty string as fallback
+            const searchInput = document.getElementById('search-input');
+            const searchTerm = searchInput ? searchInput.value : '';
+            renderFlights(currentCategory, searchTerm);
         };
     });
 
