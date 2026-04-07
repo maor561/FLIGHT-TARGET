@@ -1415,9 +1415,9 @@ async function fetchAndDisplayVatsimATC() {
         const data = await response.json();
         const controllers = data.controllers || [];
 
-        // Filter controllers for LLBG (natively named Ben Gurion)
+        // Filter controllers for LLBG (matches LLBG_* format)
         const llbgControllers = controllers.filter(c =>
-            c.callsign.startsWith('LLBG_') && c.facility >= 1
+            c.callsign.startsWith('LLBG_')
         );
 
         displayVatsimControllers(llbgControllers);
@@ -1434,31 +1434,50 @@ function displayVatsimControllers(controllers) {
     const container = document.getElementById('atc-controllers');
     if (!container) return;
 
-    // Define LLBG positions with display names and VATSIM colors
-    const positions = {
-        'LLBG_ATIS': { name: 'ATIS', type: 'atis' },
-        'LLBG_DEL': { name: 'DEL', type: 'del' },
-        'LLBG_GND': { name: 'GND', type: 'gnd' },
-        'LLBG_TWR': { name: 'TWR', type: 'twr' },
-        'LLBG_APP': { name: 'APP', type: 'app' },
-        'LLBG_CTR': { name: 'CTR', type: 'ctr' }
+    // Map VATSIM callsigns to display positions
+    // VATSIM uses format: LLBG_[Prefix]_[Position] or LLBG_[Position]
+    const positionMap = {
+        'atis': { name: 'ATIS', type: 'atis' },
+        'del': { name: 'DEL', type: 'del' },
+        'gnd': { name: 'GND', type: 'gnd' },
+        'twr': { name: 'TWR', type: 'twr' },
+        'app': { name: 'APP', type: 'app' },
+        'ctr': { name: 'CTR', type: 'ctr' }
     };
+
+    // Extract position type from VATSIM callsign
+    const getPositionType = (callsign) => {
+        // LLBG_D_APP -> extract APP, LLBG_D_ATIS -> extract ATIS, etc.
+        const parts = callsign.replace('LLBG_', '').split('_');
+        const position = parts[parts.length - 1].toLowerCase(); // Get last part
+        return position;
+    };
+
+    // Group controllers by position type
+    const controllersByPosition = {};
+    controllers.forEach(c => {
+        const posType = getPositionType(c.callsign);
+        if (!controllersByPosition[posType]) {
+            controllersByPosition[posType] = [];
+        }
+        controllersByPosition[posType].push(c);
+    });
 
     let html = '';
 
     // Position order: ATIS (right) → DEL → GND → TWR → APP → CTR (left)
-    const positionOrder = ['LLBG_ATIS', 'LLBG_DEL', 'LLBG_GND', 'LLBG_TWR', 'LLBG_APP', 'LLBG_CTR'];
+    const positionOrder = ['atis', 'del', 'gnd', 'twr', 'app', 'ctr'];
 
-    positionOrder.forEach(callsign => {
-        const info = positions[callsign];
-        const controller = controllers.find(c => c.callsign === callsign);
-
-        // Always show the position, whether online or offline
-        const isOnline = !!controller;
+    positionOrder.forEach(posType => {
+        const info = positionMap[posType];
+        const posControllers = controllersByPosition[posType] || [];
+        const isOnline = posControllers.length > 0;
+        const controller = posControllers[0]; // Use first if multiple
         const status = isOnline ? 'online' : 'offline';
         const frequency = controller?.frequency || '—';
         const controllerName = controller?.name || '';
-        const title = isOnline ? `${controllerName} (${callsign})` : `${callsign} - ממתין לחיבור`;
+        const callsign = controller?.callsign || `LLBG_${posType.toUpperCase()}`;
+        const title = isOnline ? `${controllerName} (${callsign})` : `${info.name} - ממתין לחיבור`;
 
         html += `
             <div class="atc-controller ${info.type} ${status}" title="${title}">
