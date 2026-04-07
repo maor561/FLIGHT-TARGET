@@ -427,12 +427,29 @@ async function fetchAndDisplayMetar() {
 
 async function tryFetchMetarFromApis() {
     try {
+        // Fetch METAR from AVWX API (used by VATSIM ecosystem)
+        const url = `https://avwx.rest/api/metar/LLBG?pretty=true`;
+        const res = await fetch(url);
+        if (res.ok) {
+            const data = await res.json();
+            if (data.raw) {
+                console.log('✅ METAR from AVWX:', data.raw);
+                return data.raw; // Return actual METAR string
+            }
+        }
+    } catch (e) {
+        console.warn('AVWX METAR fetch failed:', e.message);
+    }
+
+    // Fallback: fetch from Open-Meteo if AVWX fails
+    try {
         const url = `https://api.open-meteo.com/v1/forecast?latitude=32.00&longitude=34.88&current_weather=true`;
         const res = await fetch(url);
         if (res.ok) {
             const data = await res.json();
             const cur = data.current_weather;
             if (cur) {
+                console.log('⚠️ Using Open-Meteo fallback');
                 const temp = Math.round(cur.temperature);
                 const wind = Math.round(cur.windspeed);
                 const deg = Math.round(cur.winddirection);
@@ -444,7 +461,9 @@ async function tryFetchMetarFromApis() {
                 return `LLBG ${timeStr} ${windStr} 9999 CAVOK ${tempStr} Q1013`;
             }
         }
-    } catch (e) { console.debug('Open-Meteo failed:', e.message); }
+    } catch (e) {
+        console.debug('Open-Meteo fallback failed:', e.message);
+    }
     return null;
 }
 
