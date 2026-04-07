@@ -1126,7 +1126,8 @@ function setupEventListeners() {
 
             await new Promise(r => setTimeout(r, 1800));
             await fetchAndDisplayMetar();
-            renderFlights(currentCategory, document.getElementById('search-input').value);
+            const searchVal = document.getElementById('search-input')?.value || '';
+            renderFlights(currentCategory, searchVal);
             updateLastUpdatedTime();
 
             refreshBtn.classList.remove('spinning');
