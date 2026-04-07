@@ -1414,9 +1414,11 @@ async function fetchAndDisplayVatsimATC() {
 
         const data = await response.json();
         const controllers = data.controllers || [];
+        const atisStations = data.atis || [];
 
-        // Filter controllers for LLBG (matches LLBG_* format)
-        const llbgControllers = controllers.filter(c =>
+        // Combine controllers + ATIS and filter for LLBG
+        const allPositions = [...controllers, ...atisStations];
+        const llbgControllers = allPositions.filter(c =>
             c.callsign.startsWith('LLBG_')
         );
 
