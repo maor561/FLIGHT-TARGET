@@ -1479,10 +1479,26 @@ function displayVatsimControllers(controllers) {
         const frequency = controller?.frequency || '—';
         const controllerName = controller?.name || '';
         const callsign = controller?.callsign || `LLBG_${posType.toUpperCase()}`;
-        const title = isOnline ? `${controllerName} (${callsign})` : `${info.name} - ממתין לחיבור`;
+
+        // Build detailed tooltip HTML
+        let tooltipContent = '';
+        if (isOnline) {
+            tooltipContent = `
+                <div class="tooltip-header">${info.name} - ${controllerName}</div>
+                <div class="tooltip-callsign">${callsign}</div>
+                <div class="tooltip-frequency">📻 תדר: ${frequency}</div>
+                <div class="tooltip-online">🟢 מחובר</div>
+            `;
+        } else {
+            tooltipContent = `
+                <div class="tooltip-header">${info.name}</div>
+                <div class="tooltip-offline">⚫ לא מחובר</div>
+            `;
+        }
 
         html += `
-            <div class="atc-controller ${info.type} ${status}" title="${title}">
+            <div class="atc-controller ${info.type} ${status}">
+                <div class="atc-tooltip">${tooltipContent}</div>
                 <div class="atc-position">${info.name}</div>
                 <div class="atc-frequency">${frequency}</div>
             </div>
