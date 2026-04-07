@@ -1483,10 +1483,24 @@ function displayVatsimControllers(controllers) {
         // Build detailed tooltip HTML
         let tooltipContent = '';
         if (isOnline) {
+            // Get additional info
+            const rating = controller?.rating || 0;
+            const ratingNames = {
+                1: 'OBS', 2: 'S1', 3: 'S2', 4: 'S3',
+                5: 'C1', 6: 'C2', 7: 'C3', 8: 'I1', 9: 'I2', 10: 'I3', 11: 'SUP', 12: 'ADM'
+            };
+            const ratingDisplay = ratingNames[rating] || 'OBS';
+            const timeLogon = controller?.time_logon ? new Date(controller.time_logon).toLocaleTimeString('he-IL', {hour: '2-digit', minute: '2-digit'}) : 'N/A';
+
             tooltipContent = `
-                <div class="tooltip-header">${info.name} - ${controllerName}</div>
+                <div class="tooltip-header">${info.name}</div>
+                <div class="tooltip-section">${controllerName}</div>
                 <div class="tooltip-callsign">${callsign}</div>
-                <div class="tooltip-frequency">📻 תדר: ${frequency}</div>
+                <div class="tooltip-frequency">📻 ${frequency}</div>
+                <div class="tooltip-meta">
+                    <span class="rating">${ratingDisplay}</span>
+                    <span class="online-time">⏱️ ${timeLogon}</span>
+                </div>
                 <div class="tooltip-online">🟢 מחובר</div>
             `;
         } else {
