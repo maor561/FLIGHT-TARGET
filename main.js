@@ -1027,7 +1027,10 @@ async function showFlightDetails(flight) {
 // ============================================================
 function updateCategoryDisplay(category) {
     const displayEl = document.getElementById('category-filter-display');
-    if (!displayEl) return;
+    if (!displayEl) {
+        console.warn('category-filter-display element not found');
+        return;
+    }
 
     const categoryNames = {
         'all': '',
@@ -1044,7 +1047,9 @@ function updateCategoryDisplay(category) {
     };
 
     const displayName = categoryNames[category] || category;
-    displayEl.textContent = displayName ? ` (${displayName})` : '';
+    const text = displayName ? ` (${displayName})` : '';
+    displayEl.textContent = text;
+    console.log(`📁 Category filter display updated: "${category}" -> "${text}"`);
 }
 
 // ============================================================
