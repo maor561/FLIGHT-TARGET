@@ -514,5 +514,41 @@ const flights = [
         imageUrl: "https://images.pexels.com/photos/11686275/pexels-photo-11686275.jpeg?auto=compress&cs=tinysrgb&h=350",
         createdAt: "2026-04-06T08:00:00Z",
         isNew: true
+    },
+    {
+        id: "B007",
+        category: "basketball",
+        title: "מכבי ת\"א - יורוליג | וירטוס בולוניה (בית – בלגרד)",
+        mission: "Maccabi Tel Aviv EuroLeague Home Game vs Virtus Bologna – Belgrade (Round 38)",
+        background: "מכבי ראפיד תל אביב מארחת את וירטוס בולוניה מאיטליה ב-Aleksandar Nikolic Hall בבלגרד, סרביה, ב-16 באפריל 2026, בשעה 21:05. זהו הסבב האחרון (38) של העונה הסדירה ביורוליג 2025/26. עונה הסדירה מסתיימת ב-17 באפריל. מכבי מנהלת משחקי בית בבלגרד מחוץ לישראל בשל שיקולי ביטחון. תוצאת המשחק תקבע את המיקום הסופי בדירוג ואת הכרטיס לפלייאין (21 ו-24 אפריל) אם יזכו. זהו משחק קריטי לקראת הפוסט-סיזון של היורוליג 2026.",
+        route: "LLBG -> LYBE",
+        dest_icao: "LYBE",
+        date: "2026-04-16",
+        time: "16:00",
+        airline: "אל על",
+        aircraft: "Boeing 737-800",
+        icon: "🏀",
+        source: "EuroLeague Basketball / Maccabi.co.il / Sofascore",
+        imageUrl: "https://images.pexels.com/photos/31040982/pexels-photo-31040982.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-04-08T00:00:00Z",
+        isNew: true
+    },
+    {
+        id: "B008",
+        category: "basketball",
+        title: "הפועל ת\"א - יורוליג | אס מונאקו (חוץ)",
+        mission: "Hapoel IBI Tel Aviv EuroLeague Away Game vs AS Monaco – Monaco (Round 38)",
+        background: "הפועל IBI תל אביב יוצאת למשחק יורוליג 2025/26 האחרון של העונה הסדירה (סבב 38) נגד אס מונאקו, ב-17 באפריל 2026, בשעה 19:30. המשחק מתקיים ב-Stade Louis II בנסיכות מונאקו. מונאקו היא אחת מקבוצות הכדורגל החזקות ביורוליג ומשחקת בבית ב-Stade Louis II שנמצא בפונטוויי, מונאקו. ניסה הינה שדה התעופה הקרוב ביותר למונאקו. זהו המשחק האחרון בעונה הסדירה – תוצאה שתשפיע על מיקום הפועל בפלייאין (21-24 באפריל) אם יגיעו.",
+        route: "LLBG -> LFMN",
+        dest_icao: "LFMN",
+        date: "2026-04-17",
+        time: "12:00",
+        airline: "אל על",
+        aircraft: "Boeing 737-800",
+        icon: "🏀",
+        source: "EuroLeague Basketball / hellomonaco.com / Sofascore",
+        imageUrl: "https://images.pexels.com/photos/8980698/pexels-photo-8980698.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-04-08T00:00:00Z",
+        isNew: true
     }
 ];
