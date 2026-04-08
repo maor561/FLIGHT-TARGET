@@ -374,6 +374,7 @@ body {
     min-height: 50px;
     position: relative;
     cursor: pointer;
+    z-index: 10001;
 }
 
 /* Tooltip styling */
