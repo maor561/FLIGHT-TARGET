@@ -1556,6 +1556,20 @@ function displayVatsimControllers(controllers) {
         const controllerName = controller?.name || '';
         const callsign = controller?.callsign || `LLBG_${posType.toUpperCase()}`;
 
+        // Get ATIS information
+        const atisControllers = controllersByPosition['atis'] || [];
+        let atisInfo = '';
+        if (atisControllers.length > 0) {
+            atisInfo = '<div class="tooltip-atis-section" style="border-top: 1px solid rgba(0,210,255,0.3); margin-top: 8px; padding-top: 8px; font-size: 0.75rem;">';
+            atisControllers.forEach(atis => {
+                const atisName = atis.name || 'ATIS';
+                const atisFreq = atis.frequency || '—';
+                const atisCallsign = atis.callsign || 'ATIS';
+                atisInfo += `<div style="margin-bottom: 4px;"><strong>${atisCallsign}</strong> (${atisName})<br/>📻 ${atisFreq}</div>`;
+            });
+            atisInfo += '</div>';
+        }
+
         // Build detailed tooltip HTML
         let tooltipContent = '';
         if (isOnline) {
@@ -1578,11 +1592,13 @@ function displayVatsimControllers(controllers) {
                     <span class="online-time">⏱️ ${timeLogon}</span>
                 </div>
                 <div class="tooltip-online">🟢 מחובר</div>
+                ${atisInfo}
             `;
         } else {
             tooltipContent = `
                 <div class="tooltip-header">${info.name}</div>
                 <div class="tooltip-offline">⚫ לא מחובר</div>
+                ${atisInfo}
             `;
         }
 
