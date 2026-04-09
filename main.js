@@ -255,12 +255,12 @@ async function createFlightFromRSSItem(item) {
         const imageUrl = await fetchPexelsImage(searchTerm);
 
         // CRITICAL: Extract coordinates from RSS, fallback to destinations object if missing
-        // Parse: "Departure Coordinates: 32.0114°, 34.8867°"
-        const depCoordMatch = descText.match(/Departure Coordinates:\s*([\d.]+)°,\s*([\d.]+)°/);
+        // Parse: "Departure Coordinates: 32.0114°, 34.8867°" or "53.4213°, -6.2700°" (with negative values)
+        const depCoordMatch = descText.match(/Departure Coordinates:\s*([-\d.]+)°,\s*([-\d.]+)°/);
         let depCoords = depCoordMatch ? [parseFloat(depCoordMatch[1]), parseFloat(depCoordMatch[2])] : null;
 
-        // Parse: "Arrival Coordinates: 36.3992°, 25.4793°"
-        const arrCoordMatch = descText.match(/Arrival Coordinates:\s*([\d.]+)°,\s*([\d.]+)°/);
+        // Parse: "Arrival Coordinates: 36.3992°, 25.4793°" or "62.0161°, -7.1926°" (with negative values)
+        const arrCoordMatch = descText.match(/Arrival Coordinates:\s*([-\d.]+)°,\s*([-\d.]+)°/);
         let arrCoords = arrCoordMatch ? [parseFloat(arrCoordMatch[1]), parseFloat(arrCoordMatch[2])] : null;
 
         // FALLBACK: Use destinations object if coordinates missing from RSS
