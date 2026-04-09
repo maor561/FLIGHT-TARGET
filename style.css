@@ -385,7 +385,7 @@ body {
 /* Shift tooltip to the left to avoid sidebar */
 .atc-controller:nth-child(1) .atc-tooltip,
 .atc-controller:nth-child(2) .atc-tooltip {
-    left: 25% !important;
+    left: 10% !important;
     transform: translateX(-50%);
 }
 
