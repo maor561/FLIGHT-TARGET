@@ -1478,10 +1478,10 @@ async function fetchAndDisplayVatsimATC() {
         const controllers = data.controllers || [];
         const atisStations = data.atis || [];
 
-        // Combine controllers + ATIS and filter for LLBG
+        // Combine controllers + ATIS and filter for LLBG (including LLLL_CTR)
         const allPositions = [...controllers, ...atisStations];
         const llbgControllers = allPositions.filter(c =>
-            c.callsign.startsWith('LLBG_') || c.callsign === 'LLLL'
+            c.callsign.startsWith('LLBG_') || c.callsign.startsWith('LLLL_')
         );
 
         console.log('🔍 VATSIM Debug:');
@@ -1527,8 +1527,8 @@ function displayVatsimControllers(controllers) {
 
     // Extract position type from VATSIM callsign
     const getPositionType = (callsign) => {
-        // LLBG_D_APP -> extract APP, LLBG_D_ATIS -> extract ATIS, etc.
-        const parts = callsign.replace('LLBG_', '').split('_');
+        // LLBG_D_APP -> extract APP, LLBG_D_ATIS -> extract ATIS, LLLL_CTR -> extract CTR, etc.
+        let parts = callsign.replace('LLBG_', '').replace('LLLL_', '').split('_');
         let position = parts[parts.length - 1].toLowerCase(); // Get last part
 
         // Map special callsigns to position types
