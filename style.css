@@ -339,7 +339,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    min-width: 550px;
+    min-width: 680px;
     height: 100px;
     background: var(--bg-glass);
     overflow: visible;
