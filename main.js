@@ -1520,7 +1520,14 @@ function displayVatsimControllers(controllers) {
     const getPositionType = (callsign) => {
         // LLBG_D_APP -> extract APP, LLBG_D_ATIS -> extract ATIS, etc.
         const parts = callsign.replace('LLBG_', '').split('_');
-        const position = parts[parts.length - 1].toLowerCase(); // Get last part
+        let position = parts[parts.length - 1].toLowerCase(); // Get last part
+
+        // Map special callsigns to position types
+        const positionAliases = {
+            'llll': 'ctr'  // LLLL is CTR (Center)
+        };
+
+        position = positionAliases[position] || position;
         return position;
     };
 
