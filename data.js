@@ -4,9 +4,9 @@
 // ============================================================
 
 const lastUpdated = {
-    timestamp: "2026-04-06T20:05:53.000Z",
+    timestamp: "2026-04-09T10:00:00.000Z",
     source: "Latest Git Commit",
-    version: "1.1.1"
+    version: "1.1.2"
 };
 
 const destinations = {
@@ -79,7 +79,8 @@ const destinations = {
     "LCRA": { name: "Larnaca Unrecognized", coords: [34.8756, 33.6237], facts: ["שדה תעופה בקפריסין", "אזור ניסיוני או צבאי", "דוקטור סימולטור - תחנה בטיול", "שדה תעופה בשימוש מוגבל", "מקום עם משמעות היסטורית"] },
     "LFPB": { name: "Paris Beauvais", coords: [49.4544, 2.1127], facts: ["שדה תעופה בפריז, צרפת", "מרחק 80 ק״מ מצפון לפריז", "שדה תעופה משני בפריז לטיסות תקבולי", "שדה תעופה בינלאומי עם חיבורים לאירופה", "דוקטור סימולטור - תחנה בטיול סביב העולם"] },
     "EGBB": { name: "Birmingham", coords: [52.4539, -1.7480], facts: ["שדה תעופה בברמינגהם, אנגליה", "רביעי בגודלו בבריטניה לאחר Heathrow, Gatwick ו-Stansted", "חיבורים לאירופה ובעולם", "מטה רברי Ryanair בנתב עיר", "דוקטור סימולטור - תחנה בטיול סביב העולם"] },
-    "LYBE": { name: "Belgrade", coords: [44.8184, 20.3091], facts: ["בירת סרביה עם 1.7 מיליון תושבים", "ביתם הזמני של מכבי תל אביב לכדורסל עונת 2025/26", "נמל תעופה ניקולה טסלה – על שם הממציא הסרבי-אמריקאי", "ממוקמת בצומת נהרות סאבה ודנובה", "מרכז תרבות ואמנות בלקני חשוב"] }
+    "LYBE": { name: "Belgrade", coords: [44.8184, 20.3091], facts: ["בירת סרביה עם 1.7 מיליון תושבים", "ביתם הזמני של מכבי תל אביב לכדורסל עונת 2025/26", "נמל תעופה ניקולה טסלה – על שם הממציא הסרבי-אמריקאי", "ממוקמת בצומת נהרות סאבה ודנובה", "מרכז תרבות ואמנות בלקני חשוב"] },
+    "UTTT": { name: "Tashkent", coords: [41.2579, 69.2834], facts: ["בירת אוזבקיסטן – 'עיר הלחם' – העיר הגדולה ביותר במרכז אסיה", "עיר עתיקת יומין על דרך המשי ההיסטורית בין אירופה לסין", "מרכז ספורט בינלאומי – מארחת תחרויות FIG, ג'ודו ואירועי ענק", "אוזבקיסטן מפורסמת בכישרונות ספורטיביים – ג'ודו, התעמלות, כוח", "3 מיליון תושבים עם אדריכלות מדהימה הרומנטית סובייטית ואסייתית"] }
 };
 
 const flights = [
@@ -549,6 +550,42 @@ const flights = [
         source: "EuroLeague Basketball / hellomonaco.com / Sofascore",
         imageUrl: "https://images.pexels.com/photos/8980698/pexels-photo-8980698.jpeg?auto=compress&cs=tinysrgb&h=350",
         createdAt: "2026-04-08T00:00:00Z",
+        isNew: true
+    },
+    {
+        id: "S009",
+        category: "sports-other",
+        title: "נבחרת התעמלות קצבית ישראל | גביע עולם טשקנט 2026",
+        mission: "Israeli Rhythmic Gymnastics Team - FIG World Cup Tashkent, Uzbekistan",
+        background: "נבחרת ישראל בהתעמלות קצבית יוצאת לגביע העולם FIG 2026 בטשקנט, אוזבקיסטן, שיתקיים בין 10-12 באפריל 2026. ישראל השיגה מדליית ארד בסדרת גביע העולם 2026 והיא בין הנבחרות המתמודדות בתחרויות יחידניות וקבוצות עם מכשירים שונים: גלגל, חישוק, כדור ומסרטים. טשקנט, בירת אוזבקיסטן הממוקמת בצומת דרך המשי ההיסטורית, מארחת את תחרות גביע העולם כחלק מסדרת ה-FIG לשנת 2026.",
+        route: "LLBG -> UTTT",
+        dest_icao: "UTTT",
+        date: "2026-04-09",
+        time: "10:00",
+        airline: "Turkish Airlines",
+        aircraft: "Airbus A321",
+        icon: "🤸",
+        source: "FIG.org / Wikipedia - 2026 FIG Rhythmic Gymnastics World Cup series",
+        imageUrl: "https://images.pexels.com/photos/15281444/pexels-photo-15281444.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-04-09T10:00:00Z",
+        isNew: true
+    },
+    {
+        id: "S010",
+        category: "sports-other",
+        title: "נבחרת התעמלות קצבית ישראל | גביע עולם באקו 2026",
+        mission: "Israeli Rhythmic Gymnastics Team - FIG World Cup Baku, Azerbaijan",
+        background: "נבחרת ישראל בהתעמלות קצבית יוצאת לגביע העולם FIG 2026 בבאקו, אזרבייג'ן, שיתקיים בין 17-19 באפריל 2026. תחרות גביע העולם בבאקו היא אחת מהיוקרתיות בסדרת ה-FIG לשנת 2026, ומספקת לנבחרת ישראל הזדמנות לאסוף נקודות דירוג חשובות לקראת האליפות האירופית. אזרבייג'ן ידועה כמרכז ספורטיבי מוביל וארמון הספורט האולימפי בבאקו הוא ביתם של תחרויות בינלאומיות רבות. ישראל ואזרבייג'ן מקיימות יחסים דיפלומטיים ותרבותיים ענפים.",
+        route: "LLBG -> UBBB",
+        dest_icao: "UBBB",
+        date: "2026-04-15",
+        time: "09:00",
+        airline: "אזרבייג'ן אייר לינס",
+        aircraft: "Boeing 737-800",
+        icon: "🤸",
+        source: "FIG.org / Wikipedia - 2026 FIG Rhythmic Gymnastics World Cup series",
+        imageUrl: "https://images.pexels.com/photos/19962652/pexels-photo-19962652.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-04-09T10:00:00Z",
         isNew: true
     }
 ];
