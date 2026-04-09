@@ -1486,18 +1486,9 @@ async function fetchAndDisplayVatsimATC() {
 
         console.log('🔍 VATSIM Debug:');
         console.log(`   Total controllers: ${controllers.length}, ATIS: ${atisStations.length}`);
-        console.log(`   LLBG positions found: ${llbgControllers.length}`);
+        console.log(`   LLBG/LLLL positions found: ${llbgControllers.length}`);
         llbgControllers.forEach(c => {
             console.log(`   - ${c.callsign} (${c.name})`);
-        });
-
-        // Debug: Show if LLLL exists at all
-        const allLLBGRelated = allPositions.filter(c =>
-            c.callsign.includes('LLBG') || c.callsign.includes('LLLL')
-        );
-        console.log(`   All LLBG/LLLL related: ${allLLBGRelated.length}`);
-        allLLBGRelated.forEach(c => {
-            console.log(`      ${c.callsign} (${c.name})`);
         });
 
         displayVatsimControllers(llbgControllers);
@@ -1548,10 +1539,7 @@ function displayVatsimControllers(controllers) {
             controllersByPosition[posType] = [];
         }
         controllersByPosition[posType].push(c);
-        console.log(`📍 Grouped: ${c.callsign} → ${posType}`);
     });
-
-    console.log('📊 Position summary:', Object.keys(controllersByPosition).map(k => `${k}: ${controllersByPosition[k].length}`).join(', '));
 
     let html = '';
 
