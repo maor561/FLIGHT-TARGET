@@ -1567,7 +1567,20 @@ function displayVatsimControllers(controllers) {
                 const atisName = atis.name || 'ATIS';
                 const atisFreq = atis.frequency || '—';
                 const atisCallsign = atis.callsign || 'ATIS';
-                atisInfo += `<div style="margin-bottom: 4px;"><strong>${atisCallsign}</strong> (${atisName})<br/>📻 ${atisFreq}</div>`;
+                const textAtis = atis.text_atis || [];
+
+                atisInfo += `<div style="margin-bottom: 6px;">`;
+                atisInfo += `<div style="margin-bottom: 2px;"><strong>${atisCallsign}</strong> (${atisName})<br/>📻 ${atisFreq}</div>`;
+
+                // Add ATIS text lines
+                if (textAtis.length > 0) {
+                    atisInfo += `<div style="background: rgba(255,215,0,0.1); padding: 4px; border-radius: 3px; font-size: 0.7rem; line-height: 1.2; color: #ffd700;">`;
+                    textAtis.forEach((line, idx) => {
+                        atisInfo += `${line}<br/>`;
+                    });
+                    atisInfo += `</div>`;
+                }
+                atisInfo += `</div>`;
             });
             atisInfo += '</div>';
         }
