@@ -302,6 +302,7 @@ body {
     margin-bottom: 2.5rem;
     padding: 0.5rem 0;
     flex-shrink: 0;
+    overflow: visible;
 }
 
 
@@ -823,6 +824,7 @@ body {
     position: relative;
     overflow: hidden;
     animation: slideInUp 0.5s ease backwards;
+    z-index: 1;
 }
 
 .flight-card::before {
