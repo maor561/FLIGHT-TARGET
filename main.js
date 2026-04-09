@@ -1481,7 +1481,7 @@ async function fetchAndDisplayVatsimATC() {
         // Combine controllers + ATIS and filter for LLBG
         const allPositions = [...controllers, ...atisStations];
         const llbgControllers = allPositions.filter(c =>
-            c.callsign.startsWith('LLBG_')
+            c.callsign.startsWith('LLBG_') || c.callsign === 'LLLL'
         );
 
         console.log('🔍 VATSIM Debug:');
@@ -1489,6 +1489,15 @@ async function fetchAndDisplayVatsimATC() {
         console.log(`   LLBG positions found: ${llbgControllers.length}`);
         llbgControllers.forEach(c => {
             console.log(`   - ${c.callsign} (${c.name})`);
+        });
+
+        // Debug: Show if LLLL exists at all
+        const allLLBGRelated = allPositions.filter(c =>
+            c.callsign.includes('LLBG') || c.callsign.includes('LLLL')
+        );
+        console.log(`   All LLBG/LLLL related: ${allLLBGRelated.length}`);
+        allLLBGRelated.forEach(c => {
+            console.log(`      ${c.callsign} (${c.name})`);
         });
 
         displayVatsimControllers(llbgControllers);
