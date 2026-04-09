@@ -1539,12 +1539,18 @@ function displayVatsimControllers(controllers) {
             controllersByPosition[posType] = [];
         }
         controllersByPosition[posType].push(c);
+        console.log(`📍 Grouped: ${c.callsign} → ${posType}`);
     });
+
+    console.log('📊 Position summary:', Object.keys(controllersByPosition).map(k => `${k}: ${controllersByPosition[k].length}`).join(', '));
 
     let html = '';
 
     // Position order: ATIS (right) → DEL → GND → TWR → APP → CTR (left)
     const positionOrder = ['atis', 'del', 'gnd', 'twr', 'app', 'ctr'];
+
+    // Get ATIS information once
+    const atisControllers = controllersByPosition['atis'] || [];
 
     positionOrder.forEach(posType => {
         const info = positionMap[posType];
@@ -1556,10 +1562,9 @@ function displayVatsimControllers(controllers) {
         const controllerName = controller?.name || '';
         const callsign = controller?.callsign || `LLBG_${posType.toUpperCase()}`;
 
-        // Get ATIS information
-        const atisControllers = controllersByPosition['atis'] || [];
+        // Show ATIS information only in ATIS button tooltip
         let atisInfo = '';
-        if (atisControllers.length > 0) {
+        if (posType === 'atis' && atisControllers.length > 0) {
             atisInfo = '<div class="tooltip-atis-section" style="border-top: 1px solid rgba(0,210,255,0.3); margin-top: 8px; padding-top: 8px; font-size: 0.75rem;">';
             atisControllers.forEach(atis => {
                 const atisName = atis.name || 'ATIS';
