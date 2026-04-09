@@ -382,10 +382,17 @@ body {
     z-index: 100000;
 }
 
+/* Shift tooltip to the left to avoid sidebar */
+.atc-controller:nth-child(1) .atc-tooltip,
+.atc-controller:nth-child(2) .atc-tooltip {
+    left: 25% !important;
+    transform: translateX(-50%);
+}
+
 /* Tooltip styling */
 .atc-controller .atc-tooltip {
     display: none;
-    position: fixed;
+    position: absolute;
     background: rgba(20, 20, 25, 0.98);
     color: #fff;
     padding: 16px 20px;
@@ -399,13 +406,12 @@ body {
     line-height: 1.6;
     pointer-events: none;
     width: 520px;
-    max-height: 500px;
+    max-height: 400px;
     overflow-y: auto;
-    bottom: auto;
-    left: auto;
-    right: auto;
-    top: 50%;
-    transform: translateY(-50%);
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 16px;
 }
 
 .atc-controller:hover .atc-tooltip {
