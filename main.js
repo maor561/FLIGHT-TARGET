@@ -1484,6 +1484,13 @@ async function fetchAndDisplayVatsimATC() {
             c.callsign.startsWith('LLBG_')
         );
 
+        console.log('🔍 VATSIM Debug:');
+        console.log(`   Total controllers: ${controllers.length}, ATIS: ${atisStations.length}`);
+        console.log(`   LLBG positions found: ${llbgControllers.length}`);
+        llbgControllers.forEach(c => {
+            console.log(`   - ${c.callsign} (${c.name})`);
+        });
+
         displayVatsimControllers(llbgControllers);
     } catch (e) {
         console.warn('VATSIM fetch error:', e.message);
