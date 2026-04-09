@@ -303,6 +303,8 @@ body {
     padding: 0.5rem 0;
     flex-shrink: 0;
     overflow: visible;
+    position: relative;
+    z-index: 99998;
 }
 
 
@@ -341,6 +343,8 @@ body {
     height: 100px;
     background: var(--bg-glass);
     overflow: visible;
+    position: relative;
+    z-index: 99998;
 }
 
 .atc-title {
