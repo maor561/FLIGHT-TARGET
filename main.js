@@ -1469,12 +1469,32 @@ async function initVatsimATC() {
     setInterval(fetchAndDisplayVatsimATC, 30 * 1000);
 }
 
+async function fetchVatsimBookings() {
+    try {
+        const res = await fetch('/api/bookings');
+        if (!res.ok) return {};
+        const data = await res.json();
+        // Build map: callsign -> booking {start, end}
+        const map = {};
+        const items = Array.isArray(data) ? data : (data.data || []);
+        items.forEach(b => {
+            if (b.callsign) map[b.callsign] = b;
+        });
+        return map;
+    } catch (e) {
+        return {};
+    }
+}
+
 async function fetchAndDisplayVatsimATC() {
     try {
-        const response = await fetch('https://data.vatsim.net/v3/vatsim-data.json');
-        if (!response.ok) throw new Error('VATSIM API error');
+        const [vatsimRes, bookings] = await Promise.all([
+            fetch('https://data.vatsim.net/v3/vatsim-data.json'),
+            fetchVatsimBookings()
+        ]);
+        if (!vatsimRes.ok) throw new Error('VATSIM API error');
 
-        const data = await response.json();
+        const data = await vatsimRes.json();
         const controllers = data.controllers || [];
         const atisStations = data.atis || [];
 
@@ -1491,7 +1511,7 @@ async function fetchAndDisplayVatsimATC() {
             console.log(`   - ${c.callsign} (${c.name})`);
         });
 
-        displayVatsimControllers(llbgControllers);
+        displayVatsimControllers(llbgControllers, bookings);
     } catch (e) {
         console.warn('VATSIM fetch error:', e.message);
         const container = document.getElementById('atc-controllers');
@@ -1501,7 +1521,7 @@ async function fetchAndDisplayVatsimATC() {
     }
 }
 
-function displayVatsimControllers(controllers) {
+function displayVatsimControllers(controllers, bookings = {}) {
     const container = document.getElementById('atc-controllers');
     if (!container) return;
 
@@ -1585,6 +1605,17 @@ function displayVatsimControllers(controllers) {
             atisInfo += '</div>';
         }
 
+        // Check if any LLBG callsign for this position has a booking
+        const bookingEntry = Object.values(bookings).find(b =>
+            b.callsign?.startsWith('LLBG_') && getPositionType(b.callsign) === posType ||
+            b.callsign?.startsWith('LLLL_') && getPositionType(b.callsign) === posType
+        );
+        let bookingHtml = '';
+        if (bookingEntry) {
+            const fmt = iso => iso ? new Date(iso).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' }) + 'Z' : '?';
+            bookingHtml = `<div class="tooltip-booking">📅 Booked ${fmt(bookingEntry.start)} – ${fmt(bookingEntry.end)}</div>`;
+        }
+
         // Build detailed tooltip HTML
         let tooltipContent = '';
         if (isOnline) {
@@ -1617,11 +1648,13 @@ function displayVatsimControllers(controllers) {
                 <div class="tooltip-online">🟢 מחובר</div>
                 ${notesHtml}
                 ${atisInfo}
+                ${bookingHtml}
             `;
         } else {
             tooltipContent = `
                 <div class="tooltip-header">${info.name}</div>
                 <div class="tooltip-offline">⚫ לא מחובר</div>
+                ${bookingHtml}
                 ${atisInfo}
             `;
         }
