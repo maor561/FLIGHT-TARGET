@@ -1627,6 +1627,45 @@ function displayVatsimControllers(controllers) {
     });
 
     container.innerHTML = html;
+
+    // Global tooltip: appended to body to escape backdrop-filter containing block
+    let globalTooltip = document.getElementById('atc-global-tooltip');
+    if (!globalTooltip) {
+        globalTooltip = document.createElement('div');
+        globalTooltip.id = 'atc-global-tooltip';
+        document.body.appendChild(globalTooltip);
+    }
+
+    container.querySelectorAll('.atc-controller').forEach(ctrl => {
+        const innerTooltip = ctrl.querySelector('.atc-tooltip');
+        if (!innerTooltip) return;
+
+        ctrl.addEventListener('mouseenter', () => {
+            const atcDisplay = document.querySelector('.atc-display');
+            const sidebar = document.querySelector('.sidebar');
+            const mapEl = document.querySelector('.map-container');
+            if (!atcDisplay || !sidebar || !mapEl) return;
+
+            const atcRect = atcDisplay.getBoundingClientRect();
+            const sidebarRect = sidebar.getBoundingClientRect();
+            const mapRect = mapEl.getBoundingClientRect();
+
+            const tooltipTop = atcRect.bottom + 8;
+            const tooltipRight = window.innerWidth - sidebarRect.left + 10;
+            const tooltipWidth = Math.max(300, sidebarRect.left - mapRect.right - 20);
+
+            globalTooltip.innerHTML = innerTooltip.innerHTML;
+            globalTooltip.style.top = tooltipTop + 'px';
+            globalTooltip.style.right = tooltipRight + 'px';
+            globalTooltip.style.width = tooltipWidth + 'px';
+            globalTooltip.style.display = 'block';
+        });
+
+        ctrl.addEventListener('mouseleave', () => {
+            globalTooltip.style.display = 'none';
+        });
+    });
+
     const onlineCount = controllers.length;
     console.log(`✈️ VATSIM LLBG: ${onlineCount} controllers online`);
 }

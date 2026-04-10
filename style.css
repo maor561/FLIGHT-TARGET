@@ -383,7 +383,13 @@ body {
 }
 
 /* Tooltip styling */
+/* Inline tooltips hidden — global tooltip (#atc-global-tooltip) used instead */
 .atc-controller .atc-tooltip {
+    display: none !important;
+}
+
+/* Global ATC tooltip appended to body (outside backdrop-filter context) */
+#atc-global-tooltip {
     display: none;
     position: fixed;
     background: rgba(20, 20, 25, 0.98);
@@ -392,7 +398,7 @@ body {
     border-radius: 12px;
     font-size: 0.9rem;
     white-space: normal;
-    z-index: 100001;
+    z-index: 999999;
     border: 2px solid rgba(0, 210, 255, 0.5);
     box-shadow: 0 12px 48px rgba(0, 0, 0, 0.95);
     text-align: left;
@@ -400,16 +406,6 @@ body {
     pointer-events: none;
     max-height: 400px;
     overflow-y: auto;
-    /* Positioned below top-bar (2rem padding + 0.5rem + 100px atc-display + gap) */
-    /* spanning from just left of sidebar to where map starts */
-    top: 152px;
-    right: 272px;
-    /* width spans the flight-list area: (100vw - sidebar - padding*2) * 1/2.2 - gap */
-    width: calc(46vw - 100px);
-}
-
-.atc-controller:hover .atc-tooltip {
-    display: block;
 }
 
 .tooltip-header {
