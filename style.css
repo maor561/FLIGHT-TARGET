@@ -1488,6 +1488,12 @@ html[dir="rtl"] .news-ticker {
     transform: scale(1.05);
 }
 
+.whatsapp-logo {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+}
+
 /* ==== SIDEBAR FOOTER ==== */
 .sidebar-footer {
     margin-top: auto;
