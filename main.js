@@ -1588,7 +1588,6 @@ function displayVatsimControllers(controllers) {
         // Build detailed tooltip HTML
         let tooltipContent = '';
         if (isOnline) {
-            // Get additional info
             const rating = controller?.rating || 0;
             const ratingNames = {
                 1: 'OBS', 2: 'S1', 3: 'S2', 4: 'S3',
@@ -1596,6 +1595,15 @@ function displayVatsimControllers(controllers) {
             };
             const ratingDisplay = ratingNames[rating] || 'OBS';
             const timeLogon = controller?.time_logon ? new Date(controller.time_logon).toLocaleTimeString('he-IL', {hour: '2-digit', minute: '2-digit'}) : 'N/A';
+
+            // text_atis for non-ATIS positions (info notes)
+            const textAtisLines = controller?.text_atis || [];
+            let notesHtml = '';
+            if (posType !== 'atis' && textAtisLines.length > 0) {
+                notesHtml = `<ul class="tooltip-notes">` +
+                    textAtisLines.map(line => `<li>${line}</li>`).join('') +
+                    `</ul>`;
+            }
 
             tooltipContent = `
                 <div class="tooltip-header">${info.name}</div>
@@ -1607,6 +1615,7 @@ function displayVatsimControllers(controllers) {
                     <span class="online-time">⏱️ ${timeLogon}</span>
                 </div>
                 <div class="tooltip-online">🟢 מחובר</div>
+                ${notesHtml}
                 ${atisInfo}
             `;
         } else {
@@ -1636,35 +1645,46 @@ function displayVatsimControllers(controllers) {
         document.body.appendChild(globalTooltip);
     }
 
+    let hideTooltipTimer = null;
+
+    const showGlobalTooltip = (innerTooltip) => {
+        clearTimeout(hideTooltipTimer);
+        const atcDisplay = document.querySelector('.atc-display');
+        const sidebar = document.querySelector('.sidebar');
+        const mapEl = document.querySelector('.map-container');
+        if (!atcDisplay || !sidebar || !mapEl) return;
+
+        const atcRect = atcDisplay.getBoundingClientRect();
+        const sidebarRect = sidebar.getBoundingClientRect();
+        const mapRect = mapEl.getBoundingClientRect();
+
+        const tooltipTop = atcRect.bottom + 8;
+        const tooltipRight = window.innerWidth - sidebarRect.left + 10;
+        const tooltipWidth = Math.max(300, sidebarRect.left - mapRect.right - 20);
+
+        globalTooltip.innerHTML = innerTooltip.innerHTML;
+        globalTooltip.style.top = tooltipTop + 'px';
+        globalTooltip.style.right = tooltipRight + 'px';
+        globalTooltip.style.width = tooltipWidth + 'px';
+        globalTooltip.style.display = 'block';
+    };
+
+    const scheduleHide = () => {
+        hideTooltipTimer = setTimeout(() => {
+            globalTooltip.style.display = 'none';
+        }, 100);
+    };
+
     container.querySelectorAll('.atc-controller').forEach(ctrl => {
         const innerTooltip = ctrl.querySelector('.atc-tooltip');
         if (!innerTooltip) return;
-
-        ctrl.addEventListener('mouseenter', () => {
-            const atcDisplay = document.querySelector('.atc-display');
-            const sidebar = document.querySelector('.sidebar');
-            const mapEl = document.querySelector('.map-container');
-            if (!atcDisplay || !sidebar || !mapEl) return;
-
-            const atcRect = atcDisplay.getBoundingClientRect();
-            const sidebarRect = sidebar.getBoundingClientRect();
-            const mapRect = mapEl.getBoundingClientRect();
-
-            const tooltipTop = atcRect.bottom + 8;
-            const tooltipRight = window.innerWidth - sidebarRect.left + 10;
-            const tooltipWidth = Math.max(300, sidebarRect.left - mapRect.right - 20);
-
-            globalTooltip.innerHTML = innerTooltip.innerHTML;
-            globalTooltip.style.top = tooltipTop + 'px';
-            globalTooltip.style.right = tooltipRight + 'px';
-            globalTooltip.style.width = tooltipWidth + 'px';
-            globalTooltip.style.display = 'block';
-        });
-
-        ctrl.addEventListener('mouseleave', () => {
-            globalTooltip.style.display = 'none';
-        });
+        ctrl.addEventListener('mouseenter', () => showGlobalTooltip(innerTooltip));
+        ctrl.addEventListener('mouseleave', scheduleHide);
     });
+
+    // Keep tooltip open while hovering over it
+    globalTooltip.addEventListener('mouseenter', () => clearTimeout(hideTooltipTimer));
+    globalTooltip.addEventListener('mouseleave', scheduleHide);
 
     const onlineCount = controllers.length;
     console.log(`✈️ VATSIM LLBG: ${onlineCount} controllers online`);

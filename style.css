@@ -403,8 +403,8 @@ body {
     box-shadow: 0 12px 48px rgba(0, 0, 0, 0.95);
     text-align: left;
     line-height: 1.6;
-    pointer-events: none;
-    max-height: 400px;
+    pointer-events: auto;
+    max-height: 70vh;
     overflow-y: auto;
 }
 
@@ -470,6 +470,20 @@ body {
 
 .tooltip-offline {
     color: #999;
+}
+
+.tooltip-notes {
+    margin: 8px 0 0 0;
+    padding: 8px 8px 8px 20px;
+    border-top: 1px solid rgba(0, 210, 255, 0.25);
+    list-style: disc;
+    font-size: 0.82rem;
+    color: #c8d6e5;
+    line-height: 1.5;
+}
+
+.tooltip-notes li {
+    margin-bottom: 4px;
 }
 
 .tooltip-atis-section {
