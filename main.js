@@ -1469,12 +1469,15 @@ async function initVatsimATC() {
     setInterval(fetchAndDisplayVatsimATC, 30 * 1000);
 }
 
+// VATSIM Bookings API requires authentication - not currently accessible
+// If you have a VATSIM API key, contact VATSIM Tech Department for v2 access
+// to https://atc-bookings.vatsim.net/api-doc
+/*
 async function fetchVatsimBookings() {
     try {
         const res = await fetch('/api/bookings');
         if (!res.ok) return {};
         const data = await res.json();
-        // Build map: callsign -> booking {start, end}
         const map = {};
         const items = Array.isArray(data) ? data : (data.data || []);
         items.forEach(b => {
@@ -1485,13 +1488,13 @@ async function fetchVatsimBookings() {
         return {};
     }
 }
+*/
 
 async function fetchAndDisplayVatsimATC() {
     try {
-        const [vatsimRes, bookings] = await Promise.all([
-            fetch('https://data.vatsim.net/v3/vatsim-data.json'),
-            fetchVatsimBookings()
-        ]);
+        const vatsimRes = await fetch('https://data.vatsim.net/v3/vatsim-data.json');
+        // TODO: Bookings API requires VATSIM authentication - disabled for now
+        const bookings = {};
         if (!vatsimRes.ok) throw new Error('VATSIM API error');
 
         const data = await vatsimRes.json();
@@ -1605,16 +1608,8 @@ function displayVatsimControllers(controllers, bookings = {}) {
             atisInfo += '</div>';
         }
 
-        // Check if any LLBG callsign for this position has a booking
-        const bookingEntry = Object.values(bookings).find(b =>
-            b.callsign?.startsWith('LLBG_') && getPositionType(b.callsign) === posType ||
-            b.callsign?.startsWith('LLLL_') && getPositionType(b.callsign) === posType
-        );
+        // Bookings require VATSIM API key - disabled for now
         let bookingHtml = '';
-        if (bookingEntry) {
-            const fmt = iso => iso ? new Date(iso).toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' }) + 'Z' : '?';
-            bookingHtml = `<div class="tooltip-booking">📅 Booked ${fmt(bookingEntry.start)} – ${fmt(bookingEntry.end)}</div>`;
-        }
 
         // Build detailed tooltip HTML
         let tooltipContent = '';

@@ -25,7 +25,24 @@
       "Bash(node -e \":*)",
       "Bash(curl -sI \"https://raw.githubusercontent.com/maor561/FLIGHT-TARGET/master/data.js\")",
       "Bash(curl -sI \"https://flight-target.vercel.app/data.js\")",
-      "Bash(curl -s \"https://flight-target.vercel.app/data.js\")"
+      "Bash(curl -s \"https://flight-target.vercel.app/data.js\")",
+      "Bash(curl -s \"https://data.vatsim.net/v3/vatsim-data.json\")",
+      "Bash(jq \".controllers[] | select\\(.callsign | startswith\\(\"\"LLBG\"\"\\)\\)\")",
+      "Bash(curl -s https://data.vatsim.net/v3/vatsim-data.json)",
+      "Bash(python3:*)",
+      "mcp__Claude_Preview__preview_start",
+      "mcp__Control_Chrome__get_current_tab",
+      "Bash(curl -s \"https://api.vatsim.net/v2/servers\")",
+      "Bash(curl -s \"https://vatsim.net/api/v2/pilots/search?query=LLBG\")",
+      "Bash(curl -s \"https://vatsim-api.herokuapp.com/atis/LLBG\")",
+      "Bash(curl -s \"https://vatsim.net/api/v1/atis\")",
+      "WebFetch(domain:data.vatsim.net)",
+      "Bash(curl -s \"https://api.vatsim.net/v3/atis\")",
+      "WebFetch(domain:vatsim.dev)",
+      "Read(//c/tmp/**)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:atc-bookings.vatsim.net)",
+      "WebFetch(domain:forum.vatsim.net)"
     ]
   }
 }
