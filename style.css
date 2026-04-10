@@ -382,17 +382,10 @@ body {
     z-index: 100000;
 }
 
-/* Shift tooltip to the left to avoid sidebar */
-.atc-controller:nth-child(1) .atc-tooltip,
-.atc-controller:nth-child(2) .atc-tooltip {
-    left: 10% !important;
-    transform: translateX(-50%);
-}
-
 /* Tooltip styling */
 .atc-controller .atc-tooltip {
     display: none;
-    position: absolute;
+    position: fixed;
     background: rgba(20, 20, 25, 0.98);
     color: #fff;
     padding: 16px 20px;
@@ -405,13 +398,14 @@ body {
     text-align: left;
     line-height: 1.6;
     pointer-events: none;
-    width: 520px;
     max-height: 400px;
     overflow-y: auto;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-top: 16px;
+    /* Positioned below top-bar (2rem padding + 0.5rem + 100px atc-display + gap) */
+    /* spanning from just left of sidebar to where map starts */
+    top: 152px;
+    right: 272px;
+    /* width spans the flight-list area: (100vw - sidebar - padding*2) * 1/2.2 - gap */
+    width: calc(46vw - 100px);
 }
 
 .atc-controller:hover .atc-tooltip {
