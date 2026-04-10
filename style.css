@@ -1464,6 +1464,30 @@ html[dir="rtl"] .news-ticker {
     transform: rotate(180deg);
 }
 
+/* ==== WHATSAPP FEEDBACK BUTTON ==== */
+.whatsapp-feedback-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: rgba(37, 211, 102, 0.1);
+    border: 1px solid rgba(37, 211, 102, 0.3);
+    border-radius: 12px;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 1.5rem;
+    padding: 0;
+    text-decoration: none;
+}
+
+.whatsapp-feedback-btn:hover {
+    background: rgba(37, 211, 102, 0.2);
+    border-color: #25d366;
+    transform: scale(1.05);
+}
+
 /* ==== SIDEBAR FOOTER ==== */
 .sidebar-footer {
     margin-top: auto;
@@ -1472,6 +1496,11 @@ html[dir="rtl"] .news-ticker {
     display: flex;
     flex-direction: column;
     gap: 1rem;
+}
+
+.sidebar-buttons {
+    display: flex;
+    gap: 0.5rem;
 }
 
 .data-source-info {
