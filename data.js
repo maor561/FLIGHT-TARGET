@@ -4,9 +4,9 @@
 // ============================================================
 
 const lastUpdated = {
-    timestamp: "2026-04-09T10:00:00.000Z",
+    timestamp: "2026-04-12T10:00:00.000Z",
     source: "Latest Git Commit",
-    version: "1.1.2"
+    version: "1.1.3"
 };
 
 const destinations = {
@@ -80,7 +80,9 @@ const destinations = {
     "LFPB": { name: "Paris Beauvais", coords: [49.4544, 2.1127], facts: ["שדה תעופה בפריז, צרפת", "מרחק 80 ק״מ מצפון לפריז", "שדה תעופה משני בפריז לטיסות תקבולי", "שדה תעופה בינלאומי עם חיבורים לאירופה", "דוקטור סימולטור - תחנה בטיול סביב העולם"] },
     "EGBB": { name: "Birmingham", coords: [52.4539, -1.7480], facts: ["שדה תעופה בברמינגהם, אנגליה", "רביעי בגודלו בבריטניה לאחר Heathrow, Gatwick ו-Stansted", "חיבורים לאירופה ובעולם", "מטה רברי Ryanair בנתב עיר", "דוקטור סימולטור - תחנה בטיול סביב העולם"] },
     "LYBE": { name: "Belgrade", coords: [44.8184, 20.3091], facts: ["בירת סרביה עם 1.7 מיליון תושבים", "ביתם הזמני של מכבי תל אביב לכדורסל עונת 2025/26", "נמל תעופה ניקולה טסלה – על שם הממציא הסרבי-אמריקאי", "ממוקמת בצומת נהרות סאבה ודנובה", "מרכז תרבות ואמנות בלקני חשוב"] },
-    "UTTT": { name: "Tashkent", coords: [41.2579, 69.2834], facts: ["בירת אוזבקיסטן – 'עיר הלחם' – העיר הגדולה ביותר במרכז אסיה", "עיר עתיקת יומין על דרך המשי ההיסטורית בין אירופה לסין", "מרכז ספורט בינלאומי – מארחת תחרויות FIG, ג'ודו ואירועי ענק", "אוזבקיסטן מפורסמת בכישרונות ספורטיביים – ג'ודו, התעמלות, כוח", "3 מיליון תושבים עם אדריכלות מדהימה הרומנטית סובייטית ואסייתית"] }
+    "UTTT": { name: "Tashkent", coords: [41.2579, 69.2834], facts: ["בירת אוזבקיסטן – 'עיר הלחם' – העיר הגדולה ביותר במרכז אסיה", "עיר עתיקת יומין על דרך המשי ההיסטורית בין אירופה לסין", "מרכז ספורט בינלאומי – מארחת תחרויות FIG, ג'ודו ואירועי ענק", "אוזבקיסטן מפורסמת בכישרונות ספורטיביים – ג'ודו, התעמלות, כוח", "3 מיליון תושבים עם אדריכלות מדהימה הרומנטית סובייטית ואסייתית"] },
+    "LTFM": { name: "Istanbul", coords: [41.2753, 28.7519], facts: ["העיר הגדולה ביותר בטורקיה עם 15 מיליון תושבים", "ממוקמת בשני יבשות – אירופה ואסיה", "ביתה של פנרבאחה בקו – אחת מגדולות הכדורסל האירופי", "שדה התעופה Istanbul Airport – הגדול ביותר בטורקיה ומהגדולים בעולם", "מרכז תרבות, היסטוריה ועסקים בין-יבשתי"] },
+    "LBWN": { name: "Varna", coords: [43.2321, 27.8258], facts: ["'פנינת הים השחור' – עיר נמל ותיירות בבולגריה", "מארחת תחרויות FIG World Challenge Cup בהתעמלות", "מוזיאון ארכיאולוגי מרשים עם תכשיטי זהב מ-4,600 שנה לפנה\"ס", "עיר בינלאומית עם נמל ים ושדה תעופה ויזואי ים תיכוני", "מרכז תרבות וספורט בולגרי מוביל על חוף הים השחור"] }
 };
 
 const flights = [
@@ -586,6 +588,60 @@ const flights = [
         source: "FIG.org / Wikipedia - 2026 FIG Rhythmic Gymnastics World Cup series",
         imageUrl: "https://images.pexels.com/photos/19962652/pexels-photo-19962652.jpeg?auto=compress&cs=tinysrgb&h=350",
         createdAt: "2026-04-09T10:00:00Z",
+        isNew: true
+    },
+    {
+        id: "B009",
+        category: "basketball",
+        title: "הפועל ת\"א - יורוליג | רבע גמר ח.1 פנרבאחה – איסטנבול",
+        mission: "Hapoel IBI Tel Aviv EuroLeague Quarterfinal Game 1 vs Fenerbahce Beko – Istanbul, Turkey",
+        background: "הפועל IBI תל אביב, שסיימה את העונה הסדירה ביורוליג 2025/26 במקום ה-5 עם רשומה של 22-14, יוצאת לאיסטנבול, טורקיה, למשחק הפתיחה ברבע גמר הפלייאוף נגד פנרבאחה בקו (מקום 4). המשחק יתקיים ב-Ülker Sports Arena באיסטנבול ב-28 באפריל 2026. זהו משחק הפתיחה בסדרת best-of-5. פנרבאחה, מהקבוצות החזקות בתולדות היורוליג, תנסה לנצל את יתרון הבית. ניצחון להפועל חוץ יהיה הישג ענק בדרכה לפיינל פור אתונה.",
+        route: "LLBG -> LTFM",
+        dest_icao: "LTFM",
+        date: "2026-04-28",
+        time: "08:00",
+        airline: "אל על",
+        aircraft: "Boeing 737-800",
+        icon: "🏀",
+        source: "EuroLeague Basketball / euroleaguebasketball.net / Basketnews.com",
+        imageUrl: "https://images.pexels.com/photos/14351888/pexels-photo-14351888.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-04-12T10:00:00Z",
+        isNew: true
+    },
+    {
+        id: "S011",
+        category: "sports-other",
+        title: "נבחרת ישראל בהתעמלות | גביע עולם ורנה – בולגריה",
+        mission: "Israeli Artistic Gymnastics Team - FIG World Challenge Cup Varna, Bulgaria",
+        background: "ארתיום דולגופיאט, אלוף אולימפי בהתעמלות אמנותית (טוקיו 2020) ובעל שיאי עולם בתרגיל רצפה, יוצא לגביע העולם FIG World Challenge Cup בוורנה, בולגריה, שיתקיים בין 7-10 במאי 2026. ורנה, עיר נמל על הים השחור, מארחת תחרות FIG חשובה כחלק מסדרת World Challenge Cup לשנת 2026. דולגופיאט, שזכה בזהב בתחרויות קוטבוס (פברואר 2026) ואושייק (אפריל 2026), מגיע בכושר אולימפי לתחרות הבולגרית ויאבק על נקודות דירוג לקראת אליפות העולם.",
+        route: "LLBG -> LBWN",
+        dest_icao: "LBWN",
+        date: "2026-05-06",
+        time: "10:00",
+        airline: "אל על",
+        aircraft: "Boeing 737-800",
+        icon: "🤸",
+        source: "FIG.org / Wikipedia - 2026 FIG Artistic Gymnastics World Cup series",
+        imageUrl: "https://images.pexels.com/photos/6571953/pexels-photo-6571953.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-04-12T10:00:00Z",
+        isNew: true
+    },
+    {
+        id: "B010",
+        category: "basketball",
+        title: "הפועל ת\"א - יורוליג | פיינל פור אתונה 2026",
+        mission: "Hapoel IBI Tel Aviv EuroLeague Final Four – Athens, Greece",
+        background: "הפועל IBI תל אביב, שסיימה ה-5 בעונה הסדירה של יורוליג 2025/26, צפויה להגיע לפיינל פור יורוליג 2026 באתונה, יוון, שיתקיים ב-22-24 במאי 2026 ב-Telekom Center Athens (קיבולת 18,000 מקומות). זו תהיה פעם ראשונה שקבוצה ישראלית תשתתף בפיינל פור – האירוע הגדול ביותר בכדורסל האירופי. חצי הגמר יתקיים ב-22 במאי וגמר האליפות ב-24 במאי. אתונה, בירת יוון ועריסת האולימפיאדה המודרנית, תארח היסטוריה ישראלית בכדורסל.",
+        route: "LLBG -> LGAV",
+        dest_icao: "LGAV",
+        date: "2026-05-21",
+        time: "10:00",
+        airline: "אל על",
+        aircraft: "Boeing 737-800",
+        icon: "🏀",
+        source: "EuroLeague Basketball / euroleaguebasketball.net - Athens Final Four 2026",
+        imageUrl: "https://images.pexels.com/photos/33481606/pexels-photo-33481606.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-04-12T10:00:00Z",
         isNew: true
     }
 ];
