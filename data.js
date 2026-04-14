@@ -643,5 +643,41 @@ const flights = [
         imageUrl: "https://images.pexels.com/photos/33481606/pexels-photo-33481606.jpeg?auto=compress&cs=tinysrgb&h=350",
         createdAt: "2026-04-12T10:00:00Z",
         isNew: true
+    },
+    {
+        id: "F004",
+        category: "football",
+        title: "מכבי חיפה נוער | חצי גמר ליגת הנוער UEFA – שוויץ",
+        mission: "Maccabi Haifa Youth Team - UEFA Youth League Semi-Final & Final – Nyon & Lausanne, Switzerland",
+        background: "מכבי חיפה קבוצת הנוער הכתה גלים בליגת הנוער של UEFA 2025/26 לאחר שהפכה לקבוצה הישראלית הראשונה בהיסטוריה שמגיעה לחצי הגמר. בדרכה ניצחה מכבי את ברצלונה בשלב ה-32 האחרון (2-2, 3-1 בפנדלים) – תוצאה שנחשבת לאחד ההישגים הגדולים של כדורגל ישראלי. חצי הגמר יתקיים ב-17 באפריל 2026 במרכז הספורט קולוורה בנון, שוויץ – מרחק קצר ממטה UEFA. אם יעברו, ישחקו בגמר ב-20 באפריל 2026 באצטדיון דה לה טואילייר בלוזאן. זהו ציון דרך היסטורי לכדורגל הנוער הישראלי, הנלחם על תהילה על אדמת שוויץ.",
+        route: "LLBG -> LSGG",
+        dest_icao: "LSGG",
+        date: "2026-04-16",
+        time: "09:00",
+        airline: "אל על",
+        aircraft: "Boeing 737-800",
+        icon: "⚽",
+        source: "UEFA.com/uefayouthleague / Wikipedia - 2025-26 UEFA Youth League / Maccabi Haifa FC",
+        imageUrl: "https://images.pexels.com/photos/13890305/pexels-photo-13890305.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-04-14T10:00:00Z",
+        isNew: true
+    },
+    {
+        id: "C002",
+        category: "culture",
+        title: "נועם בטן | יורוביזיון 2026 – וינה, אוסטריה",
+        mission: "Eurovision Song Contest 2026 - Israeli Delegation (Noam Bettan, 'Michelle') – Vienna, Austria",
+        background: "נועם בטן, בן 27, ילידי ישראל להורים יוצאי צרפת, מייצג את ישראל בתחרות אירוויזיון 2026 בוינה, אוסטריה. השיר שלו 'מישל' (Michelle) מבוצע בשילוב עברית, צרפתית ואנגלית ומגשר בין תרבויות. אירוויזיון 2026 יתקיים ב-Wiener Stadthalle בוינה בין 12 ל-16 במאי 2026. ישראל תשתתף בחצי הגמר הראשון ב-12 במאי. המשלחת הישראלית – נועם, הלהקה, צוות ההפקה ונציגי KAN – תיסע לוינה בתחילת מאי לחזרות ולהכנות. זהו רגע מיוחד לתרבות הישראלית כשמנגינות עברית וצרפתית ישמעו על הבמה האירופית הגדולה ביותר.",
+        route: "LLBG -> LOWW",
+        dest_icao: "LOWW",
+        date: "2026-05-05",
+        time: "12:00",
+        airline: "אל על",
+        aircraft: "Boeing 737-800",
+        icon: "🎵",
+        source: "Eurovision.tv / Wikipedia - Israel in Eurovision 2026 / Times of Israel",
+        imageUrl: "https://images.pexels.com/photos/15098178/pexels-photo-15098178.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-04-14T10:00:00Z",
+        isNew: true
     }
 ];
