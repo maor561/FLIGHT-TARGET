@@ -734,5 +734,23 @@ const flights = [
         imageUrl: "https://images.pexels.com/photos/34688570/pexels-photo-34688570.jpeg?auto=compress&cs=tinysrgb&h=350",
         createdAt: "2026-04-16T06:00:00Z",
         isNew: true
+    },
+    {
+        id: "V001",
+        category: "vatil",
+        title: "יום העצמאות ה-78 | אירוע VATIL – נתב\"ג",
+        mission: "VATIL Israel 78th Independence Day Event - Full ATC at Ben Gurion + Fly Over Israel",
+        background: "ארגון VATIL (Virtual Aviation Technology Israel) עורך אירוע סימולציה מיוחד לכבוד יום העצמאות ה-78 של ישראל, ב-22 באפריל 2026, בין השעות 09:00-13:00 UTC. האירוע כולל ATC מלא בנמל תעופה בן-גוריון (LLBG) ו'טיסת על' וירטואלית מעל ישראל. המשתתפים מוזמנים לצייר את השמיים בכחול ולבן בסימולטורי הטיסה שלהם. האירוע מאורגן בשיתוף Israeli Virtual Airlines ומהווה חגיגה דיגיטלית ייחודית לקהילת סימולטורי הטיסה הישראלית ברחבי העולם. מועד האירוע: רביעי, 22 באפריל 2026, 09:00z-13:00z.",
+        route: "LLBG -> LLBG",
+        dest_icao: "LLBG",
+        date: "2026-04-22",
+        time: "09:00",
+        airline: "VATIL / Israeli Virtual Airlines",
+        aircraft: "Various (Flight Simulator)",
+        icon: "🛩️",
+        source: "VATIL official event - Israel 78th Independence Day / vatil.org",
+        imageUrl: "https://images.pexels.com/photos/1620390/pexels-photo-1620390.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-04-16T06:00:00Z",
+        isNew: true
     }
 ];
