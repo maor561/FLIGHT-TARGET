@@ -698,5 +698,41 @@ const flights = [
         imageUrl: "https://images.pexels.com/photos/6765034/pexels-photo-6765034.jpeg?auto=compress&cs=tinysrgb&h=350",
         createdAt: "2026-04-15T10:00:00Z",
         isNew: true
+    },
+    {
+        id: "S013",
+        category: "sports-other",
+        title: "נבחרת ג'ודו ישראל | אליפות אירופה – טביליסי",
+        mission: "Israeli Judo Team - European Senior Judo Championships, Tbilisi, Georgia",
+        background: "נבחרת ישראל בג'ודו יוצאת לאליפות אירופה ביחידים שתתקיים בטביליסי, גאורגיה, בין 16-19 באפריל 2026. ישראל שולחת נבחרת חזקה בראשות טימנה נלסון-לוי (אלופת אירופה 2022 במשקל 57- ק\"ג), רז הרשקו (מדליסטית כסף אולימפית בפריז 2024 במשקל 78+ ק\"ג), גפן פרימו (52- ק\"ג) ויצחק אשפיז (60 ק\"ג). ישראל מגיעה בכושר מרשים לאחר שבגרנד סלאם האחרון בטביליסי (מרץ 2026) הובילה את לוח המדליות עם 3 זהב, כסף ואבל. אליפות אירופה 2026 מושכת 400 ספורטאים מ-46 מדינות ומהווה תחנה קריטית בדרך לנקודות דירוג לאולימפיאדת לוס אנג'לס 2028.",
+        route: "LLBG -> UGTB",
+        dest_icao: "UGTB",
+        date: "2026-04-16",
+        time: "06:00",
+        airline: "אל על",
+        aircraft: "Boeing 737-800",
+        icon: "🥋",
+        source: "EJU.net/event/european-judo-championships-seniors-tbilisi-2026 / IJF.org/competition/3163",
+        imageUrl: "https://images.pexels.com/photos/6765021/pexels-photo-6765021.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-04-16T06:00:00Z",
+        isNew: true
+    },
+    {
+        id: "B011",
+        category: "basketball",
+        title: "הפועל IBI ת\"א - יורוליג | מונקו (סיבוב 38)",
+        mission: "Hapoel IBI Tel Aviv EuroLeague R38 Away Game vs AS Monaco – Nice, France",
+        background: "הפועל IBI תל אביב, שכבר הבטיחה מקום בפלייאוף יורוליג 2025/26 (23 ניצחונות בעונה הסדירה), יוצאת למשחק סיבוב 38 ואחרון מול אס מונקו. המשחק יתקיים ב-17 באפריל 2026, 19:30 שעון מקומי, ב-Stade Louis II שבנסיכות מונקו. הפועל נחשבת לאחת ההפתעות הגדולות של יורוליג 2025/26, עם מקום מובטח בפלייאוף וסיכויים ממשיים להגיע לפיינל פור באתונה (מאי 2026). מונקו, מוביל הליגה, משחקת על חיזוק מיקומה לקראת הפלייאוף. הנסיכות מונקו, אחת המדינות הקטנות בעולם, ביתה של קבוצת כדורסל אחת הגדולות באירופה. הטיסה מתבצעת לנמל תעופה ניס קוט ד'אזור (LFMN) הסמוך למונקו.",
+        route: "LLBG -> LFMN",
+        dest_icao: "LFMN",
+        date: "2026-04-17",
+        time: "08:00",
+        airline: "אל על",
+        aircraft: "Boeing 737-800",
+        icon: "🏀",
+        source: "EuroLeague Basketball / euroleaguebasketball.net / HelloMonaco.com - AS Monaco vs Hapoel IBI Tel Aviv",
+        imageUrl: "https://images.pexels.com/photos/34688570/pexels-photo-34688570.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-04-16T06:00:00Z",
+        isNew: true
     }
 ];
