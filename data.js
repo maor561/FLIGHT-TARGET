@@ -752,5 +752,23 @@ const flights = [
         imageUrl: "https://images.pexels.com/photos/1620390/pexels-photo-1620390.jpeg?auto=compress&cs=tinysrgb&h=350",
         createdAt: "2026-04-16T06:00:00Z",
         isNew: true
+    },
+    {
+        id: "B012",
+        category: "basketball",
+        title: "הפועל IBI ת\"א - יורוליג | רבע גמר ריאל מדריד – מדריד",
+        mission: "Hapoel IBI Tel Aviv EuroLeague Quarterfinal vs Real Madrid – Madrid, Spain (Games 1-2)",
+        background: "הפועל IBI תל אביב יוצאת למדריד, ספרד, לפתיחת רבע גמר הפלייאוף ביורוליג 2025/26 נגד ריאל מדריד. הסדרה מהווה best-of-5, ושני המשחקים הראשונים יתקיימו ב-Movistar Arena במדריד (28 ו-30 באפריל 2026). ריאל מדריד, בעלת יתרון הבית, היא אחת הקבוצות המנוסות ביותר בתולדות יורוליג עם 10 אליפויות אירופה. הפועל, שזו עונת הבכורה שלה ביורוליג לאחר שעלתה עם אליפות יורוקאפ, עשתה היסטוריה בסיימה במקום ה-5 בעונה הסדירה. זוהי הפגישה הראשונה אי פעם בין שתי הקבוצות בפלייאוף יורוליג – ייצוג מרשים לכדורסל הישראלי על הבמה האירופית הגדולה ביותר.",
+        route: "LLBG -> LEMD",
+        dest_icao: "LEMD",
+        date: "2026-04-28",
+        time: "08:00",
+        airline: "אל על",
+        aircraft: "Boeing 737-800",
+        icon: "🏀",
+        source: "realmadrid.com/en-US/news/basket - Real Madrid-Hapoel Tel Aviv in the EuroLeague playoff / EuroLeague Basketball / Basketnews.com",
+        imageUrl: "https://images.pexels.com/photos/29180063/pexels-photo-29180063.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-04-18T10:00:00Z",
+        isNew: true
     }
 ];
