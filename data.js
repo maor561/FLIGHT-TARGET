@@ -4,9 +4,9 @@
 // ============================================================
 
 const lastUpdated = {
-    timestamp: "2026-04-12T10:00:00.000Z",
+    timestamp: "2026-04-19T00:00:00.000Z",
     source: "Latest Git Commit",
-    version: "1.1.3"
+    version: "1.1.4"
 };
 
 const destinations = {
@@ -55,6 +55,7 @@ const destinations = {
 
     // South America
     "SBGR": { name: "São Paulo", coords: [-23.4356, -46.4731], facts: ["העיר הגדולה ביותר בדרום אמריקה – 22 מיליון במטרופולין", "המרכז הכלכלי הגדול ביותר ביבשת אמריקה הלטינית", "קהילה יהודית מהגדולות בדרום אמריקה (130,000)", "מרכז פשיון – São Paulo Fashion Week", "Avenida Paulista – רחוב העסקים והפיננסים המרכזי"] },
+    "SAEZ": { name: "Buenos Aires", coords: [-34.8222, -58.5358], facts: ["העיר הגדולה ביותר בארגנטינה עם 15 מיליון תושבים במטרופולין", "ביתה של הקהילה היהודית הגדולה ביותר בדרום אמריקה (180,000 נפש)", "ארגנטינה ידועה בטנגו, כדורגל ובשרים – גן עדן גסטרונומי", "נמל התעופה Ministro Pistarini (Ezeiza) – 35 ק\"מ מדרום-מערב לעיר", "הסכמי האייזק (Isaac Accords) נחתמו בין ישראל לארגנטינה ב-2026"] },
 
     // Israel
     "LLBG": { name: "Tel Aviv / נתב\"ג", coords: [32.0055, 34.8854], facts: ["מרכז הסטארטאפ של ישראל – 'אומת הסטארטאפ'", "קרויה 'העיר ללא הפסקה' – חיי לילה ותרבות שוקקים", "עיר הבינלאומית הרשמית של ישראל", "מרכז 4X לשיחות, ועידות ודיפלומטיה יהודית-עולמית", "נמל תעופה Ben Gurion – שער ישראל לעולם"]},
@@ -769,6 +770,42 @@ const flights = [
         source: "realmadrid.com/en-US/news/basket - Real Madrid-Hapoel Tel Aviv in the EuroLeague playoff / EuroLeague Basketball / Basketnews.com",
         imageUrl: "https://images.pexels.com/photos/29180063/pexels-photo-29180063.jpeg?auto=compress&cs=tinysrgb&h=350",
         createdAt: "2026-04-18T10:00:00Z",
+        isNew: true
+    },
+    {
+        id: "D005",
+        category: "business",
+        title: "ישראל Dream Team | Mind the Tech NY 2026",
+        mission: "Israeli Dream Team Tech Delegation - Mind the Tech Conference New York 2026",
+        background: "12 סטארטאפים ישראליים נבחרים ייצגו את ישראל בכנס Mind the Tech Week New York 2026, שיתקיים בין 11-13 במאי 2026 בניו יורק. הכנס הוא יוזמה משותפת של כלכליסט, Showcase IL ו-LeumiTech, שנועדה לחבר יזמים ישראלים מבטיחים עם משקיעים, תאגידים ושותפים אסטרטגיים בשוק האמריקאי. 12 החברות שנבחרו מ-150+ מועמדים פועלות בתחומי בינה מלאכותית, פינטק, בריאות, ביטחון וחקלאות-טכנולוגיה. הן השתתפו בבוטקמפ הכנה ב-Google for Startups ויציגו על הבמה הראשית בכנס. האירוע נדחה ממרץ למאי 2026 בשל המלחמה עם איראן.",
+        route: "LLBG -> KJFK",
+        dest_icao: "KJFK",
+        date: "2026-05-10",
+        time: "10:00",
+        airline: "אל על",
+        aircraft: "Boeing 787-9 Dreamliner",
+        icon: "💼",
+        source: "Calcalist CTech / Mind the Tech NY 2026 Official (calcalistech.com)",
+        imageUrl: "https://images.pexels.com/photos/6956451/pexels-photo-6956451.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-04-19T00:00:00Z",
+        isNew: true
+    },
+    {
+        id: "D006",
+        category: "diplomatic",
+        title: "אל על | טיסה ישירה ראשונה לבואנוס איירס",
+        mission: "El Al Inaugural Direct Flight Tel Aviv – Buenos Aires (Isaac Accords Route)",
+        background: "אל על תפעיל לראשונה בהיסטוריה טיסה ישירה בין תל אביב לבואנוס איירס, ארגנטינה. ההכרזה על הקו החדש בוצעה ב-19 באפריל 2026 במסגרת ביקורו ההיסטורי של נשיא ארגנטינה חביאר מילאי בישראל לכבוד יום העצמאות ה-78, בו הדליק לראשונה מנהיג זר לפיד בטקס הרשמי. במסגרת הביקור נחתמו הסכמי האייזק (Isaac Accords) – ברית אסטרטגית בין ישראל לארגנטינה בתחומי דיפלומטיה, כלכלה ותרבות. מילאי אישר שטיסות אל על לבואנוס איירס יחלו בדצמבר 2026, ויחברו ישירות את שתי הקהילות היהודיות הגדולות בעולם. הטיסה הישירה (ללא עצירות) נמשכת כ-14 שעות.",
+        route: "LLBG -> SAEZ",
+        dest_icao: "SAEZ",
+        date: "2026-12-15",
+        time: "23:00",
+        airline: "אל על",
+        aircraft: "Boeing 787-9 Dreamliner",
+        icon: "🕊️",
+        source: "Times of Israel / JNS.org / JPost (Milei visit April 19, 2026 – El Al Buenos Aires route December 2026)",
+        imageUrl: "https://images.pexels.com/photos/32080954/pexels-photo-32080954.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-04-19T00:00:00Z",
         isNew: true
     }
 ];
