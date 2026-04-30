@@ -4,9 +4,9 @@
 // ============================================================
 
 const lastUpdated = {
-    timestamp: "2026-04-25T00:00:00.000Z",
+    timestamp: "2026-04-30T00:00:00.000Z",
     source: "Latest Git Commit",
-    version: "1.1.5"
+    version: "1.1.6"
 };
 
 const destinations = {
@@ -861,6 +861,42 @@ const flights = [
         source: "FIG gymnastics.sport – Portimão World Challenge Cup May 15-17, 2026 / Times of Israel / JNS – Israel wins gold at Baku World Cup April 2026",
         imageUrl: "https://images.pexels.com/photos/15281444/pexels-photo-15281444.jpeg?auto=compress&cs=tinysrgb&h=350",
         createdAt: "2026-04-25T00:00:00Z",
+        isNew: true
+    },
+    {
+        id: "B013",
+        category: "basketball",
+        title: "הפועל IBI ת\"א - יורוליג | רבע גמר ג.3 ריאל מדריד – סופיה",
+        mission: "Hapoel IBI Tel Aviv EuroLeague Quarterfinal Game 3 vs Real Madrid – Sofia, Bulgaria (Home Game)",
+        background: "הפועל IBI תל אביב מארחת בסופיה (ביתה הזמני) את ריאל מדריד במשחק השלישי בסדרת רבע הגמר של יורוליג 2025/26. המשחק יתקיים ב-5 במאי 2026, 19:00 שעון אירופה המרכזי, ב-Arena 8888, סופיה, בולגריה. ריאל מדריד ניצחה את הפועל במשחק הראשון (86-82) ב-29 באפריל. זוהי הזדמנות עצומה להפועל להשוות את הסדרה ולחזור למסלול לפיינל פור. ניצחון בבית יהיה קריטי להמשך הדרך של הקבוצה הישראלית. הפועל הגיעה לרבע גמר ראשון בתולדות הקבוצה ביורוליג לאחר עונה מרשימה שבה סיימה ה-5 בעונה הסדירה.",
+        route: "LLBG -> LBSF",
+        dest_icao: "LBSF",
+        date: "2026-05-05",
+        time: "09:00",
+        airline: "אל על",
+        aircraft: "Boeing 737-800",
+        icon: "🏀",
+        source: "EuroLeague Basketball / euroleaguebasketball.net - Real Madrid vs Hapoel QF bracket 2026 / Basketnews.com",
+        imageUrl: "https://images.pexels.com/photos/31788935/pexels-photo-31788935.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-04-30T00:00:00Z",
+        isNew: true
+    },
+    {
+        id: "B014",
+        category: "basketball",
+        title: "הפועל IBI ת\"א - יורוליג | רבע גמר ג.4 ריאל מדריד – סופיה",
+        mission: "Hapoel IBI Tel Aviv EuroLeague Quarterfinal Game 4 vs Real Madrid – Sofia, Bulgaria (Home Game, if needed)",
+        background: "הפועל IBI תל אביב מארחת את ריאל מדריד בסופיה (ביתה הזמני), במשחק הרביעי בסדרת רבע הגמר של יורוליג 2025/26. המשחק יתקיים ב-7 במאי 2026, 21:00 שעון אירופה המרכזי, ב-Arena 8888, סופיה, בולגריה – אם יידרש. משחק ג.4 יתקיים רק במידה ושתי הקבוצות יגיעו אליו לאחר 1-1 בסדרה. הפועל הייתה ה-5 בעונה הסדירה של יורוליג 2025/26, וזו שנת הבכורה שלה בתחרות. ריאל מדריד, בעלת 10 אליפויות יורוליג, נחשבת לאחת הקבוצות הגדולות בתולדות הכדורסל האירופי. ניצחון הפועל בג.4 יכול להעביר את היתרון לידיה לקראת משחק ג.5 אפשרי במדריד.",
+        route: "LLBG -> LBSF",
+        dest_icao: "LBSF",
+        date: "2026-05-07",
+        time: "09:00",
+        airline: "אל על",
+        aircraft: "Boeing 737-800",
+        icon: "🏀",
+        source: "EuroLeague Basketball / euroleaguebasketball.net - Real Madrid vs Hapoel QF full schedule 2026 / Basketnews.com",
+        imageUrl: "https://images.pexels.com/photos/1752757/pexels-photo-1752757.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-04-30T00:00:00Z",
         isNew: true
     }
 ];
