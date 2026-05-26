@@ -4,9 +4,9 @@
 // ============================================================
 
 const lastUpdated = {
-    timestamp: "2026-05-20T00:00:00.000Z",
+    timestamp: "2026-05-26T00:00:00.000Z",
     source: "Latest Git Commit",
-    version: "1.1.7"
+    version: "1.1.8"
 };
 
 const destinations = {
@@ -972,6 +972,24 @@ const flights = [
         source: "IJF.org/competition/3149 – Ulaanbaatar Grand Slam June 19-21, 2026 / EJU.net/event/ulaanbaator-grand-slam-2026 / insidethegames.biz – Mongolia Grand Slam 4-year deal",
         imageUrl: "https://images.pexels.com/photos/9247650/pexels-photo-9247650.jpeg?auto=compress&cs=tinysrgb&h=350",
         createdAt: "2026-05-20T00:00:00Z",
+        isNew: true
+    },
+    {
+        id: "D009",
+        category: "diplomatic",
+        title: "משלחת שלום ישראל-לבנון | סבב 4 – וושינגטון",
+        mission: "Israeli Diplomatic Delegation – 4th Round Israel-Lebanon Peace Talks, Washington DC",
+        background: "משלחת דיפלומטית ישראלית עולה לוושינגטון לסבב הרביעי של שיחות השלום בין ישראל ללבנון, שיתקיים ב-2-3 ביוני 2026. הסבב הרביעי מגיע בעקבות פגישת ה'מסלול הביטחוני' בפנטגון ב-29 במאי 2026, שבמהלכה דנו הצוותים הצבאיים של שתי המדינות בפרטי הנסיגה והפירוז. נציגי ישראל: יחיאל לייטר (שגריר ישראל בארה\"ב) ויוסי דרזנין (סגן היועץ לביטחון לאומי). נושאי הדיון בסבב הרביעי: נסיגת צה\"ל מדרום לבנון, השתלטות הצבא הלבנוני על שטחים פנויים, פירוז נשק חיזבאלה, תמיכה פיננסית בצבא הלבנוני, ומנגנון אכיפת הפסקת האש. זהו סבב השיחות הרביעי מאז פתיחת המגעים ההיסטוריים הישירים בין ישראל ללבנון ב-14 באפריל 2026 – לראשונה מאז כישלון הסכם 17 במאי 1983. הסבב השלישי התקיים ב-14-15 במאי 2026 בוושינגטון. הצוות האמריקאי מאובזר בשגריר מייק האקאבי, ציר לבנון מישל עיסא, ויועץ מייקל נידהאם.",
+        route: "LLBG -> KIAD",
+        dest_icao: "KIAD",
+        date: "2026-06-01",
+        time: "08:00",
+        airline: "אל על",
+        aircraft: "Boeing 787-9 Dreamliner",
+        icon: "🕊️",
+        source: "NPR (May 14, 2026) / Wikipedia – 2026 Israel–Lebanon peace talks / Washington Times – 4th round June 2-3, 2026",
+        imageUrl: "https://images.pexels.com/photos/6949994/pexels-photo-6949994.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-05-26T00:00:00Z",
         isNew: true
     }
 ];
