@@ -4,7 +4,7 @@
 // ============================================================
 
 const lastUpdated = {
-    timestamp: "2026-06-07T00:00:00.000Z",
+    timestamp: "2026-06-10T00:00:00.000Z",
     source: "Latest Git Commit",
     version: "1.2.0"
 };
@@ -16,6 +16,7 @@ const destinations = {
     "KIAD": { name: "Washington DC", coords: [38.9531, -77.4565], facts: ["בירת ארצות הברית ומרכז השלטון הפדרלי", "הבניין הלבן, הקפיטול והפנטגון בה ממוקמים", "מרכז דיפלומטי ענק עם 170+ שגרירויות", "מוזיאוני הסמיתסוניאן הם הגדולים בעולם", "ממוצע ביקורי משלחות דיפלומטיות: 200+ בשנה"] },
     "KORD": { name: "Chicago", coords: [41.9742, -87.9073], facts: ["העיר השלישית בגודלה בארה״ב", "מרכז עסקי ופיננסי ענק של אמריקה התיכונה", "ידועה בארכיטקטורה מדהימה וגורדי שחקים", "מרכז אמנות ומוזיקה (ג'אז, בלוז)", "נמל O'Hare הוא בין 10 העמוסים בעולם"] },
     "KMIA": { name: "Miami", coords: [25.7959, -80.2870], facts: ["שער התיירות לאמריקה הלטינית", "מרכז פיננסי ובינלאומי דרום-מזרחי", "ידועה בחוף South Beach ובחיי לילה", "כ-70% מהאוכלוסייה דוברי ספרדית", "מרכז שיפינג ולוגיסטיקה בין-אמריקאי"] },
+    "KSFO": { name: "San Francisco", coords: [37.6213, -122.3790], facts: ["מרכז עמק הסיליקון – ביתם של Apple, Google, Meta, Salesforce ועוד ענקיות טכנולוגיה", "קהילה יהודית גדולה ופעילה במפרץ סן פרנסיסקו – מעל 200,000 נפש", "גשר שער הזהב (Golden Gate Bridge) – אחד הסמלים האדריכליים המפורסמים בעולם", "אל על חזרה לטוס ישיר מת\"א לסן פרנסיסקו באוקטובר 2026 לאחר הפסקה של 6 שנים", "30% מהשקעות הסיכון האמריקאיות מופנות לאזור ה-Bay Area – בירת ה-VC העולמית"] },
     "CYYZ": { name: "Toronto", coords: [43.6777, -79.6248], facts: ["העיר הגדולה ביותר בקנדה עם 6.2 מיליון תושבים", "גיוון תרבותי: 200+ לאומויות, 140 שפות", "מרכז פיננסי מוביל בצפון אמריקה", "ביתה של קהילה יהודית ענפה ופעילה", "מגדל CN Tower הוא אחד הגבוהים בעולם"] },
 
     // Western Europe
@@ -1065,6 +1066,42 @@ const flights = [
         source: "IJF.org/competition/3204 – Qingdao Grand Prix June 26-28, 2026 / Totallympics.com/events/34779 / Times of Israel – Israeli judoka wins gold in China",
         imageUrl: "https://images.pexels.com/photos/6253296/pexels-photo-6253296.jpeg?auto=compress&cs=tinysrgb&h=350",
         createdAt: "2026-06-07T00:00:00Z",
+        isNew: true
+    },
+    {
+        id: "S021",
+        category: "sports-other",
+        title: "נבחרת ג'ודו ישראל | אירופן אופן פראג 2026",
+        mission: "Israeli Judo Team – EJU Prague European Open, Czech Republic",
+        background: "נבחרת ישראל בג'ודו יוצאת לאירופן אופן פראג 2026 (Prague European Open), שיתקיים בין 27-28 ביוני 2026 בפראג, צ'כיה. ישראל נמנית על המשלחות החזקות בתחרות, לצד צרפת, אוקראינה והולנד. האירוע הוא חלק מסדרת ה-EJU World Tour ומהווה תחרות דירוג חשובה לסדרת ה-LA28 לקראת אולימפיאדת לוס אנג'לס 2028. ספורטאי ישראל מגיעים לפראג בתנופה לאחר עונה מרשימה הכוללת מדליות בגרנד סלאם דושנבה, גרנד סלאם אסטנה, אירופן אופן בנידורם וטאלין, ומחנה ה-EJU OTC בפורץ'. פראג, 'העיר המאה הזהבות', מארחת את האירופן אופן מדי שנה ונחשבת לאחת התחרויות הוותיקות והחשובות ביותר בסדרת ה-EJU. התחרות מאגדת 300+ ספורטאים מ-30+ מדינות.",
+        route: "LLBG -> LKPR",
+        dest_icao: "LKPR",
+        date: "2026-06-25",
+        time: "08:00",
+        airline: "אל על",
+        aircraft: "Boeing 737-800",
+        icon: "🥋",
+        source: "EJU.net/event/prague-european-open-2026/390736 / IJF.org/competition/3162 – Prague European Open June 27-28, 2026 / JudoInside.com",
+        imageUrl: "https://images.pexels.com/photos/6765035/pexels-photo-6765035.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-06-10T00:00:00Z",
+        isNew: true
+    },
+    {
+        id: "D011",
+        category: "business",
+        title: "אל על | טיסה ישירה ראשונה תל אביב – סן פרנסיסקו",
+        mission: "El Al Inaugural Direct Flight Tel Aviv – San Francisco (Silicon Valley Route, LY49)",
+        background: "אל על מחזירה לראשונה מאז 2020 טיסה ישירה בין תל אביב לסן פרנסיסקו, קליפורניה, החל מ-25 באוקטובר 2026. הקו יחבר את ישראל לעמק הסיליקון – מרכז הטכנולוגיה העולמי – בשיתוף דלתא ייר ליינס לחיבורים פנים-אמריקאיים. הטיסה (LY49 – מחווה ל-San Francisco 49ers) תופעל שלוש פעמים בשבוע (ראשון, שלישי, חמישי) באמצעות בואינג 787-9 דרימליינר ותימשך כ-15 שעות. כרטיסי קלאסיק אקונומי מתחילים מ-$1,199. הקו החדש מחזק את הקשר בין ישראל לקהילה היהודית הגדולה במפרץ סן פרנסיסקו, ולתעשיית ההיי-טק הישראלית המסתמכת על שותפות עם ענקיות הטכנולוגיה ב-Bay Area. זוהי חלק ממהלך הרחבה גלובלי של אל על ל-9 יעדים חדשים בשנת 2026.",
+        route: "LLBG -> KSFO",
+        dest_icao: "KSFO",
+        date: "2026-10-25",
+        time: "23:00",
+        airline: "אל על",
+        aircraft: "Boeing 787-9 Dreamliner",
+        icon: "💼",
+        source: "Times of Israel – El Al to resume San Francisco flights late October 2026 / AirlineGeeks.com / AviationA2Z – El Al launches Tel Aviv–San Francisco route",
+        imageUrl: "https://images.pexels.com/photos/9700586/pexels-photo-9700586.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-06-10T00:00:00Z",
         isNew: true
     }
 ];
