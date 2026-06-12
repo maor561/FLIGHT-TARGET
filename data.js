@@ -4,7 +4,7 @@
 // ============================================================
 
 const lastUpdated = {
-    timestamp: "2026-06-12T00:00:00.000Z",
+    timestamp: "2026-06-12T12:00:00.000Z",
     source: "Latest Git Commit",
     version: "1.2.0"
 };
@@ -1120,6 +1120,24 @@ const flights = [
         source: "rgworldcup-milano.it – Israel listed in official participating nations / Wikipedia – 2026 FIG Rhythmic Gymnastics World Cup series (Milan July 10-12)",
         imageUrl: "https://images.pexels.com/photos/29844636/pexels-photo-29844636.jpeg?auto=compress&cs=tinysrgb&h=350",
         createdAt: "2026-06-12T00:00:00Z",
+        isNew: true
+    },
+    {
+        id: "V002",
+        category: "vatil",
+        title: "Tel Aviv Overload | אירוע VATIL – נתב\"ג",
+        mission: "VATIL Tel-Aviv Overload Event – Full ATC at LLBG Ben Gurion",
+        background: "ארגון VATIL (VATSIM Israel) מארגן את אירוע ה-Tel Aviv Overload ביום שישי, 19 ביוני 2026, בין השעות 11:00–15:00 UTC. האירוע מציע כיסוי ATC מלא בנמל תעופה בן-גוריון (LLBG) – גישות, מגדל ועמדת קרקע מאוישות לאורך כל האירוע. הטייסים הווירטואליים מוזמנים לטוס לתל אביב ממרחק, תוך חוויית שמיים עמוסים ובקרת תעופה אמיתית. האירוע הוא חלק מסדרת 'Overload' שמארגנת VATIL מספר פעמים בשנה – טיסות בחופש יחסי של יעד וסוג מטוס, תוך חוויה מציאותית של הפעלה בנמל תעופה ישראלי שוקק. נתב\"ג (LLBG) הוא נמל התעופה הבינלאומי הראשי של ישראל ומרכז פעילות VATIL.",
+        route: "XXXX -> LLBG",
+        dest_icao: "LLBG",
+        date: "2026-06-19",
+        time: "11:00",
+        airline: "VATIL / Various Virtual Airlines",
+        aircraft: "Various (Flight Simulator)",
+        icon: "🛩️",
+        source: "my.vatsim.net/events/tel-aviv-overload-9 – VATIL official VATSIM event June 19 2026",
+        imageUrl: "https://images.pexels.com/photos/27741996/pexels-photo-27741996.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-06-12T12:00:00Z",
         isNew: true
     }
 ];
