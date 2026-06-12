@@ -4,7 +4,7 @@
 // ============================================================
 
 const lastUpdated = {
-    timestamp: "2026-06-10T00:00:00.000Z",
+    timestamp: "2026-06-12T00:00:00.000Z",
     source: "Latest Git Commit",
     version: "1.2.0"
 };
@@ -1102,6 +1102,24 @@ const flights = [
         source: "Times of Israel – El Al to resume San Francisco flights late October 2026 / AirlineGeeks.com / AviationA2Z – El Al launches Tel Aviv–San Francisco route",
         imageUrl: "https://images.pexels.com/photos/9700586/pexels-photo-9700586.jpeg?auto=compress&cs=tinysrgb&h=350",
         createdAt: "2026-06-10T00:00:00Z",
+        isNew: true
+    },
+    {
+        id: "S022",
+        category: "sports-other",
+        title: "נבחרת התעמלות קצבית ישראל | גביע עולם מילאנו 2026",
+        mission: "Israeli Rhythmic Gymnastics Team – FIG World Cup Milan, Italy",
+        background: "נבחרת ישראל בהתעמלות קצבית יוצאת לגביע העולם FIG 2026 במילאנו, איטליה, שיתקיים בין 10-12 ביולי 2026 ב-Unipol Forum. זהו גביע העולם האחרון בסדרת ה-FIG לשנת 2026 ואחד היוקרתיים ביותר – ישראל נמנית על המשלחות הרשמיות הרשומות בתחרות. הנבחרת הישראלית מגיעה למילאנו בתנופה מרשימה: זכתה בזהב בגביע העולם בבאקו (אפריל 2026) בתחרות 5 כדורים, ובזהב נוסף בגביע העולם בפורטימאו (מאי 2026) בתחרות 3 חישוקים ו-2 מטות. ישראל מדורגת שישית בטבלת המדליות של סדרת גביע העולם 2026 עם 3 זהב, 2 כסף ו-3 ארד. גם המתחרה היחידנית דריה אטמנוב (אלופת אירופה 2022), שחזרה לאימונים לאחר פרישה קצרה, צפויה להשתתף. מילאנו, בירת האופנה והעיצוב האיטלקי, מארחת את גביע העולם ב-Unipol Forum – אחד מאולמות הספורט הגדולים בצפון איטליה עם קיבולת 12,700 מקומות.",
+        route: "LLBG -> LIMC",
+        dest_icao: "LIMC",
+        date: "2026-07-08",
+        time: "10:00",
+        airline: "אל על",
+        aircraft: "Boeing 737-800",
+        icon: "🤸",
+        source: "rgworldcup-milano.it – Israel listed in official participating nations / Wikipedia – 2026 FIG Rhythmic Gymnastics World Cup series (Milan July 10-12)",
+        imageUrl: "https://images.pexels.com/photos/29844636/pexels-photo-29844636.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-06-12T00:00:00Z",
         isNew: true
     }
 ];
