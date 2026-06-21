@@ -4,7 +4,7 @@
 // ============================================================
 
 const lastUpdated = {
-    timestamp: "2026-06-12T12:00:00.000Z",
+    timestamp: "2026-06-21T00:00:00.000Z",
     source: "Latest Git Commit",
     version: "1.2.0"
 };
@@ -1138,6 +1138,24 @@ const flights = [
         source: "my.vatsim.net/events/tel-aviv-overload-9 – VATIL official VATSIM event June 19 2026",
         imageUrl: "https://images.pexels.com/photos/27741996/pexels-photo-27741996.jpeg?auto=compress&cs=tinysrgb&h=350",
         createdAt: "2026-06-12T12:00:00Z",
+        isNew: true
+    },
+    {
+        id: "J002",
+        category: "jewish",
+        title: "משחקי המכביה ה-22 | ספורטאים יהודיים מגיעים לישראל",
+        mission: "22nd Maccabiah Games 2026 – International Jewish Athletic Delegations Arrive in Israel",
+        background: "משחקי המכביה ה-22 יתקיימו בישראל בין 30 ביוני ל-13 ביולי 2026, תחת הנושא 'יותר מתמיד' (More Than Ever). האירוע, שנדחה משנת 2025 בשל מלחמת ישראל-איראן, מביא כ-5,000 ספורטאים מ-40+ מדינות לתחרות ב-45 ענפי ספורט. טקס הפתיחה יתקיים ב-1 ביולי 2026 באצטדיון טדי בירושלים, עם מצעד משלחות מרהיב. המשלחת האמריקאית – הגדולה ביותר – ממריאה מניו יורק ב-28 ביוני לנתב\"ג על גבי מטוסי אל על, בדרכה לאחד האירועים הגדולים ביותר של הספורט היהודי העולמי. המכביה הוא ה'אולימפיאדה היהודית' – אחד מגדולי אירועי הספורט הבינלאומיים בישראל, המאחד ספורטאים יהודים מכל קצוות תבל.",
+        route: "KJFK -> LLBG",
+        dest_icao: "LLBG",
+        date: "2026-06-28",
+        time: "14:00",
+        airline: "אל על",
+        aircraft: "Boeing 787-9 Dreamliner",
+        icon: "✡️",
+        source: "Times of Israel – Maccabiah Games set to go ahead July 2026 / JNS.org – Maccabiah welcomes thousands / maccabiah.com",
+        imageUrl: "https://images.pexels.com/photos/1046538/pexels-photo-1046538.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-06-21T00:00:00Z",
         isNew: true
     }
 ];
