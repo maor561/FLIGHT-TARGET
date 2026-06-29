@@ -4,7 +4,7 @@
 // ============================================================
 
 const lastUpdated = {
-    timestamp: "2026-06-21T00:00:00.000Z",
+    timestamp: "2026-06-29T00:00:00.000Z",
     source: "Latest Git Commit",
     version: "1.2.0"
 };
@@ -1156,6 +1156,60 @@ const flights = [
         source: "Times of Israel – Maccabiah Games set to go ahead July 2026 / JNS.org – Maccabiah welcomes thousands / maccabiah.com",
         imageUrl: "https://images.pexels.com/photos/1046538/pexels-photo-1046538.jpeg?auto=compress&cs=tinysrgb&h=350",
         createdAt: "2026-06-21T00:00:00Z",
+        isNew: true
+    },
+    {
+        id: "J003",
+        category: "jewish",
+        title: "משלחת מכבי בריטניה | מכביה ה-22 – ישראל",
+        mission: "British Maccabi Delegation - 22nd Maccabiah Games 2026, Israel",
+        background: "משלחת מכבי בריטניה ממריאה מלונדון היית'רו לנתב\"ג לקראת פתיחת משחקי המכביה ה-22 ב-1 ביולי 2026 באצטדיון טדי בירושלים. מכבי בריטניה הוא אחד מארגוני המכבי הוותיקים והפעילים בעולם, המשלח מדי מכביה מאות ספורטאים יהודים מבריטניה לתחרות ב-45 ענפי ספורט. המשלחת הבריטית כוללת ספורטאים מלונדון, מנצ'סטר, גלזגו, ליברפול ועוד. אל על מפעילה טיסות יומיות בין תל אביב ללונדון היית'רו. משחקי המכביה ה-22 מתקיימים בין 30 ביוני ל-13 ביולי 2026, תחת הנושא 'יותר מתמיד', עם כ-10,000 ספורטאים מ-85+ מדינות.",
+        route: "EGLL -> LLBG",
+        dest_icao: "LLBG",
+        date: "2026-06-29",
+        time: "10:00",
+        airline: "אל על",
+        aircraft: "Boeing 737-800",
+        icon: "✡️",
+        source: "British Maccabi (britishmaccabi.org) / maccabiah.com – 22nd Maccabiah Games 2026",
+        imageUrl: "https://images.pexels.com/photos/16787680/pexels-photo-16787680.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-06-29T00:00:00Z",
+        isNew: true
+    },
+    {
+        id: "J004",
+        category: "jewish",
+        title: "משלחת מכבי דרום אפריקה | מכביה ה-22 – ישראל",
+        mission: "South African Maccabi Delegation - 22nd Maccabiah Games 2026, Israel",
+        background: "משלחת מכבי דרום אפריקה (MSSA) ממריאה מיוהנסבורג (שדה תעופה OR Tambo הבינלאומי) לנתב\"ג לקראת פתיחת משחקי המכביה ה-22. ארגון מכבי דרום אפריקה הוא אחד מהגדולים ביבשת אפריקה ומשלח לכל מכביה משלחת הכוללת מאות ספורטאים ומתנדבים. הקהילה היהודית בדרום אפריקה, אחת המאורגנות בעולם עם כ-70,000 נפש, נמנית על המשלחות הוותיקות ביותר במכביה. אל על מפעילה קו ישיר בין תל אביב ליוהנסבורג. טקס הפתיחה יתקיים ב-1 ביולי 2026 באצטדיון טדי בירושלים, עם מצעד משלחות מרהיב.",
+        route: "FAOR -> LLBG",
+        dest_icao: "LLBG",
+        date: "2026-06-30",
+        time: "06:00",
+        airline: "אל על",
+        aircraft: "Boeing 787-9 Dreamliner",
+        icon: "✡️",
+        source: "SA Maccabi (maccabisa.co.za) / maccabiah.com – 22nd Maccabiah Games 2026 / Times of Israel",
+        imageUrl: "https://images.pexels.com/photos/8592967/pexels-photo-8592967.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-06-29T00:00:00Z",
+        isNew: true
+    },
+    {
+        id: "J005",
+        category: "jewish",
+        title: "משלחת מכבי קנדה | מכביה ה-22 – ישראל",
+        mission: "Canadian Maccabi Delegation - 22nd Maccabiah Games 2026, Israel",
+        background: "מכבי קנדה – ארגון הספורט היהודי הלאומי של קנדה – ממריאה מטורונטו (שדה תעופה פירסון הבינלאומי) לנתב\"ג לקראת פתיחת משחקי המכביה ה-22. קנדה נמנית על המשלחות הגדולות ביותר במכביה, שכן הקהילה היהודית בקנדה מונה כ-400,000 נפש עם ריכוז גדול בטורונטו ובמונטריאול. אל על מפעילה קו ישיר בין תל אביב לטורונטו עם מטוסי 787-9 דרימליינר. משחקי המכביה ה-22 יתקיימו בין 30 ביוני ל-13 ביולי 2026 בישראל, תחת הנושא 'יותר מתמיד', עם כ-10,000 ספורטאים מ-85+ מדינות ב-45 ענפי ספורט.",
+        route: "CYYZ -> LLBG",
+        dest_icao: "LLBG",
+        date: "2026-06-29",
+        time: "12:00",
+        airline: "אל על",
+        aircraft: "Boeing 787-9 Dreamliner",
+        icon: "✡️",
+        source: "Maccabi Canada (maccabicanada.com) / maccabiah.com – 22nd Maccabiah Games 2026 / JNS.org",
+        imageUrl: "https://images.pexels.com/photos/2310500/pexels-photo-2310500.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-06-29T00:00:00Z",
         isNew: true
     }
 ];
