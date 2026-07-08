@@ -4,7 +4,7 @@
 // ============================================================
 
 const lastUpdated = {
-    timestamp: "2026-06-29T00:00:00.000Z",
+    timestamp: "2026-07-08T00:00:00.000Z",
     source: "Latest Git Commit",
     version: "1.2.0"
 };
@@ -1210,6 +1210,42 @@ const flights = [
         source: "Maccabi Canada (maccabicanada.com) / maccabiah.com – 22nd Maccabiah Games 2026 / JNS.org",
         imageUrl: "https://images.pexels.com/photos/2310500/pexels-photo-2310500.jpeg?auto=compress&cs=tinysrgb&h=350",
         createdAt: "2026-06-29T00:00:00Z",
+        isNew: true
+    },
+    {
+        id: "J006",
+        category: "jewish",
+        title: "משלחת מכבי קנדה חוזרת הביתה | סיום מכביה 22",
+        mission: "Canadian Maccabi Delegation Returns Home - Conclusion of 22nd Maccabiah Games",
+        background: "משלחת מכבי קנדה (מאסטרס ובוגרים), שהמריאה מטורונטו ב-29 ביוני 2026 לקראת משחקי המכביה ה-22, שבה הביתה לטורונטו ב-14 ביולי 2026 - יום לאחר טקס הסיום שנערך בתל אביב ב-13 ביולי. משחקי המכביה ה-22, שהתקיימו בין 30 ביוני ל-13 ביולי תחת הנושא 'יותר מתמיד' (More Than Ever), כללו כ-10,000 ספורטאים מ-85+ מדינות ב-45 ענפי ספורט. מכבי קנדה, ארגון הספורט היהודי הלאומי של קנדה, נמנית על המשלחות הגדולות ביותר בתחרות בזכות הקהילה היהודית הקנדית המונה כ-400,000 נפש. אל על מפעילה את הקו הישיר בין תל אביב לטורונטו במטוסי 787-9 דרימליינר.",
+        route: "LLBG -> CYYZ",
+        dest_icao: "CYYZ",
+        date: "2026-07-14",
+        time: "14:00",
+        airline: "אל על",
+        aircraft: "Boeing 787-9 Dreamliner",
+        icon: "✡️",
+        source: "Maccabi Canada (maccabicanada.com/maccabiah-games/participation-costs-and-policies) / maccabiah.com – 22nd Maccabiah Games 2026",
+        imageUrl: "https://images.pexels.com/photos/28097210/pexels-photo-28097210.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-07-08T00:00:00Z",
+        isNew: true
+    },
+    {
+        id: "J007",
+        category: "jewish",
+        title: "משלחת מכבי ארה\"ב (מאסטרס) חוזרת הביתה | סיום מכביה 22",
+        mission: "Maccabi USA Masters Delegation Returns Home - Conclusion of 22nd Maccabiah Games",
+        background: "משלחת מכבי ארה\"ב בקטגוריית המאסטרס, ששהתה בישראל מ-30 ביוני ועד 14 ביולי 2026 לרגל משחקי המכביה ה-22, טסה חזרה לניו יורק ב-14 ביולי - בתום הטורניר שהסתיים בטקס סיום בתל אביב ב-13 ביולי. משלחת ארה\"ב, השנייה בגודלה אחרי ישראל עם כ-900 ספורטאים, כללה נציגים מכל רחבי ארצות הברית שהתחרו ב-45 ענפי ספורט. בעוד חלק מהספורטאים הצעירים (קטגוריות הנוער והבוגרים) נשארים בישראל לתוכנית ההעשרה 'Israel Connect' עד 20 ביולי, משלחת המאסטרס משלימה את שהותה ושבה הביתה ישירות בתום המשחקים. אל על מפעילה טיסות סדירות בין תל אביב לניו יורק (JFK).",
+        route: "LLBG -> KJFK",
+        dest_icao: "KJFK",
+        date: "2026-07-14",
+        time: "16:00",
+        airline: "אל על",
+        aircraft: "Boeing 787-9 Dreamliner",
+        icon: "✡️",
+        source: "Maccabi USA (maccabiusa.com/m25-masters-information) / maccabiah.com – 22nd Maccabiah Games 2026",
+        imageUrl: "https://images.pexels.com/photos/16734498/pexels-photo-16734498.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-07-08T00:00:00Z",
         isNew: true
     }
 ];
