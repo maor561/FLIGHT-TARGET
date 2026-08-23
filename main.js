@@ -273,9 +273,9 @@ async function createFlightFromRSSItem(item) {
         }
 
         if (!depCoords || !arrCoords) {
-            console.warn(`❌ ${flightId}: Could not find coordinates from RSS or destinations object`);
-            console.warn(`   Departure: ${depCoords ? 'OK' : 'MISSING'}, Arrival: ${arrCoords ? 'OK' : 'MISSING'}`);
-            return null;  // Don't create flight if coordinates still missing
+            // Missing coordinates should never hide a real flight from the list/KPI —
+            // just skip drawing its route on the map (addFlightToMap handles null coords safely)
+            console.warn(`⚠️ ${flightId}: Missing coordinates (Departure: ${depCoords ? 'OK' : 'MISSING'}, Arrival: ${arrCoords ? 'OK' : 'MISSING'}) - flight will show without a map route`);
         }
 
         const flight = {
