@@ -146,7 +146,6 @@ async function fetchDoctorSimulatorFlights() {
         if (newFlightsCount > 0) {
             console.log(`✨ Added ${newFlightsCount} new Doctor Simulator flights`);
             renderFlights();
-            updateStats();
             updateNewsTicker();
             updateCategoryCounts();
             renderCalendar();  // CRITICAL: Re-render calendar to show new flight dates
@@ -320,7 +319,6 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchDoctorSimulatorFlights(); // Fetch RSS flights
     setupRSSAutoRefresh(); // Setup auto-refresh every 3 minutes
     setupEventListeners();
-    updateStats();
     initMobileMenu();
     updateAnalytics();
     updateNewsTicker();
@@ -655,7 +653,7 @@ function renderFlights(category = 'all', searchTerm = '') {
         addFlightToMap(flight, i);
     });
 
-    updateStats(filtered.length);
+    updateStats(filtered);
     updateAnalytics();
     updateCategoryCounts();
 }
@@ -1187,10 +1185,11 @@ async function updateNewsTicker() {
 
     // Build ticker items with latest flights
     const items = latestFlights.map(f => {
-        const destName = destinations[f.dest_icao]?.name || f.dest_icao;
+        // Doctor Simulator titles already include the full route (dep → arr), so don't append the destination again
+        const destName = f.category === 'doctor-simulator' ? '' : ` → ${destinations[f.dest_icao]?.name || f.dest_icao}`;
         return `<div class="ticker-item">
             <span style="color:var(--accent-primary);font-weight:bold;">✨ נוסף</span>
-            <span>${getFlightIconHTML(f)} <strong style="color:var(--accent-primary)">${f.title}</strong> → ${destName} | ${formatDate(f.date)} ${f.time}</span>
+            <span>${getFlightIconHTML(f)} <strong style="color:var(--accent-primary)">${f.title}</strong>${destName} | ${formatDate(f.date)} ${f.time}</span>
         </div>`;
     }).join('<div class="ticker-item"><span style="color:var(--text-muted);padding:0 12px;">◆</span></div>');
 
@@ -1207,9 +1206,9 @@ async function updateNewsTicker() {
 // ============================================================
 // STATS & ANALYTICS
 // ============================================================
-function updateStats(count) {
-    document.getElementById('total-flights').textContent = count !== undefined ? count : flights.length;
-    document.getElementById('upcoming-events').textContent = new Set(flights.map(f => f.category)).size;
+function updateStats(visibleFlights) {
+    document.getElementById('total-flights').textContent = visibleFlights.length;
+    document.getElementById('upcoming-events').textContent = new Set(visibleFlights.map(f => f.category)).size;
 }
 
 // ============================================================
