@@ -4,7 +4,7 @@
 // ============================================================
 
 const lastUpdated = {
-    timestamp: "2026-08-01T09:00:00.000Z",
+    timestamp: "2026-08-23T09:00:00.000Z",
     source: "Latest Git Commit",
     version: "1.2.0"
 };
@@ -1302,6 +1302,60 @@ const flights = [
         source: "Mako.co.il / ONE.co.il / UEFA.com",
         imageUrl: "https://images.pexels.com/photos/23921797/pexels-photo-23921797.jpeg?auto=compress&cs=tinysrgb&h=350",
         createdAt: "2026-08-01T09:00:00Z",
+        isNew: true
+    },
+    {
+        id: "F009",
+        category: "football",
+        title: "הפועל באר שבע כדורגל | פלייאוף ליגת האלופות – גומלין בבאקו",
+        mission: "Hapoel Be'er Sheva Football Club - UEFA Champions League Playoff Round Second Leg vs Sabah FK, Baku, Azerbaijan",
+        background: "הפועל באר שבע, שהדהימה את אירופה בהעפלה לפלייאוף מוקדמות ליגת האלופות אחרי הדחת הכוכב האדום מבלגרד, ניצחה 1:2 את סבאח האזרית במשחק הראשון שנערך ב-19 באוגוסט 2026 באצטדיון ג'ולשטי בבוקרשט, רומניה (משחק ה'בית' הנטרלי של הקבוצה). משחק הגומלין המכריע ייערך ביום שלישי, 25 באוגוסט 2026, בבאקו, אזרבייג'ן, בשעה 19:45 שעון ישראל, כשמעבר לשלב הבתים של ליגת האלופות בהישג יד. ישראייר הפעילה טיסת שכר מיוחדת לאוהדי הקבוצה שהמריאה מנתב\"ג ב-04:00 בבוקר, כחלק ממכסת כ-2,000 כרטיסים שהוקצתה לאוהדים הישראלים.",
+        route: "LLBG -> UBBB",
+        dest_icao: "UBBB",
+        date: "2026-08-25",
+        time: "04:00",
+        airline: "ישראייר",
+        aircraft: "Airbus A320",
+        icon: "⚽",
+        source: "Israel Hayom (21238702) / Haaretz.co.il (2026-08-19)",
+        imageUrl: "https://images.pexels.com/photos/14445621/pexels-photo-14445621.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-08-23T09:00:00Z",
+        isNew: true
+    },
+    {
+        id: "F010",
+        category: "football",
+        title: "הפועל תל אביב כדורגל | פלייאוף קונפרנס ליג – גומלין מול אטאלנטה, מישקולץ",
+        mission: "Hapoel Tel Aviv Football Club - UEFA Conference League Playoff Round Second Leg vs Atalanta, Miskolc, Hungary",
+        background: "הפועל תל אביב סיימה ב-0:0 את משחק הבית הראשון בפלייאוף הקונפרנס ליג מול אטאלנטה האיטלקית בברגמו ב-20 באוגוסט 2026, ועלתה לשלב הבתים בכל מקרה. משחק הגומלין ייערך ביום חמישי, 27 באוגוסט 2026, באצטדיון DVTK במישקולץ, הונגריה – זירת הבית הקבועה של הקבוצה במפעלים האירופיים. כל 1,500 הכרטיסים שהוקצו לאוהדים נמכרו תוך שעה בלבד, ולפי הערכות כ-3,000 אוהדים ישראלים צפויים להגיע להונגריה למשחק, כשחברות נסיעות מפעילות חבילות טיסה מרוכזות מתל אביב לבודפשט (כשעה ו-40 דקות נסיעה ממישקולץ).",
+        route: "LLBG -> LHBP",
+        dest_icao: "LHBP",
+        date: "2026-08-27",
+        time: "07:00",
+        airline: "אל על",
+        aircraft: "Boeing 737-800",
+        icon: "⚽",
+        source: "Sport1.maariv.co.il (1925934) / ONE.co.il (524387)",
+        imageUrl: "https://images.pexels.com/photos/36592194/pexels-photo-36592194.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-08-23T09:00:00Z",
+        isNew: true
+    },
+    {
+        id: "F011",
+        category: "football",
+        title: "מכבי תל אביב כדורגל | פלייאוף קונפרנס ליג – גומלין מול לוגאנו, בטומי",
+        mission: "Maccabi Tel Aviv Football Club - UEFA Conference League Playoff Round Second Leg vs FC Lugano, Batumi, Georgia",
+        background: "מכבי תל אביב, שנשרה למוקדמות הקונפרנס ליג אחרי הדחה מהליגה האירופית מול צסק\"א סופיה, הפסידה 1:2 במשחק הראשון בפלייאוף מול לוגאנו השווייצרית שנערך ב-20 באוגוסט 2026 בעיר לוגאנו. משחק הגומלין המכריע, שבו על מכבי לנצח כדי להעפיל לשלב הבתים, ייערך ביום חמישי, 27 באוגוסט 2026 בשעה 19:00, באצטדיון בטומי (Adjarabet Arena) בגאורגיה – הבית האירופי הקבוע של הקבוצה. הקבוצה טסה לגאורגיה מטעמי ביטחון, כנהוג במשחקי הבית האירופיים שלה מאז 2023.",
+        route: "LLBG -> UGSB",
+        dest_icao: "UGSB",
+        date: "2026-08-27",
+        time: "08:00",
+        airline: "אל על",
+        aircraft: "Boeing 737-800",
+        icon: "⚽",
+        source: "BE106.net (154477) / Sport5.co.il (557078)",
+        imageUrl: "https://images.pexels.com/photos/26694125/pexels-photo-26694125.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-08-23T09:00:00Z",
         isNew: true
     }
 ];
