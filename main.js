@@ -2,6 +2,11 @@
 // FLIGHT TARGET – Main Dashboard Logic
 // ============================================================
 
+import { inject } from '@vercel/analytics';
+
+// Initialize Vercel Analytics
+inject();
+
 let currentCategory = 'all';
 let currentDateFilter = 'all';
 let currentAirlineFilter = 'all';
