@@ -4,7 +4,7 @@
 // ============================================================
 
 const lastUpdated = {
-    timestamp: "2026-08-23T09:00:00.000Z",
+    timestamp: "2026-09-11T09:00:00.000Z",
     source: "Latest Git Commit",
     version: "1.2.0"
 };
@@ -1500,6 +1500,42 @@ const flights = [
         source: "BE106.net (154477) / Sport5.co.il (557078)",
         imageUrl: "https://images.pexels.com/photos/26694125/pexels-photo-26694125.jpeg?auto=compress&cs=tinysrgb&h=350",
         createdAt: "2026-08-23T09:00:00Z",
+        isNew: true
+    },
+    {
+        id: "D012",
+        category: "business",
+        title: "ישראייר | טיסת הבכורה לניו יורק",
+        mission: "Israir Airlines - Inaugural Direct Flight to New York (JFK)",
+        background: "ישראייר משיקה קו טיסות ישיר בין תל אביב לניו יורק, כשהטיסה הראשונה ממריאה ב-15 בספטמבר 2026 (טיסת החזור הראשונה מניו יורק מתוכננת ל-17 בספטמבר). זוהי חזרתה של ישראייר ליעד לאחר הפסקה של כ-18 שנה (פעלה בקו בין 2004 ל-2008). החברה משתמשת בשני מטוסי רחבי-גוף מדגם איירבוס A330 ותפעיל בשלב הראשון שלוש טיסות שבועיות, שיתרחבו לטיסה יומית עד סוף אוקטובר. הטיסות נוחתות בשדה התעופה הבינלאומי ג'ון פ. קנדי (JFK), ללא עצירות ביניים, במשך טיסה של כ-12-13 שעות. השקת הקו הופכת את ישראייר לחברת התעופה החמישית המפעילה טיסות ישירות בין ישראל לארה\"ב, לצד אל על, ארקיע, יונייטד ודלתא.",
+        route: "LLBG -> KJFK",
+        dest_icao: "KJFK",
+        date: "2026-09-15",
+        time: "13:30",
+        airline: "ישראייר",
+        aircraft: "Airbus A330",
+        icon: "🗽",
+        source: "JNS.org (Israir brings forward launch of New York flights) / Mako.co.il / Ynet",
+        imageUrl: "https://images.pexels.com/photos/33944835/pexels-photo-33944835.png?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-09-11T09:00:00Z",
+        isNew: true
+    },
+    {
+        id: "D013",
+        category: "diplomatic",
+        title: "נתניהו | נאום מהיר בעצרת האו״ם – ניו יורק",
+        mission: "PM Netanyahu - Quick 24-Hour Trip to Address the UN General Assembly, New York",
+        background: "ראש הממשלה בנימין נתניהו יוצא לביקור מהיר בן 24 שעות בניו יורק כדי לשאת נאום בעצרת הכללית של האו\"ם, זאת לאחר שראש עיריית ניו יורק הנבחר זוהרן ממדני קרא לעצרו על רקע המלחמה בעזה. לפי שגריר ישראל באו\"ם דני דנון, נתניהו ינחת בניו יורק בשעות הלילה המאוחרות של ה-23 בספטמבר 2026, יישא את נאומו בפני העצרת אחר הצהריים של ה-24 בספטמבר, ויטוס בחזרה לישראל באותו לילה. הביקור מתקיים בצל חגי תשרי ומערכת בחירות מתקרבת בישראל. זהו ביקור נפרד ומהיר של ראש הממשלה עצמו, בנוסף למשלחת הדיפלומטית הרשמית שכבר יצאה קודם לכן לניו יורק (ר' טיסה D003).",
+        route: "LLBG -> KJFK",
+        dest_icao: "KJFK",
+        date: "2026-09-23",
+        time: "18:00",
+        airline: "אל על",
+        aircraft: "Boeing 787-9 Dreamliner",
+        icon: "🕊️",
+        source: "The Times of Israel (Netanyahu to make quick trip to speak at UN) / AP-Yahoo News / Local10.com (2026-09-08)",
+        imageUrl: "https://images.pexels.com/photos/6950205/pexels-photo-6950205.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-09-11T09:00:00Z",
         isNew: true
     }
 ];
