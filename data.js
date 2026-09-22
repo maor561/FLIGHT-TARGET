@@ -4,7 +4,7 @@
 // ============================================================
 
 const lastUpdated = {
-    timestamp: "2026-09-12T09:00:00.000Z",
+    timestamp: "2026-09-19T09:00:00.000Z",
     source: "Latest Git Commit",
     version: "1.2.0"
 };
@@ -1555,6 +1555,24 @@ const flights = [
         source: "EuroLeagueBasketball.net (official schedule) / Eurohoops.net",
         imageUrl: "https://images.pexels.com/photos/30555529/pexels-photo-30555529.jpeg?auto=compress&cs=tinysrgb&h=350",
         createdAt: "2026-09-12T09:00:00Z",
+        isNew: true
+    },
+    {
+        id: "B016",
+        category: "basketball",
+        title: "הפועל תל אביב כדורסל | פתיחת יורוליג – באיירן מינכן, סופיה",
+        mission: "Hapoel IBI Tel Aviv EuroLeague 2026/27 Season Opener (Home Game) vs Bayern Munich – Sofia, Bulgaria",
+        background: "הפועל תל אביב פותחת את עונת היורוליג 2026/27 במשחק הבית הראשון שלה מול באיירן מינכן הגרמנית. המשחק ייערך ביום חמישי, 24 בספטמבר 2026, בסופיה, בולגריה – הזירה בה הקבוצה מארחת את משחקי הבית שלה במפעלים האירופיים מטעמי ביטחון. מכירת הכרטיסים למשחק נפתחה כבר בשבועות שקדמו לאירוע, וזהו אחד משישה משחקי הפתיחה של ליל הפתיחה הרשמי של היורוליג.",
+        route: "LLBG -> LBSF",
+        dest_icao: "LBSF",
+        date: "2026-09-24",
+        time: "10:00",
+        airline: "אל על",
+        aircraft: "Boeing 737-800",
+        icon: "🏀",
+        source: "BE106.net (Hapoel Tel Aviv opens EuroLeague vs Bayern Munich in Sofia, Sept 24 2026) / Hapoel Tel Aviv Basketball official site (hapoelbc.com)",
+        imageUrl: "https://images.pexels.com/photos/34688570/pexels-photo-34688570.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-09-19T09:00:00Z",
         isNew: true
     }
 ];
