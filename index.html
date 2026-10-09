@@ -31,9 +31,10 @@ button{cursor:pointer}
 .pad{padding-inline:max(20px,calc((100vw - 1180px)/2))}
 
 /* nav */
-.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:14px;background:var(--panel);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:900}
-.logo{font-weight:900;letter-spacing:.05em;font-size:19px;white-space:nowrap}
-.logo span{color:var(--hi)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:6px;background:var(--panel);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:900}
+.logo{display:block;line-height:0}
+.logo img{height:52px;width:auto;display:block}
+:root[data-theme="dark"] .logo img{background:#fff;border-radius:10px;padding:2px 8px}
 .nav-links{display:flex;gap:22px;font-size:14px}
 .nav-links a{color:var(--dim);text-decoration:none}
 .nav-links a:hover{color:var(--ink)}
@@ -93,6 +94,7 @@ select.chip{border-radius:10px;appearance:auto}
 #map{height:230px;border-radius:10px;z-index:1;background:var(--bg)}
 .tmp{background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:99px;padding:1px 7px;font-size:11px;font-weight:500;white-space:nowrap;box-shadow:none}
 .tmp::before{display:none}
+.leaflet-control-attribution{font-size:9px;background:transparent!important;color:var(--dim)}
 .cal-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-weight:700}
 .cal-h button{border:1px solid var(--line);background:transparent;border-radius:8px;padding:2px 10px;font-size:11px}
 .cal-g{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center;font-size:13px;font-variant-numeric:tabular-nums}
@@ -216,7 +218,7 @@ section{scroll-margin-top:64px}
 <body>
 
 <nav class="nav pad">
-  <div class="logo">FLIGHT <span>TARGET</span></div>
+  <a class="logo" href="#" aria-label="FLIGHT TARGET"><img src="logo.png?v=51" alt="FLIGHT TARGET – LLBG"></a>
   <div class="nav-links"><a href="#weather">מזג אוויר</a><a href="#atc">פיקוח</a><a href="#flights">טיסות</a></div>
   <div class="icons">
     <button class="pill" id="theme" title="החלף מצב תצוגה">◐ <span>כהה / בהיר</span></button>
@@ -370,14 +372,15 @@ function fillAirlines(){
 let map, tiles, layer;
 const temps = {};
 function initMap(){
-  map = L.map('map', {zoomControl:false, attributionControl:false}).setView([35, 20], 2);
+  map = L.map('map', {zoomControl:false}).setView([35, 20], 2);
+  map.attributionControl.setPrefix(false);
   layer = L.layerGroup().addTo(map);
   setTiles();
 }
 function setTiles(){
   if (tiles) map.removeLayer(tiles);
   const dark = document.documentElement.dataset.theme === 'dark';
-  tiles = L.tileLayer(`https://{s}.basemaps.cartocdn.com/${dark ? 'dark_all' : 'light_all'}/{z}/{x}/{y}{r}.png`, {maxZoom:19}).addTo(map);
+  tiles = L.tileLayer(`https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_${dark ? 'Dark' : 'Light'}_Gray_Base/MapServer/tile/{z}/{y}/{x}`, {maxZoom:16, attribution:'Tiles © Esri'}).addTo(map);
 }
 function drawMap(list){
   layer.clearLayers();
