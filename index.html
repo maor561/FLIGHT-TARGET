@@ -1,270 +1,561 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FLIGHT TARGET – דאשבורד משלחות וטיסות מיוחדות</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-    <link rel="icon" type="image/png" href="logo.png?v=50">
-    <link rel="apple-touch-icon" href="logo.png?v=50">
-    <link rel="stylesheet" href="style.css?v=50">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FLIGHT TARGET – טיסות אמיתיות מנתב״ג לסימולטור</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<link rel="icon" type="image/png" href="logo.png">
+<style>
+:root{
+  --bg:#f4f7fc;--hero:#e6edff;--panel:#ffffff;--ink:#0e1a36;--dim:#5c6885;--line:#dfe5f1;
+  --hi:#2247d6;--hi-ink:#ffffff;--soft:#e8eeff;--ok:#0e8f55;--ok-soft:#e2f5ec;--warn:#b45309;
+  --shadow:0 1px 0 rgba(0,0,0,.05),0 10px 22px rgba(8,20,50,.09);
+  --mono:"IBM Plex Mono",Consolas,monospace;
+}
+:root[data-theme="dark"]{
+  --bg:#0b1220;--hero:#101a33;--panel:#141e36;--ink:#edf2ff;--dim:#97a6c8;--line:#26345a;
+  --hi:#6b93ff;--hi-ink:#06101f;--soft:#1b2b56;--ok:#4fd493;--ok-soft:#12332a;--warn:#f0b35a;
+  --shadow:0 10px 22px rgba(0,0,0,.35);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Rubik","Segoe UI",Arial,sans-serif;font-size:15px;line-height:1.5}
+button,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--hi);outline-offset:2px}
+.pad{padding-inline:max(20px,calc((100vw - 1180px)/2))}
+
+/* nav */
+.nav{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:14px;background:var(--panel);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:900}
+.logo{font-weight:900;letter-spacing:.05em;font-size:19px;white-space:nowrap}
+.logo span{color:var(--hi)}
+.nav-links{display:flex;gap:22px;font-size:14px}
+.nav-links a{color:var(--dim);text-decoration:none}
+.nav-links a:hover{color:var(--ink)}
+.icons{display:flex;gap:8px}
+.pill{border:1px solid var(--line);background:var(--panel);border-radius:99px;padding:6px 14px;font-size:13px;white-space:nowrap;text-decoration:none;color:var(--ink)}
+.pill:hover{border-color:var(--hi)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1fr 1.15fr;gap:40px;padding-block:44px;align-items:center;background:var(--hero)}
+.hero-txt{display:flex;flex-direction:column;gap:16px}
+h1{margin:0;font-weight:900;font-size:clamp(28px,3.8vw,44px);line-height:1.1;text-wrap:balance}
+h1 em{font-style:normal;color:var(--hi)}
+.sub{margin:0;color:var(--dim);font-size:17px;max-width:44ch}
+.count{font-size:14px;color:var(--dim)}
+.count b{color:var(--ink)}
+
+/* sections */
+.sec{padding-block:34px;display:flex;flex-direction:column;gap:18px}
+.sec.alt{background:var(--panel);border-block:1px solid var(--line)}
+.sec-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px 16px}
+h2{margin:0;font-size:22px;font-weight:700}
+.sec-h p{margin:0;color:var(--dim);font-size:14px}
+
+/* weather */
+.wx-sum{font-size:17px;font-weight:500}
+.wx-sum .good{color:var(--ok)}
+.wx-sum .bad{color:var(--warn)}
+.wx{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.wx div{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.sec:not(.alt) .wx div{background:var(--panel)}
+.wx span{display:block;font-size:12.5px;color:var(--dim)}
+.wx b{display:block;font-size:22px;font-weight:700;line-height:1.2;margin-block:2px}
+.wx small{font-size:13px;color:var(--dim)}
+.raw{font-family:var(--mono);font-size:12px;color:var(--dim);direction:ltr;text-align:right;overflow-wrap:anywhere}
+.raw summary{direction:rtl;font-family:"Rubik",sans-serif;cursor:pointer;font-size:13px}
+
+/* filters */
+.bar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.chip{border:1px solid var(--line);border-radius:99px;padding:6px 15px;background:var(--panel);white-space:nowrap;font-size:14px}
+.chip i{font-style:normal;font-family:var(--mono);font-size:11.5px;color:var(--dim);margin-inline-start:4px}
+.chip.on{background:var(--hi);border-color:var(--hi);color:var(--hi-ink);font-weight:700}
+.chip.on i{color:inherit}
+.chip.z{color:var(--dim)}
+.chip.dark.on{background:var(--ink);border-color:var(--ink);color:var(--bg)}
+.chips.subs .chip{font-size:13px;padding:4px 13px;background:transparent}
+.chips.subs .chip.on{background:var(--soft);color:var(--hi);border-color:var(--hi)}
+select.chip{border-radius:10px;appearance:auto}
+.dayflag{font-size:13.5px;color:var(--hi);background:var(--soft);border:0;border-radius:99px;padding:5px 14px}
+
+.body{display:grid;grid-template-columns:1fr 300px;gap:28px;align-items:start}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.empty{grid-column:1/-1;background:var(--panel);border:1px dashed var(--line);border-radius:14px;padding:28px;text-align:center;color:var(--dim)}
+.rail{display:flex;flex-direction:column;gap:20px;position:sticky;top:76px}
+.pn{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px}
+.pn h3{margin:0 0 10px;font-size:14px;font-weight:700}
+#map{height:230px;border-radius:10px;z-index:1;background:var(--bg)}
+.tmp{background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:99px;padding:1px 7px;font-size:11px;font-weight:500;white-space:nowrap;box-shadow:none}
+.tmp::before{display:none}
+.cal-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-weight:700}
+.cal-h button{border:1px solid var(--line);background:transparent;border-radius:8px;padding:2px 10px;font-size:11px}
+.cal-g{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center;font-size:13px;font-variant-numeric:tabular-nums}
+.cal-g span,.cal-g button{padding:5px 0;border-radius:8px;border:0;background:transparent}
+.cal-g .w{color:var(--dim);font-size:11px}
+.cal-g .t{outline:1px solid var(--ink)}
+.cal-g .f{background:var(--soft);color:var(--hi);font-weight:700}
+.cal-g .f.sel{background:var(--hi);color:var(--hi-ink)}
+
+/* boarding pass */
+.tk{position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-columns:62px 1fr 104px;border-radius:16px;box-shadow:var(--shadow);text-align:start;border:0;padding:0;width:100%;
+  --al:var(--hi);--acc:var(--al);--notch:var(--bg);background:linear-gradient(180deg,var(--panel),color-mix(in srgb,var(--al) 10%,var(--panel)))}
+:root[data-theme="dark"] .tk{--acc:color-mix(in srgb,var(--al) 50%,#fff)}
+.tk>*{position:relative;z-index:1}
+.tk:hover{transform:translateY(-2px);transition:transform .15s}
+.band{background:var(--al);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:12px 6px}
+.band i{font-style:normal;font-family:var(--mono);font-weight:600;font-size:13px;writing-mode:vertical-rl;letter-spacing:.14em;opacity:.9}
+.al-logo{width:50px;height:auto;max-height:44px;object-fit:contain;background:#fff;border-radius:7px;padding:4px;display:block}
+.band .code{writing-mode:horizontal-tb;letter-spacing:0;font-size:11px;background:#fff;color:var(--al);border-radius:4px;padding:1px 5px;opacity:1}
+.tk .arc{position:absolute;z-index:0;inset:0;width:100%;height:100%;pointer-events:none}
+.arc path{fill:none;stroke:var(--acc);stroke-width:2;stroke-dasharray:2 7;stroke-linecap:round;opacity:.35}
+.arc circle{fill:var(--acc);opacity:.35}
+.tk .wm{position:absolute;z-index:0;top:30px;right:112px;font-family:var(--mono);font-weight:600;font-size:74px;line-height:.8;color:var(--acc);opacity:.08;pointer-events:none;direction:ltr}
+.tk-m{display:flex;flex-direction:column;min-width:0}
+.tk-h{display:flex;justify-content:space-between;align-items:center;gap:8px;color:var(--dim);padding:10px 16px 0;font-size:12.5px}
+.tk-h b{font-size:14px;color:var(--ink)}
+.tk-b{padding:12px 16px 16px;display:flex;flex-direction:column;gap:14px;flex:1}
+.tk-t{font-weight:700;font-size:15.5px;line-height:1.3}
+.nw{display:inline-block;margin-inline-start:8px;padding:0 7px;border-radius:4px;font-size:11px;font-weight:700;background:var(--soft);color:var(--hi);vertical-align:middle}
+.tk-r{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;direction:ltr}
+.tk-r b{display:block;font-family:var(--mono);font-weight:600;font-size:25px;line-height:1}
+.tk-r span{display:block;font-size:12px;color:var(--dim);margin-top:3px}
+.tk-r div:last-child{text-align:right}
+.tk-r u{text-decoration:none;position:relative;border-top:2px dotted var(--dim);height:0;opacity:.7}
+.tk-r u::after{content:"✈";position:absolute;left:calc(50% - 9px);top:-12px;font-size:15px;color:var(--hi);background:var(--panel);padding:0 4px}
+.tk .tk-r u{border:0;opacity:1}
+.tk .tk-r u::after{background:transparent;color:var(--acc);font-size:18px;top:-14px}
+.tk-l{font-size:13.5px;color:var(--dim)}
+.tk-l b{color:var(--ink);font-weight:500}
+.tk-s{border-inline-start:2px dashed color-mix(in srgb,var(--ink) 22%,transparent);padding:14px 10px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;gap:8px;text-align:center}
+.tk-s::before,.tk-s::after{content:"";position:absolute;inset-inline-start:-10px;width:18px;height:18px;border-radius:50%;background:var(--notch)}
+.tk-s::before{top:-9px}.tk-s::after{bottom:-9px}
+.st{font-size:12px;font-weight:500;color:var(--ok)}
+.bc{width:100%;height:26px;background:repeating-linear-gradient(90deg,var(--ink) 0 2px,transparent 2px 3px,var(--ink) 3px 4px,transparent 4px 7px,var(--ink) 7px 10px,transparent 10px 12px);opacity:.8}
+.cta{display:block;width:100%;background:var(--al);color:#fff;border-radius:8px;padding:6px;font-size:12.5px;font-weight:700}
+.tk.big{grid-template-columns:78px 1fr 160px;--notch:var(--hero)}
+.tk.big .al-logo{width:64px;max-height:56px}
+.tk.big .tk-b{padding:18px 24px 24px;gap:20px}
+.tk.big .tk-h{padding:16px 24px 0}
+.tk.big .tk-t{font-size:20px}
+.tk.big .tk-r b{font-size:40px}
+.tk.big .wm{font-size:120px;right:170px;top:44px}
+.tk.big .cta{padding:8px}
+.cd b{display:block;font-size:46px;font-weight:900;line-height:.9;color:var(--acc)}
+.cd span{font-size:13px;color:var(--dim)}
+
+/* ATC */
+.atc{display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.pos{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:4px}
+.pos .code{font-family:var(--mono);font-weight:600;font-size:18px;direction:ltr;text-align:right}
+.pos .role{font-size:13px;color:var(--dim)}
+.pos .state{font-size:13px;color:var(--dim);margin-top:6px}
+.pos .who{font-size:12.5px;color:var(--dim);overflow-wrap:anywhere}
+.pos.on{background:var(--ok-soft);border-color:var(--ok)}
+.pos.on .state{color:var(--ok);font-weight:700}
+.pos.on .freq{font-family:var(--mono);font-weight:600;font-size:15px;direction:ltr;text-align:right}
+.dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ok);margin-inline-end:6px}
+
+/* ticker + footer */
+.tick{position:fixed;inset-inline:0;bottom:0;z-index:950;overflow:hidden;padding-block:10px;border-top:1px solid var(--line);background:var(--panel);font-size:14px;color:var(--dim);white-space:nowrap;box-shadow:0 -6px 18px rgba(8,20,50,.08)}
+body{padding-bottom:44px}
+#atc{border-top:0;padding-top:6px}
+section{scroll-margin-top:64px}
+.tick-in{display:inline-block;padding-inline-start:100%;animation:run 60s linear infinite}
+.tick:hover .tick-in{animation-play-state:paused}
+.tick b{color:var(--hi)}
+@keyframes run{to{transform:translateX(100%)}}
+@media (prefers-reduced-motion:reduce){.tick-in{animation:none;padding:0}.tick{overflow-x:auto}}
+.ft{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 20px;padding-block:16px;font-size:13px;color:var(--dim)}
+
+/* modal */
+.modal{position:fixed;inset:0;background:rgba(6,12,28,.6);display:flex;align-items:center;justify-content:center;padding:16px;z-index:2000}
+.modal[hidden]{display:none}
+.sheet{background:var(--panel);border-radius:16px;max-width:680px;width:100%;max-height:92vh;overflow:auto;position:relative}
+.sheet img{display:block;width:100%;height:220px;object-fit:cover;border-radius:16px 16px 0 0;background:var(--soft)}
+.sheet .x{position:absolute;top:12px;inset-inline-end:12px;border:0;background:var(--panel);border-radius:50%;width:34px;height:34px;font-size:16px}
+.sheet-b{padding:22px;display:flex;flex-direction:column;gap:14px}
+.sheet h3{margin:0;font-size:21px;line-height:1.25}
+.sheet .mission{color:var(--dim);direction:ltr;text-align:right;font-size:14px;margin:0}
+.sheet p{margin:0}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.facts div{background:var(--bg);border-radius:10px;padding:10px 12px}
+.facts span{display:block;font-size:12px;color:var(--dim)}
+.facts .al-logo{margin-top:6px;border:1px solid var(--line);width:auto;height:28px;max-width:100px}
+.facts b{font-size:14.5px;font-weight:500;overflow-wrap:anywhere}
+.sheet ul{margin:0;padding-inline-start:20px;color:var(--dim);font-size:14px}
+.sheet h4{margin:0;font-size:14px}
+
+@media (max-width:900px){
+  .hero,.body{grid-template-columns:1fr}
+  .hero{gap:24px;padding-block:28px}
+  .rail{position:static}
+  .wx{grid-template-columns:1fr 1fr}
+  .atc{grid-template-columns:repeat(3,1fr)}
+  .nav-links{display:none}
+}
+@media (max-width:620px){
+  .g2{grid-template-columns:1fr}
+  .tk,.tk.big{grid-template-columns:50px 1fr 92px}
+  .al-logo,.tk.big .al-logo{width:40px}
+  .tk.big .wm{font-size:74px;right:100px;top:30px}
+  .tk.big .tk-h{padding:10px 16px 0}
+  .tk.big .tk-r b{font-size:27px}
+  .tk.big .tk-b{padding:16px}
+  .atc{grid-template-columns:1fr 1fr}
+  .facts{grid-template-columns:1fr 1fr}
+  .icons .pill span{display:none}
+}
+</style>
 </head>
 <body>
-    <button id="mobile-menu-toggle" class="mobile-only" aria-label="Toggle Menu">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
-    <div id="app">
-        <aside class="sidebar">
-            <div class="logo">
-                <img src="logo.png" alt="Flight Target" class="brand-logo">
-            </div>
-            <nav class="nav-menu">
-                <!-- Calendar View -->
-                <div class="calendar-section">
-                    <div class="calendar-header">
-                        <button id="calendar-prev" class="calendar-nav">◀</button>
-                        <div id="calendar-month" class="calendar-title">אפריל 2026</div>
-                        <button id="calendar-next" class="calendar-nav">▶</button>
-                    </div>
-                    <div id="calendar-grid" class="calendar-grid"></div>
-                    <div id="calendar-flights-panel" class="calendar-flights-panel" style="display:none;">
-                        <div class="calendar-flights-header">
-                            <span id="selected-date-display"></span>
-                            <button id="close-flights-panel" class="close-btn">✕</button>
-                        </div>
-                        <div id="calendar-flights-list" class="calendar-flights-list"></div>
-                    </div>
-                </div>
 
-                <!-- All Flights Button -->
-                <button class="nav-item active" data-category="all">
-                    <span class="icon">🏠</span>
-                    <span class="label">הכל</span>
-                </button>
+<nav class="nav pad">
+  <div class="logo">FLIGHT <span>TARGET</span></div>
+  <div class="nav-links"><a href="#weather">מזג אוויר</a><a href="#atc">פיקוח</a><a href="#flights">טיסות</a></div>
+  <div class="icons">
+    <button class="pill" id="theme" title="החלף מצב תצוגה">◐ <span>כהה / בהיר</span></button>
+    <a class="pill" target="_blank" rel="noopener" href="https://wa.me/972503647548?text=שלום%20דשבורד%20FLIGHT%20TARGET%20-%20יש%20לי%20משוב">💬 <span>משוב</span></a>
+  </div>
+</nav>
 
-                <!-- Sport Category -->
-                <div class="category-item open" id="cat-sports">
-                    <div class="category-header">
-                        <span class="label">⚡ ספורט</span>
-                        <span class="chevron">⌄</span>
-                    </div>
-                    <div class="category-content">
-                        <button class="nav-item" data-category="football">
-                            <span class="icon">⚽</span>
-                            <span class="label">כדורגל</span>
-                        </button>
-                        <button class="nav-item" data-category="basketball">
-                            <span class="icon">🏀</span>
-                            <span class="label">כדורסל</span>
-                        </button>
-                        <button class="nav-item" data-category="sports-other">
-                            <span class="icon">🏅</span>
-                            <span class="label">ענפים נוספים</span>
-                        </button>
-                    </div>
-                </div>
+<header class="hero pad">
+  <div class="hero-txt">
+    <h1>טיסות אמיתיות מנתב״ג.<br><em>טוס אותן בסימולטור.</em></h1>
+    <p class="sub">משלחות ספורט, טיסות VIP, טיסות בכורה ואירועי VATIL, עם מסלול, מועד ומזג אוויר ביעד.</p>
+    <span class="count"><b id="k-flights">0</b> טיסות קרובות · <b id="k-cats">0</b> קטגוריות</span>
+  </div>
+  <div id="next"></div>
+</header>
 
-                <!-- Community Category -->
-                <div class="category-item open" id="cat-jewish">
-                    <div class="category-header">
-                        <span class="label">✡️ קהילה ויהדות</span>
-                        <span class="chevron">⌄</span>
-                    </div>
-                    <div class="category-content">
-                        <button class="nav-item" data-category="jewish">
-                            <span class="icon">✡️</span>
-                            <span class="label">משלחות קהילתיות</span>
-                        </button>
-                        <button class="nav-item" data-category="rescue">
-                            <span class="icon">🚁</span>
-                            <span class="label">משלחות חילוץ</span>
-                        </button>
-                    </div>
-                </div>
+<section class="sec alt pad" id="weather">
+  <div class="sec-h"><h2>מזג האוויר בנתב״ג עכשיו</h2><p id="wx-time"></p></div>
+  <div class="wx-sum" id="wx-sum">טוען נתוני מזג אוויר…</div>
+  <div class="wx" id="wx"></div>
+  <details class="raw"><summary>הדיווח המקורי לטייסים (METAR)</summary><div id="wx-raw"></div></details>
+</section>
 
-                <!-- Business Category -->
-                <div class="category-item open" id="cat-business">
-                    <div class="category-header">
-                        <span class="label">💼 עסקים וטכנולוגיה</span>
-                        <span class="chevron">⌄</span>
-                    </div>
-                    <div class="category-content">
-                        <button class="nav-item" data-category="business">
-                            <span class="icon">🚀</span>
-                            <span class="label">כנסים ותערוכות</span>
-                        </button>
-                    </div>
-                </div>
+<section class="sec alt pad" id="atc">
+  <div class="sec-h"><h2>פיקוח בנתב״ג · VATSIM</h2><p id="atc-sum">בודק מי מהפקחים הווירטואליים מחובר…</p></div>
+  <div class="atc" id="atc-grid"></div>
+</section>
 
-                <!-- Diplomacy Category -->
-                <div class="category-item open" id="cat-diplomacy">
-                    <div class="category-header">
-                        <span class="label">🏛️ דיפלומטיה וממשל</span>
-                        <span class="chevron">⌄</span>
-                    </div>
-                    <div class="category-content">
-                        <button class="nav-item" data-category="diplomatic">
-                            <span class="icon">🏛️</span>
-                            <span class="label">טיסות VIP</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Culture Category -->
-                <div class="category-item open" id="cat-culture">
-                    <div class="category-header">
-                        <span class="label">🎨 תרבות ואומנות</span>
-                        <span class="chevron">⌄</span>
-                    </div>
-                    <div class="category-content">
-                        <button class="nav-item" data-category="culture">
-                            <span class="icon">🎬</span>
-                            <span class="label">אירועי תרבות</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Community Flights Category -->
-                <div class="category-item open" id="cat-community">
-                    <div class="category-header">
-                        <span class="label">👥 טיסות קהילה</span>
-                        <span class="chevron">⌄</span>
-                    </div>
-                    <div class="category-content">
-                        <button class="nav-item" data-category="vatil">
-                            <span class="icon"><img src="logo2.jpg?v=50" alt="VATIL" style="width: 24px; height: 24px; object-fit: contain; border-radius: 50%;"></span>
-                            <span class="label">VATIL</span>
-                        </button>
-                        <button class="nav-item" data-category="doctor-simulator">
-                            <span class="icon"><img src="logo1.png?v=50" alt="Doctor Simulator" style="width: 24px; height: 24px; object-fit: contain; border-radius: 50%;"></span>
-                            <span class="label">דוקטור סימולטור</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Data Info -->
-                <div class="sidebar-footer">
-                    <div class="sidebar-buttons">
-                        <button id="theme-toggle" class="theme-toggle-btn" title="החלף מצב תצוגה">
-                            <span class="theme-toggle-icon">🌓</span>
-                        </button>
-                        <a href="https://wa.me/972503647548?text=שלום%20דשבורד%20FLIGHT%20TARGET%20-%20יש%20לי%20משוב"
-                           class="whatsapp-feedback-btn" title="שלח משוב דרך WhatsApp" target="_blank">
-                            <img src="WhatsApp_Logo_green.svg" alt="WhatsApp" class="whatsapp-logo">
-                        </a>
-                    </div>
-
-                    <div class="data-source-info">
-                        <div class="data-source-label">עדכון מידע אחרון</div>
-                        <div class="data-source-time" id="data-last-updated">טוען...</div>
-                        <div class="data-source-badge">Claude Scheduled Task v17</div>
-                    </div>
-                    <div class="visitor-counter">
-                        <span class="visitor-icon">👁️</span>
-                        <span id="visitor-count">...</span>
-                        <span class="visitor-label">מבקרים</span>
-                    </div>
-                </div>
-            </nav>
-        </aside>
-
-        <main class="content">
-            <header class="top-bar">
-                <div class="atc-display card">
-                    <div class="atc-title">🎙️ VATSIM - בקרות הפיקוח של נתב״ג</div>
-                    <div class="atc-controllers" id="atc-controllers">
-                        <div class="atc-loading">טוען בקרות...</div>
-                    </div>
-                </div>
-
-                <div class="metar-display card">
-                    <div class="metar-title">LLBG METAR - מזג אוויר בזמן אמת</div>
-                    <div class="metar-content">
-                        <div class="metar-parsed" id="metar-parsed">
-                            <span class="metar-chip" id="metar-temp">🌡️ –</span>
-                            <span class="metar-chip" id="metar-wind">💨 –</span>
-                            <span class="metar-chip" id="metar-vis">👁️ –</span>
-                            <span class="metar-chip" id="metar-condition">☁️ –</span>
-                            <span class="metar-chip" id="metar-qnh">🔵 –</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Last updated removed - not relevant -->
-
-                <div class="user-stats">
-                    <div class="stat">
-                        <span class="stat-label">טיסות</span>
-                        <span class="stat-value" id="total-flights">0</span>
-                    </div>
-                    <div class="stat">
-                        <span class="stat-label">קטגוריות</span>
-                        <span class="stat-value" id="upcoming-events">0</span>
-                    </div>
-                </div>
-            </header>
-
-            <div class="dashboard-grid">
-                <div class="flight-list-container">
-                    <div class="section-header">
-                        <h2 class="list-title">
-                            טיסות מיוחדות
-                            <span id="category-filter-display" class="category-display"></span>
-                        </h2>
-                        <div class="filters">
-                            <select id="airline-filter" class="filter-select">
-                                <option value="all">כל חברות התעופה</option>
-                            </select>
-                            <span class="filter-tag active">הכל</span>
-                            <span class="filter-tag">היום</span>
-                            <span class="filter-tag">השבוע</span>
-                        </div>
-                    </div>
-                    <div class="flight-list" id="flight-list"></div>
-                </div>
-
-                <div class="map-container card">
-                    <div id="map-scanline" class="scanline"></div>
-                    <div id="map"></div>
-                </div>
-            </div>
-
-            <!-- News Ticker -->
-            <div class="news-ticker-container">
-                <div class="news-ticker" id="news-ticker"></div>
-            </div>
-        </main>
+<section class="sec pad" id="flights">
+  <div class="bar">
+    <h2>הטיסות הקרובות</h2>
+    <div class="chips">
+      <select class="chip" id="airline" aria-label="חברת תעופה"></select>
+      <button class="chip dark on" data-range="all">הכל</button>
+      <button class="chip dark" data-range="today">היום</button>
+      <button class="chip dark" data-range="week">השבוע</button>
     </div>
+  </div>
+  <div class="chips" id="groups"></div>
+  <div class="chips subs" id="subs" hidden></div>
+  <button class="dayflag" id="dayflag" hidden></button>
+  <div class="body">
+    <div class="g2" id="list"></div>
+    <aside class="rail">
+      <div class="pn"><h3>מסלולים ומזג אוויר ביעד</h3><div id="map"></div></div>
+      <div class="pn"><div class="cal-h"><button id="cal-prev" aria-label="החודש הקודם">▶</button><span id="cal-title"></span><button id="cal-next" aria-label="החודש הבא">◀</button></div><div class="cal-g" id="cal"></div></div>
+    </aside>
+  </div>
+</section>
 
-    <!-- Flight Detail Modal -->
-    <div id="flight-modal" class="modal">
-        <div class="modal-content card">
-            <span class="close-modal">&times;</span>
-            <div id="modal-body"></div>
-        </div>
-    </div>
+<div class="tick"><div class="tick-in" id="tick"></div></div>
+<footer class="ft pad"><span>עדכון מידע אחרון: <span id="updated">—</span></span><span><span id="visitors">—</span> מבקרים</span></footer>
 
-    <!-- Scanning Overlay -->
-    <div id="scanning-overlay" class="scanning-overlay" style="display:none;">
-        <div class="scanning-text">
-            <div class="scan-spinner"></div>
-            <span>סורק לוח הטיסות של נתב״ג...</span>
-        </div>
-    </div>
+<div class="modal" id="modal" hidden><div class="sheet" role="dialog" aria-modal="true"><button class="x" id="modal-x" aria-label="סגור">✕</button><div id="modal-c"></div></div></div>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <script src="data.js?v=50"></script>
-    <script src="main.js?v=50"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script src="data.js?v=51"></script>
+<script>
+// ---------- helpers ----------
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const dayStart = d => { const x = new Date(d); x.setHours(0,0,0,0); return x; };
+const today = dayStart(new Date());
+const ymd = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+const longDate = s => new Date(s).toLocaleDateString('he-IL', {day:'numeric', month:'long'});
+const shortDate = s => new Date(s).toLocaleDateString('he-IL', {day:'2-digit', month:'2-digit'});
 
-    <!-- Vercel Web Analytics - Track users, pageviews, performance -->
-    <script>
-        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-    </script>
-    <script defer src="/_vercel/insights/script.js"></script>
+const GROUPS = [
+  ['sports','ספורט',['football','basketball','sports-other']],
+  ['business','עסקים וטכנולוגיה',['business']],
+  ['diplomacy','דיפלומטיה וממשל',['diplomatic']],
+  ['jewish','קהילה ויהדות',['jewish','rescue']],
+  ['culture','תרבות ואומנות',['culture']],
+  ['community','טיסות קהילה',['vatil','doctor-simulator']]
+];
+const CAT = {football:'כדורגל',basketball:'כדורסל','sports-other':'ענפים נוספים',jewish:'משלחות קהילתיות',rescue:'משלחות חילוץ',business:'כנסים ותערוכות',diplomatic:'טיסות VIP',culture:'אירועי תרבות',vatil:'VATIL','doctor-simulator':'דוקטור סימולטור'};
+const state = {group:'all', cat:null, airline:'all', range:'all', day:null};
+
+const routeOf = f => { const m = (f.route||'').match(/([A-Z]{4})\s*->\s*([A-Z]{4})/); return m ? [m[1], m[2]] : ['LLBG', f.dest_icao]; };
+const cityOf = icao => icao === 'LLBG' ? 'תל אביב' : (destinations[icao]?.name || icao);
+const upcoming = () => flights.filter(f => dayStart(f.date) >= today).sort((a,b) => new Date(a.date+'T'+(a.time||'00:00')) - new Date(b.date+'T'+(b.time||'00:00')));
+const isNew = f => f.createdAt && (Date.now() - new Date(f.createdAt)) < 24*3600e3;
+
+function visible(){
+  const week = new Date(today); week.setDate(week.getDate()+7);
+  const cats = state.cat ? [state.cat] : state.group === 'all' ? null : GROUPS.find(g => g[0] === state.group)[2];
+  return upcoming().filter(f => {
+    const d = dayStart(f.date);
+    if (cats && !cats.includes(f.category)) return false;
+    if (state.airline !== 'all' && f.airline !== state.airline) return false;
+    if (state.range === 'today' && +d !== +today) return false;
+    if (state.range === 'week' && d > week) return false;
+    if (state.day && f.date !== state.day) return false;
+    return true;
+  });
+}
+
+// ---------- boarding pass ----------
+// Approximate brand colours per airline: [match, colour, IATA-style code]
+// Branding lives in data.js (airlineBrands) so the weekly routine can add new airlines.
+const AIRLINES = (typeof airlineBrands !== 'undefined' ? airlineBrands : []).map(a => [a.match, a.color, a.code, a.logo]);
+const logoOf = al => al[3] ? `<img class="al-logo" src="${esc(al[3])}" alt="" loading="lazy" onerror="this.outerHTML='<i class=&quot;code&quot;>${esc(al[2])}</i>'">` : `<i class="code">${esc(al[2])}</i>`;
+const brand = f => AIRLINES.find(a => (f.airline || '').includes(a[0]));
+function ticket(f, big){
+  const [dep, arr] = routeOf(f);
+  const days = Math.round((dayStart(f.date) - today) / 864e5);
+  const stub = big
+    ? `<div class="cd"><b>${days === 0 ? 'היום' : days === 1 ? 'מחר' : days}</b><span>${days > 1 ? 'ימים להמראה' : 'המראה'}</span></div>`
+    : `<span class="st">מתוכנן</span>`;
+  const al = brand(f);
+  const far = arr === 'LLBG' ? dep : arr;
+  return `<button class="tk${big ? ' big' : ''}" data-id="${esc(f.id)}"${al ? ` style="--al:${esc(al[1])}"` : ''}>
+    <div class="band">${al ? logoOf(al) : '<span></span>'}<i>${al ? esc(al[2]) : ''}</i></div>
+    <svg class="arc" viewBox="0 0 400 180" preserveAspectRatio="none" aria-hidden="true"><path d="M70 150 Q200 -40 300 120"/><circle cx="70" cy="150" r="4"/><circle cx="300" cy="120" r="4"/></svg>
+    <span class="wm" aria-hidden="true">${esc(far)}</span>
+    <div class="tk-m"><div class="tk-h"><b>${esc(f.airline)}</b><span>${big ? 'הטיסה הבאה' : esc(CAT[f.category] || '')}</span></div>
+      <div class="tk-b"><div class="tk-t">${esc(f.title)}${isNew(f) ? '<span class="nw">חדש</span>' : ''}</div>
+        <div class="tk-r"><div><b>${esc(dep)}</b><span>${esc(cityOf(dep))}</span></div><u></u><div><b>${esc(arr)}</b><span>${esc(cityOf(arr))}</span></div></div>
+        <div class="tk-l"><b>${longDate(f.date)}</b> · המראה <b>${esc(f.time)}</b>${f.aircraft ? ' · ' + esc(f.aircraft) : ''}</div></div></div>
+    <div class="tk-s">${stub}<div class="bc"></div><span class="cta">${big ? 'פרטי הטיסה' : 'פרטים'}</span></div>
+  </button>`;
+}
+
+// ---------- render ----------
+function render(){
+  const all = upcoming(), list = visible();
+  $('k-flights').textContent = list.length;
+  $('k-cats').textContent = new Set(list.map(f => f.category)).size;
+  $('next').innerHTML = all[0] ? ticket(all[0], true) : '';
+
+  const count = cats => all.filter(f => cats.includes(f.category)).length;
+  $('groups').innerHTML = `<button class="chip${state.group === 'all' ? ' on' : ''}" data-group="all">הכל <i>${all.length}</i></button>` +
+    GROUPS.map(g => { const n = count(g[2]); return `<button class="chip${state.group === g[0] ? ' on' : ''}${n ? '' : ' z'}" data-group="${g[0]}">${g[1]} <i>${n}</i></button>`; }).join('');
+  const g = GROUPS.find(x => x[0] === state.group);
+  $('subs').hidden = !g || g[2].length < 2;
+  if (g) $('subs').innerHTML = g[2].map(c => `<button class="chip${state.cat === c ? ' on' : ''}" data-cat="${c}">${CAT[c]} <i>${count([c])}</i></button>`).join('');
+
+  $('dayflag').hidden = !state.day;
+  if (state.day) $('dayflag').textContent = `מציג רק את ${longDate(state.day)} ✕`;
+  $('list').innerHTML = list.length ? list.map(f => ticket(f)).join('') : '<div class="empty">אין טיסות שמתאימות לסינון הזה. נסה קטגוריה או תאריך אחר.</div>';
+  drawMap(list); drawCal(); drawTicker();
+}
+
+function fillAirlines(){
+  const cur = state.airline;
+  $('airline').innerHTML = '<option value="all">כל חברות התעופה</option>' +
+    [...new Set(upcoming().map(f => f.airline))].sort().map(a => `<option${a === cur ? ' selected' : ''}>${esc(a)}</option>`).join('');
+}
+
+// ---------- map ----------
+let map, tiles, layer;
+const temps = {};
+function initMap(){
+  map = L.map('map', {zoomControl:false, attributionControl:false}).setView([35, 20], 2);
+  layer = L.layerGroup().addTo(map);
+  setTiles();
+}
+function setTiles(){
+  if (tiles) map.removeLayer(tiles);
+  const dark = document.documentElement.dataset.theme === 'dark';
+  tiles = L.tileLayer(`https://{s}.basemaps.cartocdn.com/${dark ? 'dark_all' : 'light_all'}/{z}/{x}/{y}{r}.png`, {maxZoom:19}).addTo(map);
+}
+function drawMap(list){
+  layer.clearLayers();
+  const hi = getComputedStyle(document.documentElement).getPropertyValue('--hi').trim();
+  const pts = [];
+  list.forEach(f => {
+    const [dep, arr] = routeOf(f);
+    const a = f.depCoords || destinations[dep]?.coords, b = f.arrCoords || destinations[arr]?.coords;
+    if (!a || !b) return;
+    pts.push(a, b);
+    L.polyline([a, b], {color:hi, weight:2, opacity:.75, dashArray:'6 6'}).addTo(layer);
+    const end = arr === 'LLBG' ? a : b, code = arr === 'LLBG' ? dep : arr;
+    const mk = L.circleMarker(end, {radius:5, color:'#fff', weight:2, fillColor:hi, fillOpacity:1}).addTo(layer).on('click', () => openFlight(f.id));
+    const label = t => mk.bindTooltip(`${esc(cityOf(code))}${t != null ? ' ' + t + '°' : ''}`, {permanent:list.length <= 8, direction:'top', className:'tmp', offset:[0,-4]});
+    if (code in temps) label(temps[code]);
+    else { label(null);
+      fetch(`https://api.open-meteo.com/v1/forecast?latitude=${end[0]}&longitude=${end[1]}&current_weather=true`).then(r => r.json())
+        .then(d => { temps[code] = Math.round(d.current_weather.temperature); mk.unbindTooltip(); label(temps[code]); }).catch(() => {}); }
+  });
+  L.circleMarker(destinations.LLBG.coords, {radius:7, color:'#fff', weight:2, fillColor:hi, fillOpacity:1}).addTo(layer).bindTooltip('נתב״ג', {direction:'top', className:'tmp'});
+  if (pts.length) map.fitBounds(pts, {padding:[24,24], maxZoom:5});
+}
+
+// ---------- calendar ----------
+let calMonth = new Date(today.getFullYear(), today.getMonth(), 1);
+function drawCal(){
+  $('cal-title').textContent = calMonth.toLocaleDateString('he-IL', {month:'long', year:'numeric'});
+  const days = new Set(upcoming().map(f => f.date));
+  let h = 'אבגדהוש'.split('').map(c => `<span class="w">${c}</span>`).join('') + '<span></span>'.repeat(calMonth.getDay());
+  const n = new Date(calMonth.getFullYear(), calMonth.getMonth()+1, 0).getDate();
+  for (let d = 1; d <= n; d++){
+    const key = ymd(new Date(calMonth.getFullYear(), calMonth.getMonth(), d));
+    const cls = (key === ymd(today) ? 't ' : '') + (days.has(key) ? 'f ' : '') + (key === state.day ? 'sel' : '');
+    h += days.has(key) ? `<button class="${cls}" data-day="${key}">${d}</button>` : `<span class="${cls}">${d}</span>`;
+  }
+  $('cal').innerHTML = h;
+}
+
+// ---------- ticker ----------
+function drawTicker(){
+  const latest = [...flights].sort((a,b) => new Date(b.createdAt||0) - new Date(a.createdAt||0)).slice(0, 8);
+  $('tick').innerHTML = '<b>נוסף לאחרונה</b> &nbsp;·&nbsp; ' + latest.map(f => `${esc(f.title)}, ${shortDate(f.date)} ${esc(f.time)}`).join(' &nbsp;◆&nbsp; ');
+}
+
+// ---------- flight details ----------
+function openFlight(id){
+  const f = flights.find(x => x.id === id); if (!f) return;
+  const [dep, arr] = routeOf(f), facts = destinations[arr === 'LLBG' ? dep : arr]?.facts;
+  $('modal-c').innerHTML = `${f.imageUrl ? `<img src="${esc(f.imageUrl)}" alt="">` : ''}
+    <div class="sheet-b"><h3>${esc(f.title)}</h3><p class="mission">${esc(f.mission)}</p>
+    <div class="tk-r"><div><b>${esc(dep)}</b><span>${esc(cityOf(dep))}</span></div><u></u><div><b>${esc(arr)}</b><span>${esc(cityOf(arr))}</span></div></div>
+    <div class="facts"><div><span>תאריך</span><b>${longDate(f.date)}</b></div><div><span>המראה</span><b>${esc(f.time)}</b></div><div><span>חברה</span><b>${esc(f.airline)}</b>${brand(f) ? logoOf(brand(f)) : ''}</div>
+      <div><span>מטוס</span><b>${esc(f.aircraft || '—')}</b></div><div><span>קטגוריה</span><b>${esc(CAT[f.category] || '')}</b></div><div><span>מקור</span><b>${esc(f.source || '—')}</b></div></div>
+    ${f.background ? `<p>${esc(f.background)}</p>` : ''}
+    ${facts ? `<h4>על היעד: ${esc(cityOf(arr === 'LLBG' ? dep : arr))}</h4><ul>${facts.map(x => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}</div>`;
+  $('modal').hidden = false; $('modal-x').focus();
+}
+const closeModal = () => $('modal').hidden = true;
+
+// ---------- weather: METAR decoded into plain Hebrew ----------
+const DIRS = ['צפון','צפון-מזרח','מזרח','דרום-מזרח','דרום','דרום-מערב','מערב','צפון-מערב'];
+const WXCODES = {TS:'סופות רעמים',RA:'גשם',SHRA:'ממטרים',DZ:'טפטוף',SN:'שלג',FG:'ערפל',BR:'אובך',HZ:'אובך',DU:'אבק',SA:'חול',GR:'ברד'};
+function decodeMetar(raw){
+  const t = raw.trim().split(/\s+/), o = {raw, clouds:[], wx:[]};
+  t.forEach(p => { let m;
+    if (m = p.match(/^(\d{2})(\d{2})(\d{2})Z$/)) o.time = new Date(Date.UTC(new Date().getUTCFullYear(), new Date().getUTCMonth(), +m[1], +m[2], +m[3]));
+    else if (m = p.match(/^(\d{3}|VRB)(\d{2,3})(?:G(\d{2,3}))?KT$/)) o.wind = {dir:m[1], kt:+m[2], gust:m[3] ? +m[3] : null};
+    else if (p === 'CAVOK') { o.vis = 9999; o.cavok = true; }
+    else if (/^\d{4}$/.test(p) && o.vis == null && o.wind) o.vis = +p;
+    else if (m = p.match(/^(FEW|SCT|BKN|OVC)(\d{3})/)) o.clouds.push({k:m[1], ft:+m[2]*100});
+    else if (m = p.match(/^(M?\d{2})\/(M?\d{2})$/)) o.temp = +m[1].replace('M','-');
+    else if (m = p.match(/^Q(\d{4})$/)) o.qnh = +m[1];
+    else if (m = p.match(/^A(\d{4})$/)) o.qnh = Math.round(+m[1] / 100 * 33.8639);
+    else if (m = p.match(/^([-+]?)(?:VC)?(TS|SHRA|RA|DZ|SN|FG|BR|HZ|DU|SA|GR)+$/)) o.wx.push((m[1] === '+' ? 'כבד: ' : m[1] === '-' ? 'קל: ' : '') + WXCODES[m[2]]);
+  });
+  return o;
+}
+function showWeather(raw){
+  const o = decodeMetar(raw), kmh = o.wind ? Math.round(o.wind.kt * 1.852) : null;
+  const windWord = !o.wind || o.wind.kt < 1 ? 'אין רוח' : o.wind.kt <= 6 ? 'רוח קלה' : o.wind.kt <= 15 ? 'רוח מתונה' : o.wind.kt <= 25 ? 'רוח חזקה' : 'רוח חזקה מאוד';
+  const windFrom = !o.wind || o.wind.kt < 1 ? '' : o.wind.dir === 'VRB' ? 'כיוון משתנה' : 'מכיוון ' + DIRS[Math.round(+o.wind.dir / 45) % 8];
+  const top = ['OVC','BKN','SCT','FEW'].map(k => o.clouds.find(c => c.k === k)).find(Boolean);
+  const sky = top ? {FEW:'מעט עננים',SCT:'מעונן חלקית',BKN:'מעונן',OVC:'מעונן לגמרי'}[top.k] : 'שמיים בהירים';
+  const vis = o.vis == null ? ['—',''] : o.vis >= 9999 ? ['מצוינת','מעל 10 ק״מ'] : o.vis >= 5000 ? ['טובה', (o.vis/1000).toFixed(0) + ' ק״מ'] : o.vis >= 1500 ? ['בינונית', (o.vis/1000).toFixed(1) + ' ק״מ'] : ['לקויה', o.vis + ' מטר'];
+  const lowCeil = o.clouds.some(c => (c.k === 'BKN' || c.k === 'OVC') && c.ft < 1500);
+  const good = (o.vis ?? 9999) >= 5000 && !lowCeil && (!o.wind || (o.wind.kt <= 20 && !(o.wind.gust > 30))) && !o.wx.some(w => /רעמים|שלג|ערפל|ברד/.test(w));
+  $('wx-sum').innerHTML = `<span class="${good ? 'good' : 'bad'}">${good ? 'תנאים טובים לטיסה.' : 'תנאים מאתגרים לטיסה.'}</span> ${sky}, ${windWord}${o.wx.length ? ', ' + esc(o.wx.join(', ')) : ''}.`;
+  $('wx').innerHTML =
+    `<div><span>טמפרטורה</span><b>${o.temp != null ? o.temp + '°' : '—'}</b><small>מעלות צלזיוס</small></div>` +
+    `<div><span>רוח</span><b>${windWord}</b><small>${kmh ? `${windFrom} · ${kmh} קמ״ש${o.wind.gust ? `, משבים עד ${Math.round(o.wind.gust*1.852)}` : ''}` : 'שקט'}</small></div>` +
+    `<div><span>ראות</span><b>${vis[0]}</b><small>${vis[1]}</small></div>` +
+    `<div><span>שמיים</span><b>${sky}</b><small>${top ? `בסיס הענן ב-${top.ft.toLocaleString('he-IL')} רגל` : 'ללא עננים משמעותיים'}</small></div>` +
+    `<div><span>לחץ אוויר</span><b>${o.qnh ?? '—'}</b><small>הקטופסקל (QNH לכיוון מד הגובה)</small></div>`;
+  if (o.time) $('wx-time').textContent = 'נמדד ב-' + o.time.toLocaleTimeString('he-IL', {hour:'2-digit', minute:'2-digit'});
+  $('wx-raw').textContent = raw;
+}
+async function loadWeather(){
+  try { const r = await fetch('https://metar.vatsim.net/metar.php?id=LLBG'); const raw = (await r.text()).trim(); if (!/^LLBG/.test(raw)) throw 0; showWeather(raw); }
+  catch { $('wx-sum').textContent = 'לא הצלחנו לקבל כרגע את נתוני מזג האוויר. ננסה שוב בעוד כמה דקות.'; }
+}
+
+// ---------- ATC ----------
+const POS = [['atis','ATIS','מידע מוקלט לטייסים'],['del','DEL','אישור תוכנית טיסה'],['gnd','GND','בקרת קרקע'],['twr','TWR','מגדל פיקוח'],['app','APP','בקרת גישה'],['ctr','CTR','בקרה אזורית']];
+function showAtc(online){
+  const by = {};
+  online.forEach(c => { const k = c.callsign.split('_').pop().toLowerCase(); (by[k] = by[k] || []).push(c); });
+  const n = POS.filter(p => by[p[0]]).length;
+  $('atc-sum').innerHTML = n ? `<i class="dot"></i>${n} מתוך 6 עמדות מאוישות עכשיו` : 'אין כרגע פקחים מחוברים בנתב״ג. אפשר לטוס בלי פיקוח.';
+  $('atc-grid').innerHTML = POS.map(p => { const c = by[p[0]]?.[0];
+    return `<div class="pos${c ? ' on' : ''}"><span class="code">${p[1]}</span><span class="role">${p[2]}</span>` +
+      (c ? `<span class="state">מחובר</span><span class="freq">${esc(c.frequency)}</span><span class="who">${esc(c.name)}${c.logon_time ? ' · מאז ' + new Date(c.logon_time).toLocaleTimeString('he-IL', {hour:'2-digit', minute:'2-digit'}) : ''}</span>`
+         : `<span class="state">לא מחובר</span>`) + `</div>`; }).join('');
+}
+async function loadAtc(){
+  try { const d = await (await fetch('https://data.vatsim.net/v3/vatsim-data.json')).json();
+    showAtc([...(d.controllers || []), ...(d.atis || [])].filter(c => /^LL(BG|LL)_/.test(c.callsign))); }
+  catch { showAtc([]); $('atc-sum').textContent = 'לא הצלחנו להתחבר ל-VATSIM כרגע.'; }
+}
+
+// ---------- Doctor Simulator RSS ----------
+async function loadRss(){
+  try {
+    const xml = new DOMParser().parseFromString(await (await fetch('https://doctor-simulator-flights.vercel.app/api/rss')).text(), 'application/xml');
+    let added = 0;
+    [...xml.getElementsByTagName('item')].forEach(it => {
+      const title = it.getElementsByTagName('title')[0]?.textContent || '', m = title.match(/([A-Z]{4})\s*(?:→|->)\s*([A-Z]{4})/);
+      const desc = (it.getElementsByTagName('description')[0]?.textContent || '').replace(/<[^>]*>/g, ' ');
+      const date = desc.match(/Date:\s*(\d{4}-\d{2}-\d{2})/)?.[1], num = desc.match(/Route #:\s*(\d+)/)?.[1] || '0';
+      if (!m || !date || flights.some(f => f.id === 'DS' + num.padStart(3,'0'))) return;
+      flights.push({id:'DS' + num.padStart(3,'0'), category:'doctor-simulator', title:`${cityOf(m[1])} → ${cityOf(m[2])}`,
+        mission:`Doctor Simulator World Tour - Leg ${num}`, background:`מסע סביב העולם של דוקטור סימולטור, מקטע ${num}.`,
+        route:`${m[1]} -> ${m[2]}`, dest_icao:m[2], date, time:desc.match(/Departure Time:\s*([\d:]+)/)?.[1] || '12:00',
+        airline:'דוקטור סימולטור', aircraft:'IFR', source:'Doctor Simulator World Tour'});
+      added++;
+    });
+    if (added) { fillAirlines(); render(); }
+  } catch {}
+}
+
+// ---------- footer info ----------
+async function loadMeta(){
+  try { const c = await (await fetch('https://api.github.com/repos/maor561/FLIGHT-TARGET/commits?per_page=1')).json();
+    $('updated').textContent = new Date(c[0].commit.committer.date).toLocaleString('he-IL', {dateStyle:'short', timeStyle:'short'}); }
+  catch { $('updated').textContent = new Date(lastUpdated.timestamp).toLocaleString('he-IL', {dateStyle:'short', timeStyle:'short'}); }
+  try { const v = await (await fetch('https://api.counterapi.dev/v1/flight-target/visitors/up')).json(); if (v.count) $('visitors').textContent = v.count.toLocaleString('he-IL'); } catch {}
+}
+
+// ---------- events ----------
+document.addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) { if (e.target === $('modal')) closeModal(); return; }
+  if (b.dataset.id) return openFlight(b.dataset.id);
+  if (b.dataset.group) { state.group = b.dataset.group; state.cat = null; }
+  else if (b.dataset.cat) state.cat = state.cat === b.dataset.cat ? null : b.dataset.cat;
+  else if (b.dataset.range) { state.range = b.dataset.range; document.querySelectorAll('[data-range]').forEach(x => x.classList.toggle('on', x === b)); }
+  else if (b.dataset.day) state.day = state.day === b.dataset.day ? null : b.dataset.day;
+  else if (b.id === 'dayflag') state.day = null;
+  else if (b.id === 'cal-prev') calMonth.setMonth(calMonth.getMonth() - 1);
+  else if (b.id === 'cal-next') calMonth.setMonth(calMonth.getMonth() + 1);
+  else if (b.id === 'modal-x') return closeModal();
+  else if (b.id === 'theme') {
+    const dark = document.documentElement.dataset.theme !== 'dark';
+    document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+    try { localStorage.setItem('ft-theme', dark ? 'dark' : 'light'); } catch {}
+    setTiles();
+  } else return;
+  render();
+});
+$('airline').addEventListener('change', e => { state.airline = e.target.value; render(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// ---------- start ----------
+try { if (localStorage.getItem('ft-theme') === 'dark') document.documentElement.dataset.theme = 'dark'; } catch {}
+initMap(); fillAirlines(); render();
+loadWeather(); loadAtc(); loadRss(); loadMeta();
+setInterval(loadWeather, 10 * 60e3); setInterval(loadAtc, 2 * 60e3);
+</script>
+<!-- Vercel Web Analytics -->
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>

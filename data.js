@@ -246,6 +246,19 @@ const destinations = {
     "LEBG": { name: "Burgos", coords: [42.3575, -3.6136] }
 };
 
+// Airline branding for the boarding-pass cards (redesign.html).
+// match: text that appears in a flight's `airline` field. color: brand colour (hex). code: IATA code (or short tag).
+// logo: image URL or local file; leave "" if none (the card then shows the code instead).
+const airlineBrands = [
+    { match: "אל על", color: "#0a2d7a", code: "LY", logo: "https://pics.avs.io/200/80/LY@2x.png" },
+    { match: "ארקיע", color: "#5b2a86", code: "IZ", logo: "https://pics.avs.io/200/80/IZ@2x.png" },
+    { match: "ישראייר", color: "#0086c9", code: "6H", logo: "https://pics.avs.io/200/80/6H@2x.png" },
+    { match: "Turkish", color: "#c8102e", code: "TK", logo: "https://pics.avs.io/200/80/TK@2x.png" },
+    { match: "אזרבייג", color: "#007a87", code: "J2", logo: "https://pics.avs.io/200/80/J2@2x.png" },
+    { match: "VATIL", color: "#1f7a45", code: "VATIL", logo: "logo2.jpg" },
+    { match: "דוקטור סימולטור", color: "#c2185b", code: "DS", logo: "logo1.png" }
+];
+
 const flights = [
     {
         id: "B001",
