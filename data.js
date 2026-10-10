@@ -245,7 +245,8 @@ const destinations = {
     "LJLJ": { name: "Ljubljana", coords: [46.2237, 14.4576] },
     "LEBG": { name: "Burgos", coords: [42.3575, -3.6136] },
     "EDDL": { name: "Düsseldorf", coords: [51.2895, 6.7668] },
-    "RJAA": { name: "Tokyo Narita", coords: [35.7647, 140.3864] }
+    "RJAA": { name: "Tokyo Narita", coords: [35.7647, 140.3864] },
+    "EDDK": { name: "Cologne Bonn", coords: [50.8658, 7.1428] }
 };
 
 // Airline branding for the boarding-pass cards (index.html).
@@ -1952,6 +1953,60 @@ const flights = [
         source: "aeroroutes.com/eng/260825-iznw26nrt (IZ881 TLV 13:55 – NRT, from 25OCT26, A340-300 USC) / ch-aviation.com/news/168273 (Arkia to launch Tel Aviv–Tokyo Narita) / en.globes.co.il – Arkia to launch Tel Aviv - Tokyo flights",
         imageUrl: "https://images.pexels.com/photos/36576170/pexels-photo-36576170.jpeg?auto=compress&cs=tinysrgb&h=350",
         createdAt: "2026-10-09T09:00:00Z",
+        isNew: true
+    },
+    {
+        id: "B030",
+        category: "basketball",
+        title: "הפועל חולון כדורסל | ליגת האלופות – משחק חוץ מול ספרטק סובוטיצה",
+        mission: "Hapoel Holon Basketball Champions League 2026/27 Group F Away Game vs Spartak Office Shoes – Subotica, Serbia",
+        background: "הפועל חולון יוצאת למשחק חוץ מול אלופת סרביה ספרטק סובוטיצה במחזור השני של שלב הבתים בליגת האלופות של פיב\"א 2026/27 (בית F). המשחק ייערך ביום רביעי, 14 באוקטובר 2026, בסובוטיצה. חולון פתחה את הקמפיין בהפסד לשולה הצרפתית במשחק בית שנערך בסמוקוב שבבולגריה. לסובוטיצה אין נמל תעופה מסחרי, ולכן היעד על המפה הוא בלגרד (ניקולה טסלה), כ-180 ק\"מ ממנה. מועד הטיסה וחברת התעופה לא פורסמו – התאריך כאן הוא הערכה (יום לפני המשחק).",
+        route: "LLBG -> LYBE",
+        dest_icao: "LYBE",
+        date: "2026-10-13",
+        time: "09:00",
+        airline: "טרם פורסם",
+        aircraft: "",
+        icon: "🏀",
+        source: "be106.net/87/150763 – לוח משחקי הפועל חולון בליגת האלופות 2026/27 (14.10 ספרטק סובוטיצה, חוץ) / eurohoops.net – T. J. Holyfield returns to Basketball Champions League with Hapoel Holon / flashscore.com – Spartak Subotica v Hapoel Holon 14/10/2026",
+        imageUrl: "https://images.pexels.com/photos/1752757/pexels-photo-1752757.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-10-10T19:30:00Z",
+        isNew: true
+    },
+    {
+        id: "B031",
+        category: "basketball",
+        title: "בני הרצליה כדורסל | ליגת האלופות – משחק בית בסמוקוב מול פורטו",
+        mission: "Bnei Penlink Herzliya Basketball Champions League 2026/27 Group H Home Game (played in Samokov, Bulgaria) vs FC Porto",
+        background: "בני הרצליה מארחת את פורטו הפורטוגלית במחזור השני של שלב הבתים בליגת האלופות של פיב\"א 2026/27 (בית H). המשחק ייערך ביום רביעי, 21 באוקטובר 2026, בשעה 19:30 לפי לוח המשחקים של המועדון, באולם Arena SamElyon בסמוקוב שבבולגריה, שם מתקיימים משחקי הבית האירופיים של הקבוצה. הרצליה פתחה את הקמפיין בהפסד 86:75 בחוץ לחובנטוד בדאלונה. היעד על המפה הוא סופיה, נמל התעופה הקרוב לסמוקוב (כ-60 ק\"מ). מועד הטיסה וחברת התעופה לא פורסמו – התאריך כאן הוא הערכה (יום לפני המשחק).",
+        route: "LLBG -> LBSF",
+        dest_icao: "LBSF",
+        date: "2026-10-20",
+        time: "09:00",
+        airline: "טרם פורסם",
+        aircraft: "",
+        icon: "🏀",
+        source: "bhbasket.co.il/games – לוח משחקי בני הרצליה (21.10 פורטו, סמוקוב) / championsleague.basketball/en/games/136309-HERZ-FCP (Arena SamElyon, Samokov) / sports.walla.co.il/item/3871203 – בני הרצליה פתחה את ליגת האלופות",
+        imageUrl: "https://images.pexels.com/photos/7405712/pexels-photo-7405712.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-10-10T19:30:00Z",
+        isNew: true
+    },
+    {
+        id: "B032",
+        category: "basketball",
+        title: "בני הרצליה כדורסל | ליגת האלופות – משחק חוץ מול טלקום בון",
+        mission: "Bnei Penlink Herzliya Basketball Champions League 2026/27 Group H Away Game vs Telekom Baskets Bonn – Bonn, Germany",
+        background: "בני הרצליה יוצאת למשחק חוץ מול טלקום בון הגרמנית בשלב הבתים של ליגת האלופות של פיב\"א 2026/27 (בית H, יחד עם חובנטוד בדאלונה ופורטו). המשחק ייערך ביום רביעי, 4 בנובמבר 2026, בשעה 21:00 לפי לוח המשחקים של המועדון. היעד על המפה הוא נמל התעופה קלן-בון, הקרוב ביותר לעיר. מועד הטיסה וחברת התעופה לא פורסמו – התאריך כאן הוא הערכה (יום לפני המשחק).",
+        route: "LLBG -> EDDK",
+        dest_icao: "EDDK",
+        date: "2026-11-03",
+        time: "09:00",
+        airline: "טרם פורסם",
+        aircraft: "",
+        icon: "🏀",
+        source: "bhbasket.co.il/games – לוח משחקי בני הרצליה (4.11 טלקום בון, חוץ) / en.wikipedia.org/wiki/2026–27_Basketball_Champions_League (Group H: Joventut, Bonn, Porto, Bnei Herzliya)",
+        imageUrl: "https://images.pexels.com/photos/38766683/pexels-photo-38766683.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-10-10T19:30:00Z",
         isNew: true
     }
 ];
