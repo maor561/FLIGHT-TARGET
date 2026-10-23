@@ -4,7 +4,7 @@
 // ============================================================
 
 const lastUpdated = {
-    timestamp: "2026-09-19T09:00:00.000Z",
+    timestamp: "2026-10-23T09:00:00.000Z",
     source: "Latest Git Commit",
     version: "1.2.0"
 };
@@ -2007,6 +2007,42 @@ const flights = [
         source: "bhbasket.co.il/games – לוח משחקי בני הרצליה (4.11 טלקום בון, חוץ) / en.wikipedia.org/wiki/2026–27_Basketball_Champions_League (Group H: Joventut, Bonn, Porto, Bnei Herzliya)",
         imageUrl: "https://images.pexels.com/photos/38766683/pexels-photo-38766683.jpeg?auto=compress&cs=tinysrgb&h=350",
         createdAt: "2026-10-10T19:30:00Z",
+        isNew: true
+    },
+    {
+        id: "B033",
+        category: "basketball",
+        title: "מכבי ת\"א כדורסל | יורוליג – משחק חוץ מול הכוכב האדום בבלגרד",
+        mission: "Maccabi Tel Aviv EuroLeague 2026/27 Round 8 Away Game vs Crvena Zvezda Meridianbet – Belgrade, Serbia",
+        background: "מכבי תל אביב יוצאת למשחק חוץ מול הכוכב האדום (צרבנה זבזדה) בבלגרד במחזור השמיני של יורוליג 2026/27. המשחק ייערך ביום שלישי, 27 באוקטובר 2026, בשעה 20:00 שעון מקומי (21:00 שעון ישראל) בשטארק ארנה. מכבי מגיעה למשחק במאזן 2-4 והכוכב האדום במאזן 4-2. העונה מכבי עברה לארח את משחקי הבית שלה בלימסול שבקפריסין (החל מהמשחק מול ריאל מדריד ב-22 באוקטובר), אחרי ששיחקה בבית בבלגרד בתחילת העונה. מועד הטיסה, נקודת היציאה וחברת התעופה לא פורסמו – התאריך כאן הוא הערכה (יום לפני המשחק).",
+        route: "LLBG -> LYBE",
+        dest_icao: "LYBE",
+        date: "2026-10-26",
+        time: "09:00",
+        airline: "טרם פורסם",
+        aircraft: "",
+        icon: "🏀",
+        source: "statsniper.com/leagues/euroleague/game/2026/73 (Crvena Zvezda vs Maccabi Tel Aviv, Tue 27.10.2026) / ticket-compare.com – KK Crvena Zvezda vs Maccabi Tel Aviv 27 Oct 2026, Belgrade Arena / eurohoops.net/en/euroleague/2017104 – Maccabi Tel Aviv is leaving Belgrade and moving to Cyprus",
+        imageUrl: "https://images.pexels.com/photos/30555530/pexels-photo-30555530.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-10-23T09:00:00Z",
+        isNew: true
+    },
+    {
+        id: "B034",
+        category: "basketball",
+        title: "הפועל תל אביב כדורסל | יורוליג – משחק בית בסופיה מול אנדולו אפס",
+        mission: "Hapoel IBI Tel Aviv EuroLeague 2026/27 Home Game vs Anadolu Efes – Sofia, Bulgaria",
+        background: "הפועל תל אביב מארחת את אנדולו אפס הטורקית ביורוליג 2026/27. המשחק ייערך ביום רביעי, 28 באוקטובר 2026, בארנה 8888 בסופיה, בולגריה – שם הקבוצה מארחת את משחקי הבית האירופיים שלה העונה בשל המצב הביטחוני. הפועל מגיעה למשחק במאזן 4-2 אחרי ניצחון 81:91 בחוץ על פנאתינייקוס, ואפס במאזן 2-4. מועד הטיסה וחברת התעופה לא פורסמו – התאריך כאן הוא הערכה (יום לפני המשחק).",
+        route: "LLBG -> LBSF",
+        dest_icao: "LBSF",
+        date: "2026-10-27",
+        time: "09:00",
+        airline: "טרם פורסם",
+        aircraft: "",
+        icon: "🏀",
+        source: "koobit.com/hapoel-tel-aviv-vs-anadolu-efes-e222172 (28 Oct 2026, Arena 8888 Sofia) / statsniper.com/leagues/euroleague/game/2026/78 (Anadolu Efes at Hapoel Tel Aviv, 28.10.2026) / euroleaguebasketball.net – Hapoel's bold EuroLeague gamble (Sofia base)",
+        imageUrl: "https://images.pexels.com/photos/32965264/pexels-photo-32965264.jpeg?auto=compress&cs=tinysrgb&h=350",
+        createdAt: "2026-10-23T09:00:00Z",
         isNew: true
     }
 ];
